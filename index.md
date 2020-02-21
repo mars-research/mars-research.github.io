@@ -12,10 +12,19 @@ Lightweight Virtualized Domains: [lvds](https://mars-research.github.io/lvds/)
 
 # People
 
-Anton Burtsev (Faculty): [Anton](https://www.ics.uci.edu/~aburtsev/)
+[Anton Burtsev](https://www.ics.uci.edu/~aburtsev/) (Faculty)
 
-Vikram Narayanan (PhD): [Vikram]()
+[Vikram Narayanan]() (PhD)
 
-Harishankar Vishwanathan (PhD): [Hari]()
+[Harishankar Vishwanathan]() (PhD)
 
+[Zhaofeng Li]() (BS)
+
+[Dan Appel]() (BS)
+
+[Tianjiao Huang]() (BS)
+
+[David Detweiler]() (BS)
+
+[Utsav Jain]() (BS)
 
