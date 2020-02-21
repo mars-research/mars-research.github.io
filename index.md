@@ -10,6 +10,8 @@ Mars Research is a systems research group at the University of California, Irvin
 
 Lightweight Virtualized Domains: [lvds](https://mars-research.github.io/lvds/)
 
+Lightweight Execution Domains: [lxds](https://mars-research.github.io/lxds/)
+
 # People
 
 Anton Burtsev (Faculty): [Anton](https://www.ics.uci.edu/~aburtsev/)
