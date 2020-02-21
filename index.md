@@ -10,5 +10,11 @@ Mars Research is a systems research group at the University of California, Irvin
 
 Lightweight Virtualized Domains: [lvds](https://mars-research.github.io/lvds/)
 
+# People
+
+Anton Burtsev: [Anton](https://www.ics.uci.edu/~aburtsev/)
+
+Vikram Narayanan (PhD): [Vikram]()
+Harishankar Vishwanathan (PhD): [Hari]()
 
 
