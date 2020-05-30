@@ -8,7 +8,7 @@ Mars Research is a systems research group at the University of California, Irvin
 
 # Projects
 
-Redleaf Operating System: [redleaf](./redleaf/)
+Redleaf Operating System: [redleaf](./redleaf)
 
 Lightweight Virtualized Domains: [lvds](https://mars-research.github.io/lvds/)
 
