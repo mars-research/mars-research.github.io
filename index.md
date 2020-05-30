@@ -16,9 +16,9 @@ Lightweight Execution Domains: [lxds](https://mars-research.github.io/lxds/)
 
 [Anton Burtsev](https://www.ics.uci.edu/~aburtsev/) (Faculty)
 
-[Vikram Narayanan]() (PhD)
+[Vikram Narayanan](https://arkivm.github.io/) (PhD)
 
-[Harishankar Vishwanathan]() (PhD)
+[Harishankar Vishwanathan](http://harishankarv.github.io/) (PhD)
 
 [Zhaofeng Li]() (BS)
 
@@ -28,5 +28,4 @@ Lightweight Execution Domains: [lxds](https://mars-research.github.io/lxds/)
 
 [David Detweiler]() (BS)
 
-[Utsav Jain]() (BS)
 
