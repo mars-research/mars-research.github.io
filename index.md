@@ -8,6 +8,8 @@ Mars Research is a systems research group at the University of California, Irvin
 
 # Projects
 
+Redleaf Operating System: [redleaf](https://mars-research.github.io/redleaf/)
+
 Lightweight Virtualized Domains: [lvds](https://mars-research.github.io/lvds/)
 
 Lightweight Execution Domains: [lxds](https://mars-research.github.io/lxds/)
@@ -16,11 +18,7 @@ Lightweight Execution Domains: [lxds](https://mars-research.github.io/lxds/)
 
 [Anton Burtsev](https://www.ics.uci.edu/~aburtsev/) (Faculty)
 
-<<<<<<< HEAD
-[Vikram Narayanan](https://arkivm.github.io/) (PhD)
-=======
-[Vikram Narayanan](https://arkivm.github.io) (PhD)
->>>>>>> 37d08ce45253cce098b9cdbd077b33d77ca1c160
+[Vikram Narayanan](https://arkivm.github.io/) (PhD) 
 
 [Harishankar Vishwanathan](http://harishankarv.github.io/) (PhD)
 
