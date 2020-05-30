@@ -4,6 +4,8 @@ title: RedLeaf Operating System
 permalink: redleaf
 ---
 
+![RedLeaf Architecture](./images/redshift.png)
+
 RedLeaf is a new operating system aimed at leveraging a safe, linear-typed
 programming language, Rust, for developing safe and provably secure systems.
 RedLeaf builds on two premises: (1) Rust's linear type system enables practical
