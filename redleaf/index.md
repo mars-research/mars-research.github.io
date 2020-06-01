@@ -8,7 +8,7 @@ permalink: redleaf
 
 RedLeaf is a new operating system aimed at leveraging a safe, linear-typed
 programming language, Rust, for developing safe and provably secure systems.
-RedLeaf builds on two premises: (1) Rust's linear type system enables practical
+RedLeaf builds on two premises: (1) Rust\'s linear type system enables practical
 language safety even for systems with the tightest performance and resource
 budgets, e.g., OS kernels and firmware, (2) a combination of SMT-based
 reasoning and pointer discipline enforced by linear types provides a way to
@@ -69,11 +69,11 @@ In RedLeaf the choice of Rust is critical in two ways. First, Rust allows
 RedLeaf to leverage recent developments in the programming language community
 to simplify verification. RedLeaf builds on the premise that linear types are
 critical for creating a scalable automated verification infrastructure. In
-partic- ular, Rust enforces (using its type system) a rigorous discipline for
+particular, Rust enforces (using its type system) a rigorous discipline for
 controlling of sharing and aliasing in the program heap. Dealing with sharing
 and aliasing is a well-known source of annotation and performance overheads in
 software verifiers, and having this aspect be controlled by the type system
-allows for a much more scalable verification. Unique properties of Rust’s
+allows for a much more scalable verification. Unique properties of Rust\'s
 linear type system, and specifically its ability to lift the burden of
 resolving memory aliasing from the verifier, open a new page in the domain of
 practical and scalable verification.
