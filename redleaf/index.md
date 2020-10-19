@@ -80,6 +80,13 @@ practical and scalable verification.
 
 # Publications
 
+Vikram Narayanan, Tianjiao Huang, David Detweiler, Dan Appel, Zhaofeng Li, Gerd
+Zellweger, Anton Burtsev. **RedLeaf: Isolation and Communication in a Safe
+Operating System**. In _14th USENIX Symposium on Operating Systems Design and
+Implementation (OSDI)_, November 2020.
+[pdf](https://mars-research.github.io/doc/redleaf-osdi20.pdf)
+
+
 Vikram Narayanan (University of California, Irvine), Marek S. Baranowski
 (University of Utah), Leonid Ryzhyk (VMware Research), Zvonimir Rakamaric
 (University of Utah), Anton Burtsev (University of California, Irvine).
