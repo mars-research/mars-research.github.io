@@ -1,6 +1,9 @@
-<!--https://github.com/github/linguist/blob/master/lib/linguist/languages.yml-->
-
-# Kernel Development with Qemu (Printing "Hello World" On Bare Metal)
+---
+layout: post
+title: Kernel Development with Qemu (Printing "Hello World" On Bare Metal)
+category: Kernel development
+description: How to get started with kernel development on Qemu platform
+---
 
 If you plan to start working on a new operating system kernel things get hard
 fast---there is a ton of low-level hardware details you have to understand and
