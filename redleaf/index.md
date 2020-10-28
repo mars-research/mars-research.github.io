@@ -86,6 +86,9 @@ Operating System**. In _14th USENIX Symposium on Operating Systems Design and
 Implementation (OSDI)_, November 2020.
 [pdf](https://mars-research.github.io/doc/redleaf-osdi20.pdf)
 
+Dan Appel. **Inter-Process Communication in a Safe Kernel**. _BS Thesis_. University 
+of California, Irvine, 2020. [pdf](https://www.ics.uci.edu/~aburtsev/doc/appel-bs-thesis.pdf)
+
 
 Vikram Narayanan (University of California, Irvine), Marek S. Baranowski
 (University of Utah), Leonid Ryzhyk (VMware Research), Zvonimir Rakamaric
