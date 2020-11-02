@@ -3,6 +3,7 @@ layout: post
 title: Kernel Development with Qemu (Printing "Hello World" On Bare Metal)
 category: Kernel development
 description: How to get started with kernel development on Qemu platform
+author: <a href="https://www.ics.uci.edu/~aburtsev"> Anton Burtsev </a>
 ---
 
 If you plan to start working on a new operating system kernel things get hard
