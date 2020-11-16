@@ -6,33 +6,33 @@ description: Debugging qemu/kvm
 author: <a href="https://arkivm.github.io/">Vikram Narayanan</a>
 ---
 
-In our previous projects we always did all development on real hardware. For
+In our previous projects, we always did all development on real hardware. For
 example, [LXDs](https://mars-research.github.io/lxds/) and
 [LVDs](https://mars-research.github.io/lvds/) required baremetal speed of the
 cache-coherence protocol and support for nested virtualization (both systems
-use hardware-supported virtualization). So development under Qemu looked
+use hardware-supported virtualization). So development under QEMU looked
 unrealistic. Well, maybe we need to explore more. KVM supports nested
 virtualization, but we needed support for features like extended page table
-(EPT) switching with VMFUNC. In the end we were reluctant to take this
+(EPT) switching with VMFUNC. In the end, we were reluctant to take this
 approach. 
 
 But our most recent project,
 [RedLeaf](https://mars-research.github.io/redleaf), is a new operating system
-implemented from scratch in Rust. This was the first time we used Qemu/KVM pair
+implemented from scratch in Rust. This was the first time we used QEMU/KVM pair
 for development and found it extremely effective. Developing OS kernels under
-qemu/kvm has a much quicker developement cycle and gives a ton of debugging
+QEMU/KVM has a much quicker development cycle and gives a ton of debugging
 opportunities (e.g., attaching GDB, dumping page tables from QEMU,
-understanding tripple faults, etc.). Plus it removes an extremely annoying long
-reboot cycle.  
+understanding triple faults, etc.). Plus it removes an extremely annoying long
+reboot cycle. 
 
-We will describe what we've learned in a collection of posts and hopefully our
+We will describe what we've learned in a collection of posts and hopefully, our
 lessons are useful to others. It took us some time to debug several things that
-did not work as expected when ran on top of QEMU/KVM. Here, we describe our
+did not work as expected when run on top of QEMU/KVM. Here, we describe our
 experience of debugging 1GB page support with KVM. 
 
-**Spoiler:** our bug is tirvial, we just did not pass correct CPU model as
-arguement. So if you simply want to get it running scroll to the bottom. Our
-goal with this post is to share our tricks that allow us to debug similar
+**Spoiler:** our bug is trivial, we just did not pass the correct CPU model as
+an argument. So if you simply want to get it running scroll to the bottom. Our
+goal with this post is to share the tricks that allow us to debug similar
 issues with the QEMU setup. 
 
 ## The problem 
@@ -76,7 +76,7 @@ hp3_table:
 
 ```
 
-With this boot-time pagetable, everything was good when we run it on bare-metal, but things started to break under qemu/kvm.
+With this boot-time pagetable, everything was good when we run it on bare-metal, but things started to break under QEMU/KVM.
 All we had access to was an internal error from KVM and a register dump.
 
 ```log
@@ -118,7 +118,7 @@ are a lightweight instrumentation facility embedded in the Linux kernel.  One
 can dynamically enable these tracepoints by registering a function that would
 be called when the tracepoint is executed.
 
-Kvm code has a lot of [tracepoints](https://www.linux-kvm.org/page/Perf_events)
+KVM Code has a lot of [tracepoints](https://www.linux-kvm.org/page/Perf_events)
 for instrumenting various events. The list of tracepoints could be obtained by
 running `perf list` as shown below.
 
@@ -178,7 +178,7 @@ crashed rip (`0x131025`).
 
 The `kvm_emulate_insn` trace is located at [`arch/x86/kvm/x86.c`](https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/x86.c#L5474).
 
-The exit reason is ept misconfiguration.
+The exit reason is an EPT misconfiguration.
 ```
  qemu-system-x86-31218 [000] 159269.806542: kvm_exit:             reason EPT_MISCONFIG rip 0x133025 info 0 0
 ```
@@ -518,8 +518,8 @@ $ cpud -1
 
 
 The immediate conclusion is: our host support 1GiB pages but our guest CPU does
-not support it. Digging through qemu sources shows that only a few server class
-cpus support this feature in qemu.
+not support it. Digging through the sources shows that only a few server class
+CPU support this feature in QEMU.
 
 ```c
 static X86CPUDefinition builtin_x86_defs[] = {
@@ -551,8 +551,8 @@ pdpe1gb
 
 ## Solution: passing the CPU model that supports 1GB pages
 
-The conclusion is, in qemu command line, one should specify a cpu that supports
-this feature (according to qemu sources) or pass this a flag to the cpus to enable 1GB large page support.
+The conclusion is, in QEMU command line, one should specify a CPU that supports
+this feature (according to QEMU sources) or pass this a flag to the cpus to enable 1GiB large page support.
 
 ```
 qemu-system-x86_64 -cpu Haswell,pdpe1gb ...
@@ -562,5 +562,6 @@ or
 qemu-system-x86_64 -cpu  Skylake-Server ...
 ```
 
-Having this in our qemu commandline does not set `bit7` as reserved and thus
+Having this in our QEMU commandline does not set `bit7` as reserved and thus
 solves the bug we encountered at the beginning of this post.
+
