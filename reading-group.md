@@ -5,9 +5,9 @@ permalink: /reading-group/
 ---
 
 ### Details
-**Organizers**: Anton Burtsev, Vikram Narayanan <br/> 
-**Email**: aburtsev at uci dot edu, narayav1 at uci dot edu <br/>
-**Meeting time/place**: Tue, 2:00pm-3:00pm (held remotely)
+**Organizers**: Vikram Narayanan, Anton Burtsev <br/> 
+**Email**: narayav1 at uci dot edu, aburtsev at uci dot edu  <br/>
+**Meeting time/place**: Friday, 2:00pm-3:00pm (held remotely)
 
 We read and discuss a broad range of papers related to systems research. The
 topics range from novel system designs (generally results from recent systems
