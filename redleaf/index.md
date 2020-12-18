@@ -99,6 +99,8 @@ _17th Workshop on Hot Topics in Operating Systems (HotOS)_, May 2019.
 
 # Code
 
-Coming soon...
+* RedLeaf operating system - [https://github.com/mars-research/redleaf](https://github.com/mars-research/redleaf)
+
+* RedLeaf IDL - Coming soon...
 
 
