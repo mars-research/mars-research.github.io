@@ -16,6 +16,19 @@ conferences) to low-level details of new and existing features of modern CPUs
 
 ### Schedule
 
+#### Winter 2021
+
+<style>
+table th:first-of-type {
+    width: 10%;
+}
+</style>
+
+| Date | Paper | Presenter |
+| :------------- | :---------- | :----------- |
+| Jan 15  | [NixOS: A Purely Functional Linux Distribution](https://edolstra.github.io/pubs/nixos-icfp2008-final.pdf) |  |
+
+<br/>
 #### Fall 2020
 
 <style>
