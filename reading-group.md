@@ -24,14 +24,14 @@ table th:first-of-type {
 }
 </style>
 
-| Date | Paper | Presenter |
-| :------------- | :---------- | :----------- |
-| Mar 5 | [Hyperkernel: Push-Button Verification of an OS Kernel](https://unsat.cs.washington.edu/papers/nelson-hyperkernel.pdf) | |
-| Feb 26 | [Scaling symbolic evaluation for automatedverification of systems code with Serval](https://unsat.cs.washington.edu/papers/nelson-serval.pdf) | | 
-| Feb 12, 19  | [Understanding Memory and Thread Safety Practicesand Issues in Real-World Rust Programs](https://cseweb.ucsd.edu/~yiying/RustStudy-PLDI20.pdf) |  |
-| Feb 5  | [Safe Systems Programming in Rust : The Promise and the Challenge](https://people.mpi-sws.org/~dreyer/papers/safe-sysprog-rust/paper.pdf) |  |
-| Jan 22  | [Safe Kernel Extensions Without Run-Time Checking](https://people.eecs.berkeley.edu/~necula/Papers/pcc_osdi96.ps) |  |
-| Jan 15  | [NixOS: A Purely Functional Linux Distribution](https://edolstra.github.io/pubs/nixos-icfp2008-final.pdf) |  |
+| Date | Paper |
+| :------------- | :---------- |
+| Mar 5 | [Hyperkernel: Push-Button Verification of an OS Kernel](https://unsat.cs.washington.edu/papers/nelson-hyperkernel.pdf) |
+| Feb 26 | [Scaling symbolic evaluation for automatedverification of systems code with Serval](https://unsat.cs.washington.edu/papers/nelson-serval.pdf) |
+| Feb 12, 19  | [Understanding Memory and Thread Safety Practicesand Issues in Real-World Rust Programs](https://cseweb.ucsd.edu/~yiying/RustStudy-PLDI20.pdf) |
+| Feb 5  | [Safe Systems Programming in Rust : The Promise and the Challenge](https://people.mpi-sws.org/~dreyer/papers/safe-sysprog-rust/paper.pdf) |
+| Jan 22  | [Safe Kernel Extensions Without Run-Time Checking](https://people.eecs.berkeley.edu/~necula/Papers/pcc_osdi96.ps) |
+| Jan 15  | [NixOS: A Purely Functional Linux Distribution](https://edolstra.github.io/pubs/nixos-icfp2008-final.pdf) |
 
 <br/>
 #### Fall 2020
