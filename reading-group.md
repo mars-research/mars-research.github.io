@@ -26,7 +26,8 @@ table th:first-of-type {
 
 | Date | Paper |
 | :------------- | :---------- |
-| Mar 15 | [Lord of the Ring(s): Side Channel Attacks on theCPU On-Chip Ring Interconnect Are Practical](https://arxiv.org/pdf/2103.03443.pdf) |
+| Mar 22 | [PACStack: an Authenticated Call Stack](https://www.usenix.org/system/files/sec21summer_liljestrand.pdf) |
+| Mar 15 | [Lord of the Ring(s): Side Channel Attacks on the CPU On-Chip Ring Interconnect Are Practical](https://arxiv.org/pdf/2103.03443.pdf) |
 | Mar 9 | [Hyperkernel: Push-Button Verification of an OS Kernel](https://unsat.cs.washington.edu/papers/nelson-hyperkernel.pdf) |
 | Feb 26 | [Scaling symbolic evaluation for automatedverification of systems code with Serval](https://unsat.cs.washington.edu/papers/nelson-serval.pdf) |
 | Feb 12, 19  | [Understanding Memory and Thread Safety Practicesand Issues in Real-World Rust Programs](https://cseweb.ucsd.edu/~yiying/RustStudy-PLDI20.pdf) |
