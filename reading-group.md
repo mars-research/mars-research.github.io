@@ -26,6 +26,7 @@ table th:first-of-type {
 
 | Date | Paper |
 | :------------- | :---------- |
+| Mar 29 | [Fine-Grained Fault Tolerance using Device Checkpoints](https://pages.cs.wisc.edu/~swift/papers/asplos13_fgft.pdf) |
 | Mar 22 | [PACStack: an Authenticated Call Stack](https://www.usenix.org/system/files/sec21summer_liljestrand.pdf) |
 | Mar 15 | [Lord of the Ring(s): Side Channel Attacks on the CPU On-Chip Ring Interconnect Are Practical](https://arxiv.org/pdf/2103.03443.pdf) |
 | Mar 9 | [Hyperkernel: Push-Button Verification of an OS Kernel](https://unsat.cs.washington.edu/papers/nelson-hyperkernel.pdf) |
