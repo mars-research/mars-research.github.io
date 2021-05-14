@@ -16,6 +16,21 @@ conferences) to low-level details of new and existing features of modern CPUs
 
 ### Schedule
 
+#### Spring 2021
+
+<style>
+table th:first-of-type {
+    width: 10%;
+}
+</style>
+
+| Date | Paper |
+| :------------- | :---------- |
+| May 14 | [A Principled Approach To KernelMemory Management - Chapter 4](https://unsworks.unsw.edu.au/fapi/datastream/unsworks:8363/SOURCE02?view=true) |
+| Apr 16 | [Fine-Grained Fault Tolerance using Device Checkpoints](https://pages.cs.wisc.edu/~swift/papers/asplos13_fgft.pdf) |
+| Apr 2 | [LegoOS: A Disseminated, Distributed OS for Hardware Resource Disaggregation](https://cseweb.ucsd.edu/~yiying/LegoOS-OSDI18.pdf) |
+
+<br/>
 #### Winter 2021
 
 <style>
@@ -26,7 +41,6 @@ table th:first-of-type {
 
 | Date | Paper |
 | :------------- | :---------- |
-| Mar 29 | [Fine-Grained Fault Tolerance using Device Checkpoints](https://pages.cs.wisc.edu/~swift/papers/asplos13_fgft.pdf) |
 | Mar 22 | [PACStack: an Authenticated Call Stack](https://www.usenix.org/system/files/sec21summer_liljestrand.pdf) |
 | Mar 15 | [Lord of the Ring(s): Side Channel Attacks on the CPU On-Chip Ring Interconnect Are Practical](https://arxiv.org/pdf/2103.03443.pdf) |
 | Mar 9 | [Hyperkernel: Push-Button Verification of an OS Kernel](https://unsat.cs.washington.edu/papers/nelson-hyperkernel.pdf) |
