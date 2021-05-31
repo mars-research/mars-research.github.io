@@ -61,12 +61,12 @@ table th:first-of-type {
 }
 </style>
 
-| Date | Paper | Presenter |
-| :------------- | :---------- | :----------- |
-| Dec 18  | [Reexamining Direct Cache Access to Optimize I/O Intensive Applications for Multi-hundred-gigabit Networks](https://www.usenix.org/conference/atc20/presentation/farshin) |  |
-| Nov 27  | [Code-Pointer Integrity](https://www.usenix.org/conference/osdi14/technical-sessions/presentation/kuznetsov) |  |
-| Nov 20  | [Size-aware Sharding For Improving Tail Latencies in In-memory Key-value Stores](https://www.usenix.org/conference/nsdi19/presentation/didona) |  |
-| Nov 16  | [MICA: A Holistic Approach to Fast In-Memory Key-Value Storage](https://www.usenix.org/conference/nsdi14/technical-sessions/presentation/lim)   |   |
-| Nov 6   | [hXDP: Efficient Software Packet Processing on FPGA NICs](https://www.usenix.org/conference/osdi20/presentation/brunella)   |   |
-| Nov 3   | [Theseus: an Experiment in Operating System Structure and State Management](https://www.usenix.org/conference/osdi20/presentation/boos)  | |
+| Date | Paper |
+| :------------- | :---------- |
+| Dec 18  | [Reexamining Direct Cache Access to Optimize I/O Intensive Applications for Multi-hundred-gigabit Networks](https://www.usenix.org/conference/atc20/presentation/farshin)   |
+| Nov 27  | [Code-Pointer Integrity](https://www.usenix.org/conference/osdi14/technical-sessions/presentation/kuznetsov) |
+| Nov 20  | [Size-aware Sharding For Improving Tail Latencies in In-memory Key-value Stores](https://www.usenix.org/conference/nsdi19/presentation/didona) |
+| Nov 16  | [MICA: A Holistic Approach to Fast In-Memory Key-Value Storage](https://www.usenix.org/conference/nsdi14/technical-sessions/presentation/lim)   |
+| Nov 6   | [hXDP: Efficient Software Packet Processing on FPGA NICs](https://www.usenix.org/conference/osdi20/presentation/brunella)   |
+| Nov 3   | [Theseus: an Experiment in Operating System Structure and State Management](https://www.usenix.org/conference/osdi20/presentation/boos)  |
 
