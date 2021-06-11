@@ -26,6 +26,8 @@ table th:first-of-type {
 
 | Date | Paper |
 | :------------- | :---------- |
+| Jun 11 | [High Velocity Kernel File Systems with Bento](https://www.usenix.org/system/files/fast21-miller.pdf) |
+| Jun 4 | [Corundum: Statically-Enforced Persistent Memory Safety](http://cseweb.ucsd.edu/~mhoseinzadeh/hoseinzadeh-corundum-asplos21.pdf) |
 | May 28 | [DIFUZE: Interface Aware Fuzzing for Kernel Drivers](https://dl.acm.org/doi/10.1145/3133956.3134069) |
 | May 21 | [Lightweight Kernel Isolation with Virtualization and VM Functions](https://mars-research.github.io/doc/lvds-vee20.pdf) |
 | May 14 | [A Principled Approach To KernelMemory Management - Chapter 4](https://unsworks.unsw.edu.au/fapi/datastream/unsworks:8363/SOURCE02?view=true) |
