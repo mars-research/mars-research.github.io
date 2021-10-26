@@ -3,6 +3,8 @@
 title: Lightweight Virtualized Domains
 aliases:
 - /lvds
+
+ShowReadingTime: false
 ---
 
 <img src="images/lvds.png" alt="LVDs Architecture" width="550"/>

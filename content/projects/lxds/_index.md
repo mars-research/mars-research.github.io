@@ -1,8 +1,9 @@
-
 ---
 title: Lightweight Execution Domains
 aliases:
 - /lxds
+
+ShowReadingTime: false
 ---
 
 <img src="images/lxds.png" alt="LXDs Architecture" width="550"/>
