@@ -26,7 +26,7 @@ properties of linear types for verification.
 Zhaofeng Li, Tianjiao Huang, Vikram Narayanan, Anton Burtsev. **Understanding
 the Overheads of Hardware and Language-Based IPC Mechanisms**. In _11th
 Workshop on Programming Languages and Operating Systems (PLOS)_, October 2021.
-[pdf](https://mars-research.github.io/doc/plos21/plos21-ipc-overheads.pdf)
+[pdf](https://mars-research.github.io/static/doc/plos21/plos21-ipc-overheads.pdf)
 
 ## Code
 
