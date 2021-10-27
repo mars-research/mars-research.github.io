@@ -6,8 +6,8 @@ title: News
 # News
 
 * Two papers got accepted to **[PLOS'21](https://plos-workshop.org/2021/program.php)**.
-  - **Isolation in Rust: What is Missing?** ([pdf](https://mars-research.github.io/static/doc/plos21/plos21-rust-isolation.pdf), [video]())
-  - **Understanding the Overheads of Hardware and Language-Based IPC Mechanisms** ([pdf](https://mars-research.github.io/static/doc/plos21/plos21-ipc-overheads.pdf), [video]())
+  - **Isolation in Rust: What is Missing?** ([pdf](https://mars-research.github.io/doc/plos21/plos21-rust-isolation.pdf), [video]())
+  - **Understanding the Overheads of Hardware and Language-Based IPC Mechanisms** ([pdf](https://mars-research.github.io/doc/plos21/plos21-ipc-overheads.pdf), [video]())
 
 
 * Tianjiao Huang receives **ICS Outstanding Contribution to Research, 2021** award for his outstanding [contributions to research](https://www.ics.uci.edu/ugrad/2020-21_ICS_Honors_and_Awards_for_Publication.pdf)
@@ -18,5 +18,5 @@ title: News
   - ([pdf](https://www.usenix.org/system/files/osdi20-narayanan_vikram.pdf), [video](https://www.youtube.com/watch?v=MKjliJWzs6w))
 
 * Our paper **Lightweight Kernel Isolation with Virtualization and VM Functions** wins the Best Paper Award at **VEE'20**
-  - ([pdf](https://mars-research.github.io/static/doc/lvds-vee20.pdf), [video](https://www.youtube.com/watch?v=vPx5mQS9Mik))
+  - ([pdf](https://mars-research.github.io/doc/lvds-vee20.pdf), [video](https://www.youtube.com/watch?v=vPx5mQS9Mik))
   - [UCI News](https://www.cs.uci.edu/cs-researchers-vikram-narayanan-and-anton-burtsev-win-best-paper-award/)

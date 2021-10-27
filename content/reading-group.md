@@ -32,7 +32,7 @@ table th:first-of-type {
 | Jun 11 | [High Velocity Kernel File Systems with Bento](https://www.usenix.org/system/files/fast21-miller.pdf) |
 | Jun 4 | [Corundum: Statically-Enforced Persistent Memory Safety](http://cseweb.ucsd.edu/~mhoseinzadeh/hoseinzadeh-corundum-asplos21.pdf) |
 | May 28 | [DIFUZE: Interface Aware Fuzzing for Kernel Drivers](https://dl.acm.org/doi/10.1145/3133956.3134069) |
-| May 21 | [Lightweight Kernel Isolation with Virtualization and VM Functions](https://mars-research.github.io/static/doc/lvds-vee20.pdf) |
+| May 21 | [Lightweight Kernel Isolation with Virtualization and VM Functions](https://mars-research.github.io/doc/lvds-vee20.pdf) |
 | May 14 | [A Principled Approach To KernelMemory Management - Chapter 4](https://unsworks.unsw.edu.au/fapi/datastream/unsworks:8363/SOURCE02?view=true) |
 | Apr 16 | [Fine-Grained Fault Tolerance using Device Checkpoints](https://pages.cs.wisc.edu/~swift/papers/asplos13_fgft.pdf) |
 | Apr 2 | [LegoOS: A Disseminated, Distributed OS for Hardware Resource Disaggregation](https://cseweb.ucsd.edu/~yiying/LegoOS-OSDI18.pdf) |
