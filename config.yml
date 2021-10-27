@@ -1,0 +1,47 @@
+baseURL: 'https://mars-research.github.io/'
+languageCode: 'en-us'
+title: 'Mars Research Group'
+
+module:
+  imports:
+    path: 'github.com/adityatelange/hugo-PaperMod'
+
+params:
+  ShowReadingTime: true
+  ShowFullTextinRSS: true
+  ShowCodeCopyButtons: true
+  disableSpecial1stPost: true
+  editPost:
+    URL: 'https://github.com/mars-research/mars-research.github.io/blob/main/content'
+    Text: Suggest Changes
+    appendFilePath: true
+
+menu:
+  main:
+    - identifier: home
+      name: Home
+      url: /
+      weight: 10
+    - identifier: publications
+      name: Publications
+      url: /publications
+      weight: 20
+    - identifier: projects
+      name: Projects
+      url: /projects
+      weight: 30
+    - identifier: blog
+      name: Blog
+      url: /posts
+      weight: 40
+    - identifier: reading-group
+      name: Reading Group
+      url: /reading-group
+      weight: 50
+
+# Allow raw HTML in content
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+

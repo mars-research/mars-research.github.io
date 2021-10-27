@@ -1,0 +1,16 @@
+# Hugo
+_gen
+public
+
+# Jekyll (old)
+_site
+.sass-cache
+.jekyll-metadata
+.jekyll-cache
+
+# Nix
+.direnv
+result
+
+# Local Netlify folder
+.netlify

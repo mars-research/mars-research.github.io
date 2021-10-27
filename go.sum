@@ -1,0 +1,8 @@
+github.com/LukasJoswiak/etch v0.0.0-20211012041416-6c1ea493f095 h1:2MFLtqpspbpJp4jB/+X6Tpww6KhZFfPUpn8bQwc/0pg=
+github.com/LukasJoswiak/etch v0.0.0-20211012041416-6c1ea493f095/go.mod h1:tdCjHyDbi/JUH+PwT7EuRAoTu1tIrDvTQgZ5UJLNe7Q=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20211022144934-60cbb311b7dc h1:tg3be1uwYHDkxiqB7qqd7989eCmE/VbpMkGEsTkf5uo=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20211022144934-60cbb311b7dc/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
+github.com/alex-shpak/hugo-book v0.0.0-20211019200541-8bb6d7ebec03 h1:GNE3B7LiDnbBF/3DIPjkc+QsxHc1R78Rn/UTjWaSup0=
+github.com/alex-shpak/hugo-book v0.0.0-20211019200541-8bb6d7ebec03/go.mod h1:L4NMyzbn15fpLIpmmtDg9ZFFyTZzw87/lk7M2bMQ7ds=
+github.com/luizdepra/hugo-coder v0.0.0-20210923133158-6581e860bde4 h1:9wcDqziKLfkU7FvjJuA+OowRVjhcpCk0ohR+M2A86Lo=
+github.com/luizdepra/hugo-coder v0.0.0-20210923133158-6581e860bde4/go.mod h1:9EQBf2rU+NPjlohGuKcEgdqSeOc3tIQoOty4xPpuUQ4=

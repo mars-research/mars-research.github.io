@@ -1,0 +1,60 @@
+{
+  description = "Mars Research Homepage";
+
+  inputs = {
+    mars-std.url = "github:mars-research/mars-std";
+  };
+
+  outputs = { self, mars-std, ... }: let
+    supportedSystems = mars-std.lib.defaultSystems;
+  in mars-std.lib.eachSystem supportedSystems (system: let
+    pkgs = mars-std.legacyPackages.${system};
+
+    src = pkgs.nix-gitignore.gitignoreSource [] ./.;
+    vendorSha256 = "sha256-uEzihbpSv5iHwwoNYA9s9o/fRk1MwA45cNxthYj2ASc=";
+
+    website = pkgs.stdenv.mkDerivation {
+      name = "mars-research-homepage";
+      inherit src;
+
+      nativeBuildInputs = with pkgs; [ go hugo ];
+
+      buildPhase = ''
+        ln -sf ${hugoVendor} _vendor
+        hugo
+      '';
+
+      installPhase = ''
+        cp -r public $out
+      '';
+    };
+
+    hugoVendor = pkgs.stdenv.mkDerivation {
+      name = "mars-research-homepage-vendor";
+
+      inherit src;
+
+      nativeBuildInputs = with pkgs; [ go hugo git ];
+
+      GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+
+      buildPhase = ''
+        hugo mod vendor
+      '';
+
+      installPhase = ''
+        cp -r _vendor $out
+      '';
+
+      outputHashMode = "recursive";
+      outputHashAlgo = "sha256";
+      outputHash = vendorSha256;
+    };
+  in {
+    devShell = pkgs.mkShell {
+      inputsFrom = [ website ];
+    };
+    packages.website = website;
+    defaultPackage = website;
+  });
+}
