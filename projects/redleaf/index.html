@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>RedLeaf | Mars Research Group</title>
+<meta name="keywords" content="" />
+<meta name="description" content="RedLeaf is a new operating system aimed at leveraging a safe, linear-typed programming language, Rust, for developing safe and provably secure systems. RedLeaf builds on two premises: (1) Rust&#39;s linear type system enables practical language safety even for systems with the tightest performance and resource budgets, e.g., OS kernels and firmware, (2) a combination of SMT-based reasoning and pointer discipline enforced by linear types provides a way to automate and simplify verification effort and scale it to the size of a small operating system kernel that can run firmware subsystems.">
+<meta name="author" content="">
+<link rel="canonical" href="https://mars-research.github.io/projects/redleaf/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.6f60056d44d3f7eb69a4bc6c332b59960f3a995802bded244750232f33713c49.css" integrity="sha256-b2AFbUTT9&#43;tppLxsMytZlg86mVgCve0kR1AjLzNxPEk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://mars-research.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://mars-research.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://mars-research.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://mars-research.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://mars-research.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.88.1" />
+<link rel="alternate" type="application/rss+xml" href="https://mars-research.github.io/projects/redleaf/index.xml">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="RedLeaf" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://mars-research.github.io/projects/redleaf/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="RedLeaf"/>
+<meta name="twitter:description" content=""/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Projects",
+      "item": "https://mars-research.github.io/projects/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "RedLeaf",
+      "item": "https://mars-research.github.io/projects/redleaf/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://mars-research.github.io/" accesskey="h" title="Mars Research Group (Alt + H)">Mars Research Group</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://mars-research.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://mars-research.github.io/publications" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://mars-research.github.io/projects" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://mars-research.github.io/posts" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://mars-research.github.io/reading-group" title="Reading Group">
+                    <span>Reading Group</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>RedLeaf</h1>
+</header>
+<div class="post-content"><img src="images/redleaf.png" height="400px"/>
+<p>RedLeaf is a new operating system aimed at leveraging a safe, linear-typed
+programming language, Rust, for developing safe and provably secure systems.
+RedLeaf builds on two premises: (1) Rust's linear type system enables practical
+language safety even for systems with the tightest performance and resource
+budgets, e.g., OS kernels and firmware, (2) a combination of SMT-based
+reasoning and pointer discipline enforced by linear types provides a way to
+automate and simplify verification effort and scale it to the size of a small
+operating system kernel that can run firmware subsystems.</p>
+<p>There are two main lines of the project: 1) leveraging language safety for
+exploring its impact on operating system organization, and 2) leveraging
+properties of linear types for verification.</p>
+<h2 id="clean-slate-safe-kernels">Clean-Slate Safe Kernels<a hidden class="anchor" aria-hidden="true" href="#clean-slate-safe-kernels">#</a></h2>
+<p>Since early computer systems developed five decades ago overheads of language
+safety remain prohibitive for development of operating system kernels. Today,
+we run kernels developed in C. Unfortunately, the choice of C, an unsafe
+low-level programming language, as the de facto standard for kernel development
+contributes to several hundred vulnerabilities a year.</p>
+<p>Recently, however,  the performance landscape of safe languages is starting to
+change with the development of programming languages like Rust that achieve
+safety without garbage collection. Rust is the first practical language that
+combines an old idea of linear types with pragmatic language design. Rust
+enforces type and memory safety through a restricted ownership model, where
+there exists a unique reference to each live object in memory. This allows
+statically tracking the lifetime of the object and deallocating it without a
+garbage collector. Rust represents a unique point in the language design space,
+bringing the benefits of type and memory safety to systems that cannot afford
+the cost of garbage collection. The runtime overhead of the language is limited
+to bounds checking, which is often hidden by modern superscalar out of order
+CPUs.</p>
+<p>In contrast to commodity systems, RedLeaf does not rely on hardware address
+spaces for isolation and instead uses only type and memory safety of the Rust
+language. Departure from costly hardware isolation mechanisms allows us to
+explore the design space of systems that embrace lightweight fine-grained
+isolation.</p>
+<p>RedLeaf is designed as a microkernel system in which a collection of language
+domains implement functionality of the system: kernel subsystems, device
+drivers, and user applications.</p>
+<p>Rust provides systems developers with mechanisms we were all waiting for for
+decades: zero-cost language safety and a type system that enforces ownership.
+We argue that Rust’s language safety allows us to enable many classical ideas
+of operating system research for the first time in a practical way.</p>
+<h2 id="verification">Verification<a hidden class="anchor" aria-hidden="true" href="#verification">#</a></h2>
+<p>RedLeaf provides a Floyd-Hoare-style modular verification (i.e., based on
+pre-conditions, post-conditions, and loop invariants) for low-level systems
+that are designed to be fast and small. It achieves that by developing a new
+verification toolchain built on the SMACK verifier, Boogie intermediate
+verification language, and Z3 SMT solver.</p>
+<p>In RedLeaf the choice of Rust is critical in two ways. First, Rust allows
+RedLeaf to leverage recent developments in the programming language community
+to simplify verification. RedLeaf builds on the premise that linear types are
+critical for creating a scalable automated verification infrastructure. In
+particular, Rust enforces (using its type system) a rigorous discipline for
+controlling of sharing and aliasing in the program heap. Dealing with sharing
+and aliasing is a well-known source of annotation and performance overheads in
+software verifiers, and having this aspect be controlled by the type system
+allows for a much more scalable verification. Unique properties of Rust's
+linear type system, and specifically its ability to lift the burden of
+resolving memory aliasing from the verifier, open a new page in the domain of
+practical and scalable verification.</p>
+<h2 id="publications">Publications<a hidden class="anchor" aria-hidden="true" href="#publications">#</a></h2>
+<p>Zhaofeng Li, Tianjiao Huang, Vikram Narayanan, Anton Burtsev. <strong>Understanding
+the Overheads of Hardware and Language-Based IPC Mechanisms</strong>. In <em>11th
+Workshop on Programming Languages and Operating Systems (PLOS)</em>, October 2021.
+<a href="https://mars-research.github.io/doc/plos21/plos21-ipc-overheads.pdf">pdf</a></p>
+<p>Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li, Vikram
+Narayanan, Gerd Zellweger. <strong>Isolation in Rust: What is missing?</strong>. In <em>11th
+Workshop on Programming Languages and Operating Systems (PLOS)</em>, October 2021.
+<a href="https://mars-research.github.io/doc/plos21/plos21-rust-isolation.pdf">pdf</a></p>
+<p>Vikram Narayanan, Tianjiao Huang, David Detweiler, Dan Appel, Zhaofeng Li, Gerd
+Zellweger, Anton Burtsev. <strong>RedLeaf: Isolation and Communication in a Safe
+Operating System</strong>. In <em>14th USENIX Symposium on Operating Systems Design and
+Implementation (OSDI)</em>, November 2020.
+<a href="https://mars-research.github.io/doc/redleaf-osdi20.pdf">pdf</a></p>
+<p>Dan Appel. <strong>Inter-Process Communication in a Safe Kernel</strong>. <em>BS Thesis</em>. University
+of California, Irvine, 2020. <a href="https://www.ics.uci.edu/~aburtsev/doc/appel-bs-thesis.pdf">pdf</a></p>
+<p>Vikram Narayanan (University of California, Irvine), Marek S. Baranowski
+(University of Utah), Leonid Ryzhyk (VMware Research), Zvonimir Rakamaric
+(University of Utah), Anton Burtsev (University of California, Irvine).
+<strong>RedLeaf: Towards An Operating System for Safe and Verified Firmware</strong>. In
+<em>17th Workshop on Hot Topics in Operating Systems (HotOS)</em>, May 2019.
+<a href="https://mars-research.github.io/doc/redleaf-hotos19.pdf">pdf</a></p>
+<h1 id="code">Code<a hidden class="anchor" aria-hidden="true" href="#code">#</a></h1>
+<ul>
+<li>RedLeaf Operating System: <a href="https://github.com/mars-research/redleaf">https://github.com/mars-research/redleaf</a></li>
+<li>RedLeaf IDL: <a href="https://github.com/mars-research/redIDL">https://github.com/mars-research/redIDL</a></li>
+</ul>
+
+
+</div>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2021 <a href="https://mars-research.github.io/">Mars Research Group</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

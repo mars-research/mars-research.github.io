@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://mars-research.github.io/posts/2020/11/qemu-kvm-1gb-pages/</loc>
+    <lastmod>2020-11-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://mars-research.github.io/</loc>
+    <lastmod>2020-11-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://mars-research.github.io/posts/</loc>
+    <lastmod>2020-11-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://mars-research.github.io/posts/2020/10/hello-world-on-bare-metal/</loc>
+    <lastmod>2020-10-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://mars-research.github.io/categories/</loc>
+  </url><url>
+    <loc>https://mars-research.github.io/news/</loc>
+  </url><url>
+    <loc>https://mars-research.github.io/projects/lang-ipc/</loc>
+  </url><url>
+    <loc>https://mars-research.github.io/projects/</loc>
+  </url><url>
+    <loc>https://mars-research.github.io/reading-group/</loc>
+  </url><url>
+    <loc>https://mars-research.github.io/publications/</loc>
+  </url><url>
+    <loc>https://mars-research.github.io/projects/redleaf/</loc>
+  </url><url>
+    <loc>https://mars-research.github.io/tags/</loc>
+  </url>
+</urlset>

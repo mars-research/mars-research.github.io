@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Mars Research Group</title>
+    <link>https://mars-research.github.io/posts/</link>
+    <description>Recent content in Posts on Mars Research Group</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://mars-research.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Debugging QEMU/KVM Setup If Something Goes Wrong (e.g., Support for 1GB Pages)</title>
+      <link>https://mars-research.github.io/posts/2020/11/qemu-kvm-1gb-pages/</link>
+      <pubDate>Sun, 01 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mars-research.github.io/posts/2020/11/qemu-kvm-1gb-pages/</guid>
+      <description>In our previous projects, we always did all development on real hardware. For example, LXDs and LVDs required baremetal speed of the cache-coherence protocol and support for nested virtualization (both systems use hardware-supported virtualization). So development under QEMU looked unrealistic. Well, maybe we need to explore more. KVM supports nested virtualization, but we needed support for features like extended page table (EPT) switching with VMFUNC. In the end, we were reluctant to take this approach.</description>
+      <content:encoded><![CDATA[<p>In our previous projects, we always did all development on real hardware. For
+example, <a href="https://mars-research.github.io/lxds/">LXDs</a> and
+<a href="https://mars-research.github.io/lvds/">LVDs</a> required baremetal speed of the
+cache-coherence protocol and support for nested virtualization (both systems
+use hardware-supported virtualization). So development under QEMU looked
+unrealistic. Well, maybe we need to explore more. KVM supports nested
+virtualization, but we needed support for features like extended page table
+(EPT) switching with VMFUNC. In the end, we were reluctant to take this
+approach.</p>
+<p>But our most recent project,
+<a href="https://mars-research.github.io/redleaf">RedLeaf</a>, is a new operating system
+implemented from scratch in Rust. This was the first time we used QEMU/KVM pair
+for development and found it extremely effective. Developing OS kernels under
+QEMU/KVM has a much quicker development cycle and gives a ton of debugging
+opportunities (e.g., attaching GDB, dumping page tables from QEMU,
+understanding triple faults, etc.). Plus it removes an extremely annoying long
+reboot cycle.</p>
+<p>We will describe what we&rsquo;ve learned in a collection of posts and hopefully, our
+lessons are useful to others. It took us some time to debug several things that
+did not work as expected when run on top of QEMU/KVM. Here, we describe our
+experience of debugging 1GB page support with KVM.</p>
+<p><strong>Spoiler:</strong> our bug is trivial, we just did not pass the correct CPU model as
+an argument. So if you simply want to get it running scroll to the bottom. Our
+goal with this post is to share the tricks that allow us to debug similar
+issues with the QEMU setup.</p>
+<h2 id="the-problem">The problem</h2>
+<p>We started our development with a 3 level pagetable with 2MiB hugepages. Later,
+we wanted more memory and decided to support huge pagetables (1GiB pages).</p>
+<p>Here is our pagetable setup, trying to direct-map the first 32GiBs of memory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm">setup_huge_page_tables:
+    <span style="color:#75715e">; map first P4 entry to P3 table
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">rax</span>, <span style="color:#66d9ef">hp3_table</span>
+    <span style="color:#a6e22e">or</span> <span style="color:#66d9ef">rax</span>, <span style="color:#ae81ff">0</span><span style="color:#66d9ef">b11</span> <span style="color:#75715e">; present + writable
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> [<span style="color:#66d9ef">hp4_table</span>], <span style="color:#66d9ef">rax</span>
+
+    <span style="color:#75715e">;map each P3 entry to a huge 1GiB page
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">ecx</span>, <span style="color:#ae81ff">0</span>         <span style="color:#75715e">; counter variable
+</span><span style="color:#75715e"></span>
+.map_hp3_table:
+    <span style="color:#75715e">; map ecx-th P3 entry to a huge page that starts at address 1GiB*ecx
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">rax</span>, <span style="color:#ae81ff">1</span> <span style="color:#960050;background-color:#1e0010">&lt;&lt;</span> <span style="color:#ae81ff">30</span>  <span style="color:#75715e">; 1GiB
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mul</span> <span style="color:#66d9ef">ecx</span>            <span style="color:#75715e">; start address of ecx-th page
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">shl</span> <span style="color:#66d9ef">rdx</span>, <span style="color:#ae81ff">32</span>
+    <span style="color:#a6e22e">or</span> <span style="color:#66d9ef">rax</span>, <span style="color:#66d9ef">rdx</span>
+    <span style="color:#a6e22e">or</span> <span style="color:#66d9ef">rax</span>, <span style="color:#ae81ff">0</span><span style="color:#66d9ef">b10000011</span> <span style="color:#75715e">; present + writable + huge
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> [<span style="color:#66d9ef">hp3_table</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#66d9ef">ecx</span> * <span style="color:#ae81ff">8</span>], <span style="color:#66d9ef">rax</span> <span style="color:#75715e">; map ecx-th entry
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">inc</span> <span style="color:#66d9ef">ecx</span>            <span style="color:#75715e">; increase counter
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">cmp</span> <span style="color:#66d9ef">ecx</span>, <span style="color:#ae81ff">0x20</span>       <span style="color:#75715e">; if counter == 32, 32 entries in P3 table is mapped
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">jne</span> <span style="color:#66d9ef">.map_hp3_table</span>  <span style="color:#75715e">; else map the next entry
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">; Apic regions would belong in the first few gigabytes
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">ret</span>
+
+<span style="color:#a6e22e">section</span> <span style="color:#66d9ef">.bss</span>
+
+hp4_table:
+    <span style="color:#a6e22e">resb</span> <span style="color:#ae81ff">4096</span>              
+<span style="color:#66d9ef">hp3_table</span>:  
+    <span style="color:#66d9ef">resb</span> <span style="color:#ae81ff">4096</span>
+
+</code></pre></div><p>With this boot-time pagetable, everything was good when we run it on bare-metal, but things started to break under QEMU/KVM.
+All we had access to was an internal error from KVM and a register dump.</p>
+<pre tabindex="0"><code class="language-log" data-lang="log">KVM internal error. Suberror: 1
+emulation failure
+EAX=80000011 EBX=00000000 ECX=c0000080 EDX=00000000
+ESI=00000000 EDI=00000000 EBP=00000000 ESP=01bfa000
+EIP=00133025 EFL=00010086 [--S--P-] CPL=0 II=0 A20=1 SMM=0 HLT=0
+ES =0018 00000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+CS =0010 00000000 ffffffff 00c09b00 DPL=0 CS32 [-RA]
+SS =0018 00000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+DS =0018 00000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+FS =0018 00000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+GS =0018 00000000 ffffffff 00c09300 DPL=0 DS   [-WA]
+LDT=0000 00000000 0000ffff 00008200 DPL=0 LDT
+TR =0000 00000000 0000ffff 00008b00 DPL=0 TSS64-busy
+GDT=     0000000000100018 0000000f
+IDT=     0000000000000000 00000000
+CR0=80000011 CR2=0000000000000000 CR3=0000000000bf8000 CR4=00000020
+DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000
+DR6=00000000ffff0ff0 DR7=0000000000000400
+EFER=0000000000000500
+</code></pre><p>The program counter was pointing to an instruction which accesses the <a href="https://wiki.osdev.org/Printing_To_Screen">VGA
+buffer</a></p>
+<pre tabindex="0"><code class="language-objdump" data-lang="objdump">  133025:       66 c7 05 00 80 0b 00 48 02                      movw   $0x248,0xb8000(%rip)
+</code></pre><p>At this point, what can we do to debug the crash? We were kind of lost, why VGA
+buffer, what went wrong?</p>
+<h2 id="step-1-enable-kvm-tracing">Step 1: Enable KVM tracing</h2>
+<p>We start debugging by enabling KVM tracing with Linux tracepoints.  [Linux
+tracepoints] (<a href="https://www.kernel.org/doc/html/latest/trace/tracepoints.html">https://www.kernel.org/doc/html/latest/trace/tracepoints.html</a>)
+are a lightweight instrumentation facility embedded in the Linux kernel.  One
+can dynamically enable these tracepoints by registering a function that would
+be called when the tracepoint is executed.</p>
+<p>KVM Code has a lot of <a href="https://www.linux-kvm.org/page/Perf_events">tracepoints</a>
+for instrumenting various events. The list of tracepoints could be obtained by
+running <code>perf list</code> as shown below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo perf list | grep kvm
+  ...
+  kvm:kvm_emulate_insn                               <span style="color:#f92672">[</span>Tracepoint event<span style="color:#f92672">]</span>
+  kvm:kvm_enter_smm                                  <span style="color:#f92672">[</span>Tracepoint event<span style="color:#f92672">]</span>
+  kvm:kvm_entry                                      <span style="color:#f92672">[</span>Tracepoint event<span style="color:#f92672">]</span>
+  kvm:kvm_eoi                                        <span style="color:#f92672">[</span>Tracepoint event<span style="color:#f92672">]</span>
+  kvm:kvm_exit                                       <span style="color:#f92672">[</span>Tracepoint event<span style="color:#f92672">]</span>
+  kvm:kvm_fast_mmio                                  <span style="color:#f92672">[</span>Tracepoint event<span style="color:#f92672">]</span>
+  kvm:kvm_fpu                                        <span style="color:#f92672">[</span>Tracepoint event<span style="color:#f92672">]</span>
+  kvm:kvm_halt_poll_ns                               <span style="color:#f92672">[</span>Tracepoint event<span style="color:#f92672">]</span>
+  ...
+</code></pre></div><p><a href="https://git.kernel.org/pub/scm/linux/kernel/git/rostedt/trace-cmd.git"><code>trace-cmd</code></a>
+offers a set of tools to trace and collect these events.</p>
+<p>Let&rsquo;s run with all kvm tracepoints <a href="https://www.linux-kvm.org/page/Tracing">enabled</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo trace-cmd record -b <span style="color:#ae81ff">20000</span> -e kvm
+</code></pre></div><p>From the dumped report,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo trace-cmd report &gt; trace-cmd.txt
+</code></pre></div><p>we have some more details</p>
+<pre tabindex="0"><code> qemu-system-x86-31218 [000] 159269.806542: kvm_exit:             reason EPT_MISCONFIG rip 0x133025 info 0 0
+ qemu-system-x86-31218 [000] 159269.806546: kvm_emulate_insn:     0:133025: ec
+ qemu-system-x86-31218 [000] 159269.806547: kvm_emulate_insn:     0:133025: ec FAIL
+ qemu-system-x86-31218 [000] 159269.806548: kvm_userspace_exit:   reason KVM_EXIT_INTERNAL_ERROR (17)
+ qemu-system-x86-31218 [000] 159269.806548: kvm_fpu:              unload
+ qemu-system-x86-31215 [007] 159325.605844: kvm_hv_stimer_cleanup: vcpu_id 0 timer 0
+ qemu-system-x86-31215 [007] 159325.605852: kvm_hv_stimer_cleanup: vcpu_id 0 timer 1
+ qemu-system-x86-31215 [007] 159325.605852: kvm_hv_stimer_cleanup: vcpu_id 0 timer 2
+ qemu-system-x86-31215 [007] 159325.605853: kvm_hv_stimer_cleanup: vcpu_id 0 timer 3
+</code></pre><p>Well, grepping <code>KVM_EXIT_INTERNAL_ERROR</code> did not give us much information. But
+what caught the eye was that the instruction dump at <code>rip</code> was not what we see in
+<code>objdump</code>. So, we tried looking into the previous <code>kvm_emulate_insn</code> logs in
+the trace report to see how it is handled.</p>
+<p>Below is our previous instance of <code>emulate_insn</code> trace.</p>
+<pre tabindex="0"><code> qemu-system-x86-31218 [000] 159269.805554: kvm_exit:             reason IO_INSTRUCTION rip 0xa962 info 1770008 0
+ qemu-system-x86-31218 [000] 159269.805555: kvm_emulate_insn:     f0000:a962: ec
+ qemu-system-x86-31218 [000] 159269.805555: kvm_userspace_exit:   reason KVM_EXIT_IO (2)
+</code></pre><p>From the above, it looks like kvm seem to have failed to fetch the instructions at our
+crashed rip (<code>0x131025</code>).</p>
+<p>The <code>kvm_emulate_insn</code> trace is located at <a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/x86.c#L5474"><code>arch/x86/kvm/x86.c</code></a>.</p>
+<p>The exit reason is an EPT misconfiguration.</p>
+<pre tabindex="0"><code> qemu-system-x86-31218 [000] 159269.806542: kvm_exit:             reason EPT_MISCONFIG rip 0x133025 info 0 0
+</code></pre><p>and the request for emulation originated from here: <a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/vmx.c#L6166"><code>handle_ept_misconfig</code></a> which matches with our trace log.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">handle_ept_misconfig</span>(<span style="color:#66d9ef">struct</span> kvm_vcpu <span style="color:#f92672">*</span>vcpu)
+{
+	...
+        ret <span style="color:#f92672">=</span> handle_mmio_page_fault(vcpu, gpa, true);
+        <span style="color:#66d9ef">if</span> (likely(ret <span style="color:#f92672">==</span> RET_MMIO_PF_EMULATE))
+                <span style="color:#66d9ef">return</span> x86_emulate_instruction(vcpu, gpa, <span style="color:#ae81ff">0</span>, NULL, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">==</span>
+                                              EMULATE_DONE;
+	...
+</code></pre></div><p>From <a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/x86.c#L5435"><code>arch/x86/kvm/x86.c</code></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">x86_emulate_instruction</span>(<span style="color:#66d9ef">struct</span> kvm_vcpu <span style="color:#f92672">*</span>vcpu,
+                            <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> cr2,
+                            <span style="color:#66d9ef">int</span> emulation_type,
+                            <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>insn,
+                            <span style="color:#66d9ef">int</span> insn_len)
+{
+        <span style="color:#66d9ef">struct</span> x86_emulate_ctxt <span style="color:#f92672">*</span>ctxt <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>vcpu<span style="color:#f92672">-&gt;</span>arch.emulate_ctxt;
+
+	...
+
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(emulation_type <span style="color:#f92672">&amp;</span> EMULTYPE_NO_DECODE)) {
+                init_emulate_ctxt(vcpu);
+
+		... 
+
+                r <span style="color:#f92672">=</span> x86_decode_insn(ctxt, insn, insn_len);
+
+                trace_kvm_emulate_insn_start(vcpu);
+</code></pre></div><h2 id="step-2-taking-a-closer-look-at-function-arguments-with-systemtap">Step 2: Taking a closer look at function arguments with Systemtap</h2>
+<p>We want to understand what goes wrong in decoding the instruction at our
+faulting <code>rip</code>. For example, we may want to peek into the arguments to
+<code>x86_decode_insn</code> function to observe <code>insn</code> or its return value.</p>
+<p>One way is to modify the kernel sources and add more debugging information in
+these functions. But that&rsquo;s quite an invasive change. Instead, we use
+systemtap, a non-invasive way to attach probes at call and return sites for
+various kernel functions without modifying the kernel sources.</p>
+<p><a href="https://sourceware.org/systemtap/wiki">Systemtap</a> offers a nice commandline
+interface and a scripting language using which one can attach call/return probes
+to kernel functions. Additionally, it offers guru mode - where you can place
+embedded C blocks that can use kernel datastructures and functions.</p>
+<p>The code flow of <code>x86_decode_insn</code> in our scenario is:<br></p>
+<p align="center">
+  <img src="/images/qemu-kvm-1gb-pages/kvm_callgraph.svg">
+</p>
+<p>In the above graph, <code>gva_to_gpa</code> and is a function pointer which dynamically changes based
+on the context we run the guest on. Instead of trying to dig through the code
+to resolve it, we can run systemtap to dynamically figure out which <code>gva_to_gpa</code>
+pointer is mapped.</p>
+<p>Also, to understand if address translation happens correctly, we monitored both
+these calls: <code>kvm_fetch_guest_virt</code> and <code>kvm_vcpu_read_guest_page</code>.</p>
+<p>Here is the systemtap script we use to stick a probe at call-site for these
+functions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">global count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+probe module(<span style="color:#e6db74">&#34;kvm&#34;</span>).function(<span style="color:#e6db74">&#34;kvm_fetch_guest_virt&#34;</span>) {
+        printf(<span style="color:#e6db74">&#34;%s eip 0x%08x, addr: 0x%08x, bytes: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, ppfunc(), <span style="color:#960050;background-color:#1e0010">$</span>ctxt<span style="color:#f92672">-&gt;</span>eip, <span style="color:#960050;background-color:#1e0010">$</span>addr, <span style="color:#960050;background-color:#1e0010">$</span>bytes);
+        <span style="color:#66d9ef">if</span> (count <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+                printf(<span style="color:#e6db74">&#34;fp_gva_to_gpa: %x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, print_fp(<span style="color:#960050;background-color:#1e0010">$</span>ctxt));
+                count<span style="color:#f92672">++</span>;
+        }
+	<span style="color:#75715e">// We want to know the gva_to_gpa when our guest is at this rip
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#960050;background-color:#1e0010">$</span>addr <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x133025</span>) {
+                printf(<span style="color:#e6db74">&#34;fp_gva_to_gpa: %x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, print_fp(<span style="color:#960050;background-color:#1e0010">$</span>ctxt));
+        }
+}
+
+probe module(<span style="color:#e6db74">&#34;kvm&#34;</span>).function(<span style="color:#e6db74">&#34;kvm_vcpu_read_guest_page&#34;</span>) {
+        printf(<span style="color:#e6db74">&#34;  -%s =&gt; gfn 0x%08x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, ppfunc(), <span style="color:#960050;background-color:#1e0010">$</span>gfn);
+}
+</code></pre></div><p>Running this by logging the output to a file,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo stap -v ./kvm.stp -o kvm_stap.log
+</code></pre></div><p>Here is what we have,</p>
+<pre tabindex="0"><code>kvm_fetch_guest_virt eip 0x0000cfa6, addr: 0x000fcfa6, bytes: 15
+fp_gva_to_gpa: ffffffffa04416e0			// This is what gva_to_gpa points to at the beginning
+  -kvm_vcpu_read_guest_page =&gt; gfn 0x000000fc
+...
+&lt;snip&gt;
+
+kvm_fetch_guest_virt eip 0x00133025, addr: 0x00133025, bytes: 15
+fp_gva_to_gpa: ffffffffa0448660			// This is what gva_to_gpa points to when we hit our bug
+
+</code></pre><p>The log shows that for the offending address, we see the record for
+<code>kvm_fetch_guest_virt</code>, but we do not see any for <code>kvm_vcpu_read_guest_page</code>,
+which means the our <code>gva_to_gpa</code> likely returned an error.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* used for instruction fetching */</span>
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">kvm_fetch_guest_virt</span>(<span style="color:#66d9ef">struct</span> x86_emulate_ctxt <span style="color:#f92672">*</span>ctxt,
+				gva_t addr, <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>val, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> bytes,
+				<span style="color:#66d9ef">struct</span> x86_exception <span style="color:#f92672">*</span>exception)
+{
+	<span style="color:#66d9ef">struct</span> kvm_vcpu <span style="color:#f92672">*</span>vcpu <span style="color:#f92672">=</span> emul_to_vcpu(ctxt);
+	u32 access <span style="color:#f92672">=</span> (kvm_x86_ops<span style="color:#f92672">-&gt;</span>get_cpl(vcpu) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">?</span> PFERR_USER_MASK : <span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">unsigned</span> offset;
+	<span style="color:#66d9ef">int</span> ret;
+
+	<span style="color:#75715e">/* Inline kvm_read_guest_virt_helper for speed.  */</span>
+	gpa_t gpa <span style="color:#f92672">=</span> vcpu<span style="color:#f92672">-&gt;</span>arch.walk_mmu<span style="color:#f92672">-&gt;</span>gva_to_gpa(vcpu, addr, access<span style="color:#f92672">|</span>PFERR_FETCH_MASK,
+						    exception);
+	<span style="color:#66d9ef">if</span> (unlikely(gpa <span style="color:#f92672">==</span> UNMAPPED_GVA))
+		<span style="color:#66d9ef">return</span> X86EMUL_PROPAGATE_FAULT;
+
+	offset <span style="color:#f92672">=</span> addr <span style="color:#f92672">&amp;</span> (PAGE_SIZE<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+	<span style="color:#66d9ef">if</span> (WARN_ON(offset <span style="color:#f92672">+</span> bytes <span style="color:#f92672">&gt;</span> PAGE_SIZE))
+		bytes <span style="color:#f92672">=</span> (<span style="color:#66d9ef">unsigned</span>)PAGE_SIZE <span style="color:#f92672">-</span> offset;
+	ret <span style="color:#f92672">=</span> kvm_vcpu_read_guest_page(vcpu, gpa <span style="color:#f92672">&gt;&gt;</span> PAGE_SHIFT, val,
+				       offset, bytes);
+	<span style="color:#66d9ef">if</span> (unlikely(ret <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>))
+		<span style="color:#66d9ef">return</span> X86EMUL_IO_NEEDED;
+
+	<span style="color:#66d9ef">return</span> X86EMUL_CONTINUE;
+}
+</code></pre></div><p>From <code>kallsyms</code>, we can get the actual functions the <code>gva_to_gpa</code> functions pointers point to.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo grep -e ffffffffa04416e0 -e ffffffffa0448660 /proc/kallsyms
+ffffffffa04416e0 t nonpaging_gva_to_gpa <span style="color:#f92672">[</span>kvm<span style="color:#f92672">]</span>
+ffffffffa0448660 t paging64_gva_to_gpa  <span style="color:#f92672">[</span>kvm<span style="color:#f92672">]</span>
+</code></pre></div><p>During initialization, paging is turned off, so the function pointer is
+pointing to <code>nonpaging_gva_to_gpa</code> and when paging is turned on it points to
+<code>paging64_gva_to_gpa</code>. So, at our offending address,
+<a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/paging_tmpl.h#L890"><code>paging64_gva_to_gpa</code></a>
+likely returns a failure.</p>
+<p>All <code>gva_to_gpa</code> helpers are templatized in the file
+<a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/paging_tmpl.h"><code>paging_tmpl.h</code></a>.
+<code>paging64_gva_to_gpa</code> is nothing but a wrapper around <a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/paging_tmpl.h#L456"><code>paging64_walk_addr</code></a>
+which inturn is a wrapper to <a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/paging_tmpl.h#L280"><code>paging64_walk_addr_generic</code></a> which walks the relevant pagetable.</p>
+<p>Adding a return probe at this function in the systemtap script would give us the return value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">global ret_active <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+probe module(<span style="color:#e6db74">&#34;kvm&#34;</span>).function(<span style="color:#e6db74">&#34;paging64_walk_addr_generic&#34;</span>) {
+        <span style="color:#66d9ef">if</span> (<span style="color:#960050;background-color:#1e0010">$</span>addr <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x00133025</span>) {
+                printf(<span style="color:#e6db74">&#34;Walking: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#960050;background-color:#1e0010">$$</span>parms);
+                ret_active <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+        }
+}
+
+probe module(<span style="color:#e6db74">&#34;kvm&#34;</span>).function(<span style="color:#e6db74">&#34;paging64_walk_addr_generic&#34;</span>).<span style="color:#66d9ef">return</span> {
+        <span style="color:#66d9ef">if</span> (ret_active <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+                printf(<span style="color:#e6db74">&#34;return: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#960050;background-color:#1e0010">$$</span><span style="color:#66d9ef">return</span>);
+        }
+}
+
+</code></pre></div><p>This gives us:</p>
+<pre tabindex="0"><code>Walking: walker=0xffff88140cf07a50 vcpu=0xffff882820b48000 mmu=0xffff882820b48300 addr=0x133025 access=0x10
+return: return=0x0
+</code></pre><h2 id="step-3-enable-even-more-kvm-tracing">Step 3: Enable even more KVM tracing</h2>
+<p>The function (<code>paging64_walk_addr_generic</code>) returns <code>1</code> if it has found a valid
+mapping and <code>0</code> otherwise (in case of an error). From systemtap log, we see a
+failure in address walk, but we do not know yet what happened.</p>
+<p>Fortunately, there are more tracepoints in the page walk <a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/paging_tmpl.h#L280">code</a>.
+Also, from <code>perf list</code> we have a bunch of <code>kvm_mmu</code> tracepoints.</p>
+<pre tabindex="0"><code>$ sudo perf list | grep kvmmmu
+  ...
+  kvmmmu:kvm_mmu_set_dirty_bit                       [Tracepoint event]
+  kvmmmu:kvm_mmu_set_spte                            [Tracepoint event]
+  kvmmmu:kvm_mmu_spte_requested                      [Tracepoint event]
+  kvmmmu:kvm_mmu_sync_page                           [Tracepoint event]
+  kvmmmu:kvm_mmu_unsync_page                         [Tracepoint event]
+  kvmmmu:kvm_mmu_walker_error                        [Tracepoint event]
+  ...
+</code></pre><p>By enabling the tracepoints in <code>paging64_walk_addr_generic</code>,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo trace-cmd record -b <span style="color:#ae81ff">20000</span> -e kvm -e kvm_mmu_pagetable_walk -e kvm_mmu_paging_element -e kvm_mmu_walker_error
+
+</code></pre></div><p>we have more information about the error:</p>
+<pre tabindex="0"><code> qemu-system-x86-31218 [000] 159269.806542: kvm_exit:             reason EPT_MISCONFIG rip 0x133025 info 0 0
+ qemu-system-x86-31218 [000] 159269.806544: kvm_mmu_pagetable_walk: addr 133025 pferr 10 F
+ qemu-system-x86-31218 [000] 159269.806545: kvm_mmu_paging_element: pte bf9023 level 4
+ qemu-system-x86-31218 [000] 159269.806545: kvm_mmu_paging_element: pte a3 level 3
+ qemu-system-x86-31218 [000] 159269.806546: kvm_mmu_walker_error: pferr 9 P|RSVD
+ qemu-system-x86-31218 [000] 159269.806546: kvm_emulate_insn:     0:133025: ec
+ qemu-system-x86-31218 [000] 159269.806547: kvm_emulate_insn:     0:133025: ec FAIL
+ qemu-system-x86-31218 [000] 159269.806548: kvm_userspace_exit:   reason KVM_EXIT_INTERNAL_ERROR (17)
+</code></pre><h3 id="pagetable-organization">Pagetable organization</h3>
+<p>Before decoding the error, let&rsquo;s take a quick look at our pagetable organization. We have just two levels (<code>level4</code> and <code>level3</code>) <br></p>
+<p align="center">
+  <img src="/images/qemu-kvm-1gb-pages/pgtable.svg">
+</p>
+<p>From the log, the walk was successful for <code>level4</code> table and while walking
+<code>level3</code> we get an error which hints that the reserved bit is set on the <code>level3</code>
+entry.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">FNAME</span>(walk_addr_generic)(<span style="color:#66d9ef">struct</span> guest_walker <span style="color:#f92672">*</span>walker,
+                                    <span style="color:#66d9ef">struct</span> kvm_vcpu <span style="color:#f92672">*</span>vcpu, <span style="color:#66d9ef">struct</span> kvm_mmu <span style="color:#f92672">*</span>mmu,
+                                    gva_t addr, u32 access)
+{
+	...
+
+        trace_kvm_mmu_pagetable_walk(addr, access);
+
+        <span style="color:#66d9ef">do</span> {
+		...
+
+                <span style="color:#66d9ef">if</span> (unlikely(is_rsvd_bits_set(mmu, pte, walker<span style="color:#f92672">-&gt;</span>level))) {
+                        errcode <span style="color:#f92672">=</span> PFERR_RSVD_MASK <span style="color:#f92672">|</span> PFERR_PRESENT_MASK;
+                        <span style="color:#66d9ef">goto</span> error;
+                }
+
+		...
+        } <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>is_last_gpte(mmu, walker<span style="color:#f92672">-&gt;</span>level, pte));
+
+error:
+	...
+
+        trace_kvm_mmu_walker_error(walker<span style="color:#f92672">-&gt;</span>fault.error_code);
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>The check for reserved bit is happening <a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/mmu.c#L3314">here</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span>
+<span style="color:#a6e22e">__is_rsvd_bits_set</span>(<span style="color:#66d9ef">struct</span> rsvd_bits_validate <span style="color:#f92672">*</span>rsvd_check, u64 pte, <span style="color:#66d9ef">int</span> level)
+{
+	<span style="color:#66d9ef">int</span> bit7 <span style="color:#f92672">=</span> (pte <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>, low6 <span style="color:#f92672">=</span> pte <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x3f</span>;
+
+	<span style="color:#66d9ef">return</span> (pte <span style="color:#f92672">&amp;</span> rsvd_check<span style="color:#f92672">-&gt;</span>rsvd_bits_mask[bit7][level<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) <span style="color:#f92672">|</span>
+		((rsvd_check<span style="color:#f92672">-&gt;</span>bad_mt_xwr <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1ull</span> <span style="color:#f92672">&lt;&lt;</span> low6)) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>);
+}
+</code></pre></div><p>In our pagetable entry, we set <code>bit7</code> in the <code>level3</code> entry for enabling 1GiB
+pages.  With those inputs, the expression above expands to
+<code>rsvd_bits_mask[1][2]</code>. The mask is set in <code>__reset_rsvds_bits_mask</code>.</p>
+<p>From <a href="https://elixir.bootlin.com/linux/v4.8.4/source/arch/x86/kvm/mmu.c#L3679"><code>arch/x86/kvm/mmu.c</code></a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span>
+<span style="color:#a6e22e">__reset_rsvds_bits_mask</span>(<span style="color:#66d9ef">struct</span> kvm_vcpu <span style="color:#f92672">*</span>vcpu,
+			<span style="color:#66d9ef">struct</span> rsvd_bits_validate <span style="color:#f92672">*</span>rsvd_check,
+			<span style="color:#66d9ef">int</span> maxphyaddr, <span style="color:#66d9ef">int</span> level, <span style="color:#66d9ef">bool</span> nx, <span style="color:#66d9ef">bool</span> gbpages,
+			<span style="color:#66d9ef">bool</span> pse, <span style="color:#66d9ef">bool</span> amd)
+{
+	...
+
+	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>gbpages)
+		gbpages_bit_rsvd <span style="color:#f92672">=</span> rsvd_bits(<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">7</span>);
+	...
+
+	<span style="color:#66d9ef">switch</span> (level) {
+	...
+	<span style="color:#66d9ef">case</span> PT64_ROOT_LEVEL:
+	...
+		rsvd_check<span style="color:#f92672">-&gt;</span>rsvd_bits_mask[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> exb_bit_rsvd <span style="color:#f92672">|</span>
+			gbpages_bit_rsvd <span style="color:#f92672">|</span> rsvd_bits(maxphyaddr, <span style="color:#ae81ff">51</span>) <span style="color:#f92672">|</span>
+			rsvd_bits(<span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">29</span>);
+		<span style="color:#66d9ef">break</span>;
+
+	...
+}
+
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> reset_rsvds_bits_mask(<span style="color:#66d9ef">struct</span> kvm_vcpu <span style="color:#f92672">*</span>vcpu,
+				  <span style="color:#66d9ef">struct</span> kvm_mmu <span style="color:#f92672">*</span>context)
+{
+	__reset_rsvds_bits_mask(vcpu, <span style="color:#f92672">&amp;</span>context<span style="color:#f92672">-&gt;</span>guest_rsvd_check,
+				cpuid_maxphyaddr(vcpu), context<span style="color:#f92672">-&gt;</span>root_level,
+				context<span style="color:#f92672">-&gt;</span>nx, guest_cpuid_has_gbpages(vcpu),
+				is_pse(vcpu), guest_cpuid_is_amd(vcpu));
+}
+</code></pre></div><p>So, the hint of whether to set this bit as reserved comes from whether the
+guest cpu has gbpages capability. This comes from CPUID leaf
+<code>0x8000_0001</code>.EDX[26].</p>
+<p>Running cpuid on the host gives,</p>
+<pre tabindex="0"><code>...
+$ cpud -1
+   ...
+   extended feature flags (0x80000001/edx):           
+      SYSCALL and SYSRET instructions        = true                                                                  
+      execution disable                      = true       
+      1-GB large page support                = true  
+  ...
+</code></pre><h2 id="root-cause-cpuid">Root-cause: CPUID</h2>
+<p>The immediate conclusion is: our host support 1GiB pages but our guest CPU does
+not support it. Digging through the sources shows that only a few server class
+CPU support this feature in QEMU.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> X86CPUDefinition builtin_x86_defs[] <span style="color:#f92672">=</span> {
+    ...
+    {    
+        .name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Skylake-Server&#34;</span>,
+        .level <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xd</span>, 
+        .vendor <span style="color:#f92672">=</span> CPUID_VENDOR_INTEL,
+
+        .features[FEAT_8000_0001_EDX] <span style="color:#f92672">=</span>
+            CPUID_EXT2_LM <span style="color:#f92672">|</span> CPUID_EXT2_PDPE1GB <span style="color:#f92672">|</span> CPUID_EXT2_RDTSCP <span style="color:#f92672">|</span>
+            CPUID_EXT2_NX <span style="color:#f92672">|</span> CPUID_EXT2_SYSCALL,
+
+    ...
+</code></pre></div><p>Also, from <a href="https://www.qemu.org/docs/master/system/target-i386.html#recommendations-for-kvm-cpu-model-configuration-on-x86-hosts">qemu documentation</a></p>
+<pre tabindex="0"><code>pdpe1gb
+
+    Recommended to allow guest OS to use 1GB size pages.
+
+    Not included by default in any Intel CPU model.
+
+    Should be explicitly turned on for all Intel CPU models.
+
+    Note that not all CPU hardware will support this feature.
+</code></pre><h2 id="solution-passing-the-cpu-model-that-supports-1gb-pages">Solution: passing the CPU model that supports 1GB pages</h2>
+<p>The conclusion is, in QEMU command line, one should specify a CPU that supports
+this feature (according to QEMU sources) or pass this a flag to the cpus to enable 1GiB large page support.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">qemu-system-x86_64 -cpu Haswell,pdpe1gb ...
+</code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">qemu-system-x86_64 -cpu Skylake-Server ...
+</code></pre></div><p>Having this in our QEMU commandline does not set <code>bit7</code> as reserved and thus
+solves the bug we encountered at the beginning of this post.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Kernel Development with Qemu (Printing &#34;Hello World&#34; On Bare Metal)</title>
+      <link>https://mars-research.github.io/posts/2020/10/hello-world-on-bare-metal/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mars-research.github.io/posts/2020/10/hello-world-on-bare-metal/</guid>
+      <description>How to get started with kernel development on Qemu platform</description>
+      <content:encoded><![CDATA[<p>If you plan to start working on a new operating system kernel things get hard
+fast&mdash;there is a ton of low-level hardware details you have to understand and
+a number of design decisions you have to make (after all, why would you build
+yet another kernel&mdash;you have to invent something new, right?).  Complexity is
+intimidating. Nevertheless, if you take it step by step, the basics are simple.
+And it&rsquo;s worth trying. We&rsquo;re sure you&rsquo;ll venture into your own kernel
+story&mdash;multicore-scalability, security, safety, fast device access,</p>
+<p>This post provides a minimal set of steps needed to print &ldquo;Hello world!&rdquo; on the
+screen.</p>
+<h2 id="qemu-the-fastest-way-to-start">Qemu: the Fastest Way to Start</h2>
+<p>The fastest way to get started on a new kernel is to use a virtual machine like
+Qemu. Note, we like Qemu the most because it is open source (if things go
+wrong, you can actually debug what is going on), and good support on Linux
+servers (we carry most of our development remotely in a baremetal datacenter,
+and Qemu just works out of the box). Compared to running on real hardware
+(which has a long reboot cycle, and limited debugging mechanisms), development
+under a virtual machine, e.g., Qemu has a much quicker cycle and gives a ton of
+debugging opportunities (e.g., attaching GDB, dumping page tables,
+understanding triple faults, etc.).  Moreover, for serious kernel development,
+the Qemu+KVM bundle provides performance that is nearly identical to bare metal
+for most workloads, i.e., a nested page table slows you down by a couple
+of percents on workloads that touch a lot of memory, e.g., a hash table, but
+overall by running on Qemu+KVM you get a fair estimate of your system&rsquo;s
+performance.</p>
+<p>Qemu can boot a multiboot-compatible kernel with the (<code>-kernel</code>) option.
+Multiboot is a general specification. This is convenient, it can be booted by
+any multiboot-compatible boot loader, e.g., GRUB&mdash;this makes it convenient the
+moment you are ready to test your kernel on real hardware you can boot it with
+GRUB (see below).</p>
+<p>The Multiboot specification requires that the kernel binary starts with a
+special header. We will make this header in two steps: 1) we will use assembly
+to create specific header constants (it&rsquo;s possible to make the header in C, but
+what if you program your kernel in Rust?) and 2) we will use a linker script to
+make sure that the header is placed exactly at the beginning of the kernel
+binary.</p>
+<h3 id="multiboot-header">Multiboot Header</h3>
+<p>A multiboot header is easy (the code is adapted from <a href="https://www.cs.vu.nl/~herbertb/misc/writingkernels.txt">&ldquo;Writing kernels that boot with Qemu and Grub&rdquo; tutorial by Herbert Boss</a> and it uses
+the Intel assembly):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#75715e">; Multiboot v1 - Compliant Header for QEMU 
+</span><span style="color:#75715e">; We use multiboot v1 since Qemu &#34;-kernel&#34; doesn&#39;t support 
+</span><span style="color:#75715e">; multiboot v2
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">; This part MUST be 4-byte aligned, so we solve that issue using &#39;ALIGN 4&#39;
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">ALIGN</span> <span style="color:#ae81ff">4</span>
+<span style="color:#a6e22e">section</span> <span style="color:#66d9ef">.multiboot_header</span>
+    <span style="color:#75715e">; Multiboot macros to make a few lines later more readable
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">MULTIBOOT_PAGE_ALIGN</span>	<span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">&lt;&lt;</span><span style="color:#ae81ff">0</span>
+    <span style="color:#a6e22e">MULTIBOOT_MEMORY_INFO</span>	<span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">&lt;&lt;</span><span style="color:#ae81ff">1</span>                                         
+    <span style="color:#66d9ef">MULTIBOOT_HEADER_MAGIC</span>	<span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">0x1BADB002</span>                                   <span style="color:#75715e">; magic number 
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">MULTIBOOT_HEADER_FLAGS</span>	<span style="color:#66d9ef">equ</span> <span style="color:#66d9ef">MULTIBOOT_PAGE_ALIGN</span> <span style="color:#960050;background-color:#1e0010">|</span> <span style="color:#66d9ef">MULTIBOOT_MEMORY_INFO</span> <span style="color:#75715e">; flags
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">MULTIBOOT_CHECKSUM</span>	<span style="color:#66d9ef">equ</span> - (<span style="color:#66d9ef">MULTIBOOT_HEADER_MAGIC</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#66d9ef">MULTIBOOT_HEADER_FLAGS</span>)  <span style="color:#75715e">; checksum 
+</span><span style="color:#75715e"></span>                                <span style="color:#75715e">; (magic number + checksum + flags should equal 0)
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">; This is the GRUB Multiboot header. A boot signature
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">dd</span> <span style="color:#66d9ef">MULTIBOOT_HEADER_MAGIC</span>
+    <span style="color:#a6e22e">dd</span> <span style="color:#66d9ef">MULTIBOOT_HEADER_FLAGS</span>
+    <span style="color:#a6e22e">dd</span> <span style="color:#66d9ef">MULTIBOOT_CHECKSUM</span>
+
+</code></pre></div><p>Here we first define several constants, e.g., <code>MULTIBOOT_PAGE_ALIGN</code>, <code>MULTIBOOT_MEMORY_INFO</code>,
+<code>MULTIBOOT_HEADER_MAGIC</code>, combine them into <code>MULTIBOOT_HEADER_FLAGS</code> and <code>MULTIBOOT_CHECKSUM</code>, and
+then define the header as three 4 byte values in the last three lines.</p>
+<p>While this looks criptic in practice it&rsquo;s rather simple.
+Go ahead and read the <a href="https://www.gnu.org/software/grub/manual/multiboot/multiboot.html">Multiboot Specification, Section 3.1.1</a>
+to see which fields are put inside the header.</p>
+<p>We can compile this with <code>nasm</code> like</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">nasm -felf32 multiboot_header.asm -o multiboot_header.o
+</code></pre></div><h3 id="linker-script">Linker Script</h3>
+<p>Now we need to compile a kernel binary in such a way that the multiboot header appears as the first
+section in the ELF file. For this we will use a linker scripts that instructs the linker to copy
+sections from multiple files in a specific order:</p>
+<pre tabindex="0"><code>ENTRY(start)
+
+SECTIONS {
+    . = 0x100000; /* Tells GRUB to load the kernel starting at the 1MB */
+
+    .boot :
+    {
+        /* Ensure that the multiboot header is at the beginning */
+        *(.multiboot_header)
+    }
+
+    .text :
+    {
+        *(.text)
+    }
+
+}
+</code></pre><p>Here we specify that the kernel entry point will be the <code>start</code> label. The
+bootloader that understand ELF format will load the kernel in memory (by the
+way, we ask to load the kernel at address <code>0x100000</code>) and will jump to the
+entry point specified in the ELF header. The linker will arrange that the ELF
+entry point points to the <code>start</code> label in the code. The <code>multiboot_header</code>
+will be copied by the linked to be above the rest of the ELF file, e.g., <code>text</code>
+section.</p>
+<h3 id="building-hello-world">Building Hello world</h3>
+<p>Now we&rsquo;re ready to actually implement the code that prints &ldquo;Hello world!&rdquo; on
+the screen (this is adapted from <a href="https://intermezzos.github.io/book/first-edition/hello-world.html">intermezzOS</a>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#a6e22e">global</span> <span style="color:#66d9ef">start</span>
+
+<span style="color:#a6e22e">section</span> <span style="color:#66d9ef">.text</span>
+<span style="color:#a6e22e">bits</span> <span style="color:#ae81ff">32</span>    <span style="color:#75715e">; By default, GRUB loads the kernel in 32-bit mode
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">start</span>:
+    
+    <span style="color:#75715e">; Print `Hello world!` on the screen by placing ASCII 
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">; characters in the VGA screen buffer that starts at 0xb8000
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8000</span>], <span style="color:#ae81ff">0x0248</span> <span style="color:#75715e">; H
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8002</span>], <span style="color:#ae81ff">0x0265</span> <span style="color:#75715e">; e
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8004</span>], <span style="color:#ae81ff">0x026c</span> <span style="color:#75715e">; l
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8006</span>], <span style="color:#ae81ff">0x026c</span> <span style="color:#75715e">; l
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8008</span>], <span style="color:#ae81ff">0x026f</span> <span style="color:#75715e">; o
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb800a</span>], <span style="color:#ae81ff">0x0220</span> <span style="color:#75715e">;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb800c</span>], <span style="color:#ae81ff">0x0277</span> <span style="color:#75715e">; w
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb800e</span>], <span style="color:#ae81ff">0x026f</span> <span style="color:#75715e">; o
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8010</span>], <span style="color:#ae81ff">0x0272</span> <span style="color:#75715e">; r
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8012</span>], <span style="color:#ae81ff">0x026c</span> <span style="color:#75715e">; l
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8014</span>], <span style="color:#ae81ff">0x0264</span> <span style="color:#75715e">; d
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mov</span> <span style="color:#66d9ef">word</span> [<span style="color:#ae81ff">0xb8016</span>], <span style="color:#ae81ff">0x0221</span> <span style="color:#75715e">; !
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">hlt</span> <span style="color:#75715e">; Halt CPU 
+</span><span style="color:#75715e"></span>
+</code></pre></div><p>The code moves ASCII characters <code>H</code>, <code>e</code>, <code>l</code>, etc., into the VGA frame buffer and then halts
+the CPU with the <code>hlt</code> instruction.</p>
+<p>Now we&rsquo;re ready to build and run this simple kernel. First, we compile the multiboot header:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">nasm -felf32 multiboot_header.asm -o multiboot_header.o
+</code></pre></div><p>Then compile the hello code (let&rsquo;s put it into the <code>boot.asm</code>file):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">nasm -felf32 boot.asm -o boot.o
+</code></pre></div><p>Then invoke a linker to build a final kernel ELF binary:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ld -m elf_i386 -n -T linker.ld -o kernel.bin boot.o multiboot_header.o
+</code></pre></div><p>And now you&rsquo;re ready to boot with Qemu:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">qemu-system-x86_64 -kernel kernel.bin
+</code></pre></div><h3 id="debugging-with-gdb">Debugging with GDB</h3>
+<p>Now lets see how we can debug our kernel with GDB. In the same folder where you work on your
+kernel create a simple <code>.gdbinit</code> file</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">target remote localhost:1234
+symbol-file kernel.bin
+</code></pre></div><p>This file instructs GDB to connect to the <code>localhost:1234</code> and load the symbol file for <code>kernel.bin</code>.
+Now we&rsquo;re ready to start our debugging session. In one terminal start Qemu</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">qemu-system-x86_64 -kernel kernel.bin -S -s
+</code></pre></div><p>In another terminal simply start gdb and the <code>.gdbinit</code> will connect it to the Qemu instance
+running your OS</p>
+<pre tabindex="0"><code>gdb
+</code></pre><p>Inside GDB you can set a breakpoint on the <code>start</code> label, e.g.</p>
+<pre tabindex="0"><code>(gdb) b start
+Breakpoint 1 at 0x100010
+</code></pre><p>Now switch layout to <code>regs</code> or <code>asm</code> and hit <code>c</code> for continue. Note, you don&rsquo;t get to immediately
+see your &ldquo;Hello world&rdquo; code as Qemu will executes BIOS.</p>
+<pre tabindex="0"><code>(gdb) layout regs
+(gdb) c
+</code></pre><p>You can see your assembly sequence and can single step through it with <code>si</code></p>
+<pre tabindex="0"><code>(gdb) si
+</code></pre><h3 id="debugging-tips">Debugging tips</h3>
+<p>You can always check if your multiboot header is correct by running</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">grub-file --is-x86-multiboot kernel.bin
+</code></pre></div><p>The <code>grub-file</code> is quiet but return 0 if it finds a header, and 1 otherwise.
+You can check for the return code with</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo $?
+</code></pre></div><p>You can change <code>--is-x86-multiboot</code> to <code>--is-x86-multiboot2</code> for checking the
+multiboot2 specification.</p>
+<h3 id="automation-with-make">Automation with Make</h3>
+<p>It&rsquo;s much more convenient to assemble all build commands in a simple Makefile</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make">kernel <span style="color:#f92672">:=</span> kernel.bin
+
+linker_script <span style="color:#f92672">:=</span> linker.ld
+assembly_source_files <span style="color:#f92672">:=</span> <span style="color:#66d9ef">$(</span>wildcard *.asm<span style="color:#66d9ef">)</span>
+assembly_object_files <span style="color:#f92672">:=</span> <span style="color:#66d9ef">$(</span>patsubst %.asm, build/%.o, <span style="color:#66d9ef">$(</span>assembly_source_files<span style="color:#66d9ef">))</span>
+
+<span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> all clean kernel qemu qemu-gdb
+
+<span style="color:#a6e22e">all</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>kernel<span style="color:#66d9ef">)</span>
+
+<span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
+	- @rm -fr build *.o <span style="color:#66d9ef">$(</span>kernel<span style="color:#66d9ef">)</span>
+	- @rm -f serial.log
+
+<span style="color:#a6e22e">qemu</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>kernel<span style="color:#66d9ef">)</span>
+	qemu-system-x86_64 -vga std -s -serial file:serial.log -kernel <span style="color:#66d9ef">$(</span>kernel<span style="color:#66d9ef">)</span>
+
+<span style="color:#a6e22e">qemu-gdb</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>kernel<span style="color:#66d9ef">)</span>
+	qemu-system-x86_64 -vga std -s -serial file:serial.log -S -kernel <span style="color:#66d9ef">$(</span>kernel<span style="color:#66d9ef">)</span>
+
+<span style="color:#a6e22e">$(kernel)</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>assembly_object_files<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>linker_script<span style="color:#66d9ef">)</span>
+	ld -m elf_i386 -n -T <span style="color:#66d9ef">$(</span>linker_script<span style="color:#66d9ef">)</span> -o <span style="color:#66d9ef">$(</span>kernel<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>assembly_object_files<span style="color:#66d9ef">)</span>
+
+<span style="color:#75715e"># compile assembly files
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">build/%.o</span><span style="color:#f92672">:</span> %.asm
+	@mkdir -p <span style="color:#66d9ef">$(</span>shell dirname $@<span style="color:#66d9ef">)</span>
+	nasm -felf32 $&lt; -o $@
+
+</code></pre></div><h2 id="qemu-booting-a-64bit-kernel">Qemu: Booting a 64bit Kernel</h2>
+<p>Remember, Qemu supports only the mutiboot v1 specification, and will only
+boot a 32bit ELF binary. Since most likely you will be building a 64bit kernel the <code>-kernel</code>
+flag to Qemu is a somewhat limited option. An alternative way to boot is to really go through the full
+boot protocol with a real boot loader that can boot our kernel from some kind of a storage device.
+The simplest way is to create a CD-ROM image that
+contains the GRUB loader and your kernel. Qemu will run the BIOS and the BIOS will follow the
+boot protocol loading GRUB the CD-ROM device. Then GRUB that supports both Multiboot v1 and v2
+will load our 64bit kernel.</p>
+<p>To create a bootable ISO, we&rsquo;re going to use the <code>grub2-mkrescue</code> program that
+generates a GRUB rescue image.  We first create a folder layout that will
+contain our kernel on disk, and then use  <code>grub2-mkrescue</code> to create a rescue
+image.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir -p build/isofiles/boot/grub
+</code></pre></div><p>The -p flag to mkdir will make the directory we specify, as well as any
+directories missing in the path (<code>-p</code> stands for &ldquo;parent&rdquo; as in parent directories).
+In other words, this will make the <code>build</code> directory with the <code>isofiles</code> directory inside
+that has <code>boot</code> inside, and finally the <code>grub</code> directory inside of that.</p>
+<p>In other words we are creating the following layout:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">├── build
+│   ├── boot.o
+│   ├── hello.iso
+│   ├── isofiles
+│   │   └── boot
+│   │       ├── grub
+│   │       │   └── grub.cfg
+│   │       └── kernel.bin
+</code></pre></div><p>Next, we create <code>grub.cfg</code>, a GRUB configuration file inside of that build/isofiles/boot/grub directory. The GRUB
+config file will instruct GRUB how to boot our kernel:</p>
+<pre tabindex="0"><code>set timeout=0
+set default=0
+
+menuentry &quot;hello&quot; {
+    multiboot2 /boot/kernel.bin
+    boot
+}
+
+</code></pre><p>Note that we set the <code>default</code> GRUB entry to 0 (that&rsquo;s the only entry we have), and configure the <code>timeout</code> to be 0
+seconds (after all we just want to boot immediately).</p>
+<p>One additional detial here is that we switch from Multiboot v1 to v2, so we use a slightly different <code>multiboot_header.asm</code> file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#75715e">; Multiboot 2 - Compliant Header
+</span><span style="color:#75715e">; https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html (Section 3.1.1)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">section</span> <span style="color:#66d9ef">.multiboot_header</span>
+header_start:
+    <span style="color:#75715e">; Multiboot macros to make a few lines later more readable
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">MULTIBOOT_PAGE_ALIGN</span>	<span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">&lt;&lt;</span><span style="color:#ae81ff">0</span>
+    <span style="color:#a6e22e">MULTIBOOT_HEADER_ARCH</span>       <span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">0</span>         <span style="color:#75715e">; 32-bit (protected) mode of i386
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">MULTIBOOT_HEADER_MAGIC</span>	<span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">0xe85250d6</span>          <span style="color:#75715e">; magic number
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">MULTIBOOT_CHECKSUM</span>	<span style="color:#66d9ef">equ</span> - (<span style="color:#66d9ef">MULTIBOOT_HEADER_MAGIC</span> <span style="color:#960050;background-color:#1e0010">+</span> (<span style="color:#66d9ef">header_end</span> - <span style="color:#66d9ef">header_start</span>))  <span style="color:#75715e">; checksum
+</span><span style="color:#75715e"></span>                                                        <span style="color:#75715e">; (magic number + checksum + flags should equal 0)
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">MULTIBOOT_TYPE</span>		<span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#a6e22e">MULTIBOOT_FLAGS</span>		<span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#a6e22e">MULTIBOOT_SIZE</span>		<span style="color:#66d9ef">equ</span> <span style="color:#ae81ff">8</span>
+
+    <span style="color:#75715e">; This is the GRUB Multiboot header. A boot signature
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">dd</span> <span style="color:#66d9ef">MULTIBOOT_HEADER_MAGIC</span>
+    <span style="color:#a6e22e">dd</span> <span style="color:#66d9ef">MULTIBOOT_HEADER_ARCH</span>
+    <span style="color:#a6e22e">dd</span> <span style="color:#66d9ef">header_end</span> - <span style="color:#66d9ef">header_start</span> <span style="color:#75715e">; Size of the Header
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">dd</span> <span style="color:#66d9ef">MULTIBOOT_CHECKSUM</span>
+
+    <span style="color:#75715e">; Required end tag
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">dw</span> <span style="color:#66d9ef">MULTIBOOT_TYPE</span>
+    <span style="color:#a6e22e">dw</span> <span style="color:#66d9ef">MULTIBOOT_FLAGS</span>
+    <span style="color:#a6e22e">dd</span> <span style="color:#66d9ef">MULTIBOOT_SIZE</span>
+header_end:
+</code></pre></div><p>Again, don&rsquo;t be shy to check the <a href="https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html">Multiboot Specification v2, Section 3.1.1</a>
+to see the exact meaning of all fields that we use above.</p>
+<p>Now don&rsquo;t have to bother about compiling the 32bit kernel, and instead use normal 64bit ELF file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">nasm -felf64 boot.asm -o build/boot.o
+nasm -felf64 multiboot_header.asm -o build/multiboot_header.o
+ld -n -T linker.ld -o build/kernel.bin  build/boot.o  build/multiboot_header.o
+</code></pre></div><p>Here we ask the linker to put the <code>kernel.bin</code> file inside <code>boot</code>.</p>
+<p>We can use <code>grub2-mkrescue</code> to generate a bootable ISO image:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ grub2-mkrescue -o build/hello.iso build/isofiles
+</code></pre></div><p>The -o flag controls the output filename, which we choose to be <code>build/hello.iso</code>. And then we pass it the directory to make the ISO out of, which is the <code>build/isofiles</code> directory we just set up.</p>
+<p>This will produce an <code>build/hello.iso</code> file with our kernel inside. Now we can pass this ISO file to QEMU</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ qemu-system-x86_64 -cdrom build/hello.iso
+</code></pre></div><h2 id="booting-off-a-usb-stick">Booting off a USB stick</h2>
+<p>Copy the ISO disk image to the USB stick (make sure to use correct device for the
+USB drive, otherwise you can overwrite your hard disk). You can use lsblk on Ubuntu
+to list block devices</p>
+<pre tabindex="0"><code>lsblk
+</code></pre><p>For me it&rsquo;s <code>/dev/sda</code> or <code>/dev/sdb</code> but my laptop runs off an NVMe device, so for you
+<code>/dev/sda</code> may very well be your root device, not a USB!</p>
+<pre tabindex="0"><code>sudo dd if=build/hello.iso of=/dev/&lt;your_usb_drive&gt; bs=1MB
+sync
+</code></pre><h3 id="boot-on-baremetal-from-a-linux-partition">Boot on baremetal from a Linux partition</h3>
+<pre tabindex="0"><code>sudo cp build/kernel.bin /boot/
+</code></pre><p>Add the following entry to the grub menu list. On a Linux machine this can
+be done by adding this to the /etc/grub.d/40_custom. You might adjust the
+root=&lsquo;hd0,2&rsquo; to reflect where your Linux root is on disk, e.g., maybe it&rsquo;s on
+root=&lsquo;hd0,1&rsquo;</p>
+<pre tabindex="0"><code>set timeout=30
+menuentry &quot;Hello World&quot; {
+    insmod ext2
+    set root='hd0,1'
+    set kernel='/boot/kernel.bin'
+    echo &quot;Loading ${kernel}...&quot;
+    multiboot2 ${kernel} ${kernel}
+    boot
+}
+</code></pre><p>Update grub</p>
+<pre tabindex="0"><code>  sudo sudo update-grub2
+</code></pre><p>Reboot and choose the &ldquo;Hello World&rdquo; entry. Make sure that you can see the grub menu
+list by editing /etc/default/grub making sure that GRUB_HIDDEN_TIMEOUT_QUIET is
+set to &ldquo;false&rdquo;.</p>
+<pre tabindex="0"><code>  GRUB_HIDDEN_TIMEOUT_QUIET=false
+</code></pre><h2 id="source-code">Source code</h2>
+<p>The source code for this post can be found at  <a href="https://github.com/mars-research/hello-os">hello-os</a> <code>master</code> and
+<code>qemu-kernel</code> branches.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li>
+<p><a href="https://intermezzos.github.io/book/first-edition/booting-up.html">intermezzOS, an operating system for learning</a> provides
+an excellent and detailed overview of how to boot into Rust (including printing the &ldquo;Hello World!&rdquo; discussed here.</p>
+</li>
+<li>
+<p><a href="https://os.phil-opp.com/multiboot-kernel/">A minimal Multiboot Kernel</a> is a blog post that describes a minimal multiboot kernel.</p>
+</li>
+<li>
+<p><a href="https://binarydebt.wordpress.com/2018/10/06/how-does-an-x86-processor-boot/">How Does an Intel Processor Boot?</a> is a good
+overview of the boot process on Intel CPUs.</p>
+</li>
+<li>
+<p><a href="https://eprint.iacr.org/2016/086.pdf">Intel SGX Explained</a> provides yet another, more in-depth overview of the boot process
+on Intel platforms.</p>
+</li>
+<li>
+<p><a href="https://0xax.gitbooks.io/linux-insides/content/Booting/">linux-insides</a> provides an overview of the Linux boot process.</p>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>
