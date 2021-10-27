@@ -10,6 +10,7 @@ params:
   ShowReadingTime: true
   ShowFullTextinRSS: true
   ShowCodeCopyButtons: true
+  ShowBreadCrumbs: true
   disableSpecial1stPost: true
   editPost:
     URL: 'https://github.com/mars-research/mars-research.github.io/blob/main/content'

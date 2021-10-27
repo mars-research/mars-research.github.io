@@ -1,6 +1,4 @@
 ---
-title: Projects
+title: Blog
 ShowBreadCrumbs: false
 ---
-
-

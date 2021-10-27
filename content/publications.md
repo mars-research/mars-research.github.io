@@ -5,6 +5,7 @@ aliases:
 - '/pubs'
 
 ShowReadingTime: false
+ShowBreadCrumbs: false
 ---
 
 Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev

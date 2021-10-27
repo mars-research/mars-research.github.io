@@ -3,6 +3,7 @@ menu: after
 title: Reading Group
 
 ShowReadingTime: false
+ShowBreadCrumbs: false
 ---
 
 ## Details
