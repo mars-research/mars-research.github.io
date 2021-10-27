@@ -2,6 +2,7 @@
 title: RedLeaf
 aliases:
 - /redleaf
+summary: A research operating system developed from scratch in Rust, aimed to explore the impact of language safety on operating system organization.
 ---
 
 <img src="images/redleaf.png" height="400px"/>
