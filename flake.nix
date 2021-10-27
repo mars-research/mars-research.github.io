@@ -27,6 +27,8 @@
       installPhase = ''
         cp -r public $out
       '';
+
+      dontFixup = true;
     };
 
     hugoVendor = pkgs.stdenv.mkDerivation {
