@@ -31,14 +31,18 @@ menu:
       name: Projects
       url: /projects
       weight: 30
+    - identifier: news
+      name: News
+      url: /news
+      weight: 40
     - identifier: blog
       name: Blog
       url: /posts
-      weight: 40
+      weight: 50
     - identifier: reading-group
       name: Reading Group
       url: /reading-group
-      weight: 50
+      weight: 60
 
 # Allow raw HTML in content
 markup:
