@@ -18,14 +18,10 @@ jobs:
             experimental-features = nix-command flakes
 
       - name: Build website
-        run: nix build -o out .#website
-
-      # Ugly hack so it has permission to delete the worktree afterwards
-      - name: Copy website
-        run: cp --no-preserve=mode -r out/ public/
+        run: nix build .#website
 
       - name: Deploy website
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+        uses: JamesIves/github-pages-deploy-action@4.1.6
         with:
           branch: gh-pages
-          folder: public
+          folder: result
