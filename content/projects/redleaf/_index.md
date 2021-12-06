@@ -7,7 +7,7 @@ summary: A research operating system developed from scratch in Rust, aimed to ex
 ShowReadingTime: false
 ---
 
-<img src="images/redleaf.png" height="400px"/>
+<img src="images/redleaf.png" height="400px" style="background-color: #ffffff; padding: 10px;"/>
 
 RedLeaf is a new operating system aimed at leveraging a safe, linear-typed
 programming language, Rust, for developing safe and provably secure systems.
