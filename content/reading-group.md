@@ -25,6 +25,16 @@ table th:first-of-type {
 }
 </style>
 
+### Fall 2021
+
+| Date | Paper |
+| :------------- | :---------- |
+| Dec 28 | [Retrofitting Fine Grain Isolation in the Firefox Renderer](https://www.usenix.org/system/files/sec20-narayan.pdf) |
+| Dec 21 | [XFI: Software Guards for System Address Spaces](https://people.eecs.berkeley.edu/~necula/Papers/xfi-osdi06.pdf) |
+| Nov 12 | [Membrane: Operating System Support for Restartable File Systems](https://www.usenix.org/legacy/events/fast10/tech/full_papers/sundararaman.pdf) |
+| Nov 5  | [Efficiently Recovering Stateful System Components of Multi-server Microkernels](https://ieeexplore.ieee.org/document/9546453/) |
+| Oct 29 | [The Aurora Single Level Store Operating System](https://rcs.uwaterloo.ca/~ali/papers/sosp21-aurora.pdf) |
+
 ### Spring 2021
 
 | Date | Paper |
