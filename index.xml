@@ -862,6 +862,25 @@ table th:first-of-type {
     width: 10%;
 }
 </style>
+<h3 id="fall-2021">Fall 2021</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Date</th>
+<th style="text-align:left">Paper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Dec 28</td>
+<td style="text-align:left"><a href="https://www.usenix.org/system/files/sec20-narayan.pdf">Retrofitting Fine Grain Isolation in the Firefox Renderer</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Dec 21</td>
+<td style="text-align:left"><a href="https://people.eecs.berkeley.edu/~necula/Papers/xfi-osdi06.pdf">XFI: Software Guards for System Address Spaces</a></td>
+</tr>
+</tbody>
+</table>
 <h3 id="spring-2021">Spring 2021</h3>
 <table>
 <thead>
