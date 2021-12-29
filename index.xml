@@ -879,6 +879,18 @@ table th:first-of-type {
 <td style="text-align:left">Dec 21</td>
 <td style="text-align:left"><a href="https://people.eecs.berkeley.edu/~necula/Papers/xfi-osdi06.pdf">XFI: Software Guards for System Address Spaces</a></td>
 </tr>
+<tr>
+<td style="text-align:left">Nov 12</td>
+<td style="text-align:left"><a href="https://www.usenix.org/legacy/events/fast10/tech/full_papers/sundararaman.pdf">Membrane: Operating System Support for Restartable File Systems</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Nov 5</td>
+<td style="text-align:left"><a href="https://ieeexplore.ieee.org/document/9546453/">Efficiently Recovering Stateful System Components of Multi-server Microkernels</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Oct 29</td>
+<td style="text-align:left"><a href="https://rcs.uwaterloo.ca/~ali/papers/sosp21-aurora.pdf">The Aurora Single Level Store Operating System</a></td>
+</tr>
 </tbody>
 </table>
 <h3 id="spring-2021">Spring 2021</h3>
