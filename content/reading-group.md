@@ -25,6 +25,12 @@ table th:first-of-type {
 }
 </style>
 
+### Winter 2022
+
+| Date | Paper |
+| :------------- | :---------- |
+| Jan 21 | [https://www.usenix.org/conference/usenixsecurity19/presentation/vahldiek-oberwagner](https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf) |
+
 ### Fall 2021
 
 | Date | Paper |
