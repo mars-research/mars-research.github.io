@@ -42,7 +42,7 @@ one for management (FPGA shell) and one for user programming. More details
 </code></pre><ul>
 <li>
 <p>There is a bit of a chicken-and-egg problem in figuring out which hardware is
-connected on this machine. There has got to be a better way to figure out the
+connected to this machine. There has got to be a better way to figure out the
 type of hardware connected to your PCIe bus. But we were lazy and tried to do
 a quick search on <em>UMass + cloudlab + fpga</em> to figure out what UMass people
 were planning to populate on their cluster and we get a
@@ -58,7 +58,7 @@ U280</a>.</p>
 </li>
 <li>
 <p>We installed the debian packages for the following components that are
-available from the above mentioned link. Installing with apt (i.e., <code>apt install xilinx_debian_files.deb</code>)
+available from the <em>Getting Started</em> page. Installing with apt (i.e., <code>apt install xilinx_debian_files.deb</code>)
 should automatically install all the needed dependencies.</p>
 <ul>
 <li>XRT (Xilinux Runtime)</li>
@@ -121,8 +121,9 @@ available for download behind a registration wall.</li>
 <ul>
 <li>Even for a minimal installation, Vitis suite would take around 170 GB of disk
 space. As Umass cluster does not support attaching a datastore currently, we
-installed all the software in the project specific NFS filesyste that is
-available under <code>/proj/&lt;your-project-name/</code>.</li>
+installed all the software in the project specific NFS filesystem that is
+available under <code>/proj/&lt;your-project-name/</code>. Please consult with Cloudlab
+administrators before installing it in the shared NFS drive.</li>
 </ul>
 <h3 id="pynq">PYNQ</h3>
 <p><a href="https://github.com/Xilinx/PYNQ">PYNQ</a> is an opensource library that provides a
@@ -155,7 +156,7 @@ example.</p>
 </li>
 <li>
 <p>To build the examples, you need to source both the XRT and Vitis environment
-(Vitis enviroment brings in their c++ compiler <code>v++</code>).</p>
+(Vitis environment brings in their c++ compiler <code>v++</code>).</p>
 </li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">source /opt/xilinx/xrt/setup.sh
