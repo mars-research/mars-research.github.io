@@ -6,11 +6,11 @@
     <description>Recent content in Blog on Mars Research Group</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://mars-research.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://mars-research.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting up Alveo FPGAs on Cloudlab - Part 1</title>
       <link>https://mars-research.github.io/posts/2022/01/playing-with-alveo-on-cloudlab-umass/</link>
-      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>https://mars-research.github.io/posts/2022/01/playing-with-alveo-on-cloudlab-umass/</guid>
       <description>As a systems research team, we build operating systems, low-level software, hack kernels and yet hardware programming always remained on the todo-list of &amp;ldquo;cool, but haven&amp;rsquo;t tried yet&amp;rdquo;. When Cloudlab started introducing FPGA accelerators to their testbed, we got excited and finally decided to give it a try.
