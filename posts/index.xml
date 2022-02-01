@@ -27,8 +27,10 @@ FPGA accelerator cards.</p>
 lists a variety of hardware nodes to choose from based on your needs. As of
 this writing, the FPGA machines on UMass cluster is still not listed on this
 documentation.</p>
-<p>We set up an experiment with <code>fpga-alveo</code> hardware on UMass cluster. This machine
-also has a fairly recent CPU <a href="https://ark.intel.com/content/www/us/en/ark/products/199347/intel-xeon-gold-6226r-processor-22m-cache-2-90-ghz.html"><strong>Intel(R) Xeon(R) Gold 6226R</strong></a>.</p>
+<p>We set up an experiment with <code>fpga-alveo</code> hardware on UMass cluster. This
+machine also has a fairly recent CPU <a href="https://ark.intel.com/content/www/us/en/ark/products/199347/intel-xeon-gold-6226r-processor-22m-cache-2-90-ghz.html"><strong>Intel(R) Xeon(R) Gold
+6226R</strong></a>.
+Our experiment uses stock Ubuntu 18.04 LTS, which is recommended for all Xilinx software versioned <code>v2021.2</code>.</p>
 <h3 id="setting-up-xilinx-development-environment">Setting up Xilinx development environment</h3>
 <ul>
 <li>The first step is to query the PCI bus for the presence of any Xilinx device.
@@ -272,7 +274,13 @@ Out[21]:
 PynqBuffer([640, 497, 931, 213, 539, 369, 577, 315, 452, 476, 421, 518,
             181, 639, 580, 208, 597, 719, 659, 548, 341, 466, 505,  41,
             900, 290, 653, 167, 165, 564, 858,  32], dtype=uint32)
-</code></pre><p>In Part 2, we will create a Vivado project for Alveo U280 card directly from
+</code></pre><h3 id="revisiting-the-node">Revisiting the node</h3>
+<p>If you happen to swap out the node, you need to install the dependencies and
+also the kernel modules necessary to accessing the Xilinx devices (<code>xocl.ko</code>
+and <code>xclmgmt.ko</code>). The easy way is to just re-install the XRT component from
+the debian file which would install the kernel modules and the opencl
+dependencies.</p>
+<p>In Part 2, we will create a Vivado project for Alveo U280 card directly from
 Verilog sources.</p>
 <h4 id="resources">Resources</h4>
 <ul>
