@@ -275,10 +275,10 @@ PynqBuffer([640, 497, 931, 213, 539, 369, 577, 315, 452, 476, 421, 518,
             181, 639, 580, 208, 597, 719, 659, 548, 341, 466, 505,  41,
             900, 290, 653, 167, 165, 564, 858,  32], dtype=uint32)
 </code></pre><h3 id="revisiting-the-node">Revisiting the node</h3>
-<p>If you happen to swap out the node, you need to install the dependencies and
-also the kernel modules necessary to accessing the Xilinx devices (<code>xocl.ko</code>
-and <code>xclmgmt.ko</code>). The easy way is to just re-install the XRT component from
-the debian file which would install the kernel modules and the opencl
+<p>If you happen to swap out the node, just install the dependencies and also the
+kernel modules necessary for accessing the Xilinx devices (<code>xocl.ko</code> and
+<code>xclmgmt.ko</code>). The easiest way is to just re-install the XRT component from the
+deb package which takes care of installing the kernel modules and other
 dependencies.</p>
 <p>In Part 2, we will create a Vivado project for Alveo U280 card directly from
 Verilog sources.</p>
