@@ -3,15 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://mars-research.github.io/posts/</loc>
-    <lastmod>2022-01-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://mars-research.github.io/</loc>
-    <lastmod>2022-01-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://mars-research.github.io/posts/2022/01/playing-with-alveo-on-cloudlab-umass-p1/</loc>
-    <lastmod>2022-01-30T00:00:00+00:00</lastmod>
+    <lastmod>2020-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://mars-research.github.io/posts/2020/11/qemu-kvm-1gb-pages/</loc>
+    <lastmod>2020-11-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://mars-research.github.io/</loc>
     <lastmod>2020-11-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://mars-research.github.io/posts/2020/10/hello-world-on-bare-metal/</loc>
