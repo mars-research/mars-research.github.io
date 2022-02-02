@@ -6,7 +6,294 @@
     <description>Recent content in Blog on Mars Research Group</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://mars-research.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://mars-research.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Setting up Alveo FPGAs on Cloudlab - Part 1</title>
+      <link>https://mars-research.github.io/posts/2022/01/playing-with-alveo-on-cloudlab-umass-p1/</link>
+      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://mars-research.github.io/posts/2022/01/playing-with-alveo-on-cloudlab-umass-p1/</guid>
+      <description>As a systems research team, we build operating systems, low-level software, hack kernels and yet hardware programming always remained on the todo-list of &amp;ldquo;cool, but haven&amp;rsquo;t tried yet&amp;rdquo;. When Cloudlab started introducing FPGA accelerators to their testbed, we got excited and finally decided to give it a try.
+Cloudlab is one of the publicly available testbeds for research. In all of our projects, we carry out the whole development process on Cloudlab infrastructure.</description>
+      <content:encoded><![CDATA[<p>As a systems research team, we build operating systems, low-level software,
+hack kernels and yet hardware programming always remained on the todo-list of &ldquo;cool,
+but haven&rsquo;t tried yet&rdquo;. When Cloudlab started introducing FPGA accelerators to
+their testbed, we got excited and finally decided to give it a try.</p>
+<p>Cloudlab is one of the publicly available testbeds for research. In all of our
+projects, we carry out the whole development process on Cloudlab
+infrastructure. Recently, UMass Amherst cluster started offering machines with
+FPGA accelerator cards.</p>
+<p>The official documentation of <a href="https://docs.cloudlab.us/hardware.html">Cloudlab</a>
+lists a variety of hardware nodes to choose from based on your needs. As of
+this writing, the FPGA machines on UMass cluster is still not listed on this
+documentation.</p>
+<p>We set up an experiment with <code>fpga-alveo</code> hardware on UMass cluster. This
+machine also has a fairly recent CPU <a href="https://ark.intel.com/content/www/us/en/ark/products/199347/intel-xeon-gold-6226r-processor-22m-cache-2-90-ghz.html"><strong>Intel(R) Xeon(R) Gold
+6226R</strong></a>.
+Our experiment uses stock Ubuntu 18.04 LTS, which is recommended for all Xilinx software versioned <code>v2021.2</code>.</p>
+<h3 id="setting-up-xilinx-development-environment">Setting up Xilinx development environment</h3>
+<ul>
+<li>The first step is to query the PCI bus for the presence of any Xilinx device.
+The accelerator cards would show up as two different physical functions (PFs),
+one for management (FPGA shell) and one for user programming. More details
+<a href="https://xilinx.github.io/XRT/master/html/platforms.html">here</a></li>
+</ul>
+<pre tabindex="0"><code>sudo lspci -d 10ee:
+3b:00.0 Processing accelerators: Xilinx Corporation Device 500c
+3b:00.1 Processing accelerators: Xilinx Corporation Device 500d
+</code></pre><ul>
+<li>
+<p>There is a bit of a chicken-and-egg problem in figuring out which hardware is
+connected to this machine. There has got to be a better way to figure out the
+type of hardware connected to your PCIe bus. But we were lazy and tried to do
+a quick search on <em>UMass + cloudlab + fpga</em> to figure out what UMass people
+were planning to populate on their cluster and we get a
+<a href="https://massopen.cloud/wp-content/uploads/2020/04/Open-Cloud-Workshop-OCT.pptx-2.pdf">hit</a>.
+We optimistically assumed they went with the same hardware listed on their
+proposal, which was Alveo U280 acceleration card.</p>
+</li>
+<li>
+<p>From here on, things get accelerated a bit. Xilinx has a getting started page
+for each hardware that hosts the list of tools you would need to set up the
+environment. Here is the page for <a href="https://www.xilinx.com/products/boards-and-kits/alveo/u280.html#gettingStarted">Alveo
+U280</a>.</p>
+</li>
+<li>
+<p>We installed the debian packages for the following components that are
+available from the <em>Getting Started</em> page. Installing with apt (i.e., <code>apt install xilinx_debian_files.deb</code>)
+should automatically install all the needed dependencies.</p>
+<ul>
+<li>XRT (Xilinux Runtime)</li>
+<li>Target Deployment platform</li>
+</ul>
+</li>
+<li>
+<p>After installing, the device can be validated using this command. It also
+performs a few tests on the hardware.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>$ sudo /opt/xilinx/xrt/bin/xbutil validate -d 0
+---------------------------------------------------------------------
+INFO: Found 1 cards
+
+INFO: Validating card[0]: xilinx_u280_xdma_201920_3
+INFO: == Starting AUX power connector check:
+INFO: == AUX power connector check PASSED
+INFO: == Starting Power warning check:
+INFO: == Power warning check PASSED
+INFO: == Starting PCIE link check:
+INFO: == PCIE link check PASSED
+INFO: == Starting SC firmware version check:
+INFO: == SC firmware version check PASSED
+INFO: == Starting verify kernel test:
+INFO: == verify kernel test PASSED
+INFO: == Starting IOPS test:
+Maximum IOPS: 84145 (hello)
+INFO: == IOPS test PASSED
+INFO: == Starting DMA test:
+Host -&gt; PCIe -&gt; FPGA write bandwidth = 11262.153007 MB/s
+Host &lt;- PCIe &lt;- FPGA read bandwidth = 11899.228409 MB/s
+INFO: == DMA test PASSED
+INFO: == Starting device memory bandwidth test:
+...........
+Maximum throughput: 43738 MB/s
+INFO: == device memory bandwidth test PASSED
+INFO: == Starting PCIE peer-to-peer test:
+P2P BAR is not enabled. Skipping validation
+INFO: == PCIE peer-to-peer test SKIPPED
+INFO: == Starting memory-to-memory DMA test:
+M2M is not available. Skipping validation
+INFO: == memory-to-memory DMA test SKIPPED
+INFO: == Starting host memory bandwidth test:
+Host_mem is not available. Skipping validation
+INFO: == host memory bandwidth test SKIPPED
+INFO: Card[0] validated successfully.
+
+INFO: All cards validated successfully.
+</code></pre><ul>
+<li>However, to design/program the FPGA, you would need Vitis hardware suite that is
+available for download behind a registration wall.</li>
+</ul>
+<h3 id="installables-behind-a-registration-wall">Installables behind a registration wall</h3>
+<p>Below installables are available only after creating a Xilinx account.</p>
+<ol>
+<li>Development target platform</li>
+<li>Vitis Core Development Kit</li>
+</ol>
+<ul>
+<li>Even for a minimal installation, Vitis suite would take around 170 GB of disk
+space. As Umass cluster does not support attaching a datastore currently, we
+installed all the software in the project specific NFS filesystem that is
+available under <code>/proj/&lt;your-project-name/</code>. Please consult with Cloudlab
+administrators before installing it in the shared NFS drive.</li>
+</ul>
+<h3 id="pynq">PYNQ</h3>
+<p><a href="https://github.com/Xilinx/PYNQ">PYNQ</a> is an opensource library that provides a
+python API for Xilinx platforms. Installing PYNQ is fairly trivial with <code>pip</code>.
+However, one can follow advanced setup instructions (such as installing through
+<code>Conda</code>) detailed
+<a href="https://pynq.readthedocs.io/en/v2.7.0/getting_started/alveo_getting_started.html">here</a></p>
+<h3 id="pynq-in-action">PYNQ in action</h3>
+<ul>
+<li>PYNQ relies on XRT that we installed earlier. So, it&rsquo;s important to source
+the XRT environment before using the <code>pynq</code> python module.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">source /opt/xilinx/xrt/setup.sh
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">1</span>]: <span style="color:#f92672">import</span> pynq
+
+In [<span style="color:#ae81ff">2</span>]: pynq<span style="color:#f92672">.</span>Device<span style="color:#f92672">.</span>devices
+Out[<span style="color:#ae81ff">2</span>]: [<span style="color:#f92672">&lt;</span>pynq<span style="color:#f92672">.</span>pl_server<span style="color:#f92672">.</span>xrt_device<span style="color:#f92672">.</span>XrtDevice at <span style="color:#ae81ff">0x7fb8dd4549b0</span><span style="color:#f92672">&gt;</span>]
+
+In [<span style="color:#ae81ff">3</span>]: pynq<span style="color:#f92672">.</span>Device<span style="color:#f92672">.</span>devices[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>name
+Out[<span style="color:#ae81ff">3</span>]: <span style="color:#e6db74">&#39;xilinx_u280_xdma_201920_3&#39;</span>
+</code></pre></div><h3 id="hello-world---a-vector-addition-on-u280">Hello World - A vector addition on U280</h3>
+<ul>
+<li>
+<p>Vitis_Accel_Examples -
+<a href="https://github.com/Xilinx/Vitis_Accel_Examples">https://github.com/Xilinx/Vitis_Accel_Examples</a>
+hosts a variety of examples that can be programmed on Vitis supported
+platforms. We followed this introductory
+<a href="https://www.youtube.com/watch?v=uJ1RPbDkvJI">video</a> to run <code>hello_world</code>
+example.</p>
+</li>
+<li>
+<p>To build the examples, you need to source both the XRT and Vitis environment
+(Vitis environment brings in their c++ compiler <code>v++</code>).</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">source /opt/xilinx/xrt/setup.sh
+source /opt/tools/Xilinx/Vitis/2021.2/settings64.sh
+</code></pre></div><ul>
+<li>
+<p>(Likely) due to the Y2K22 bug, the above examples refuse to compile on version
+<code>2021.2</code>. The error would look similar to
+<a href="https://support.xilinx.com/s/question/0D52E00006uzPZu/caught-tcl-error-error-2201031626-is-an-invalid-argument-please-specify-an-integer-value?language=en_US">this</a>.</p>
+<ul>
+<li>
+<p>The workaround suggested in the above link is to use <code>faketime</code> package to
+force the date before <em>01 January, 2022</em>.</p>
+</li>
+<li>
+<p>One can compile and test for three different <code>TARGETS</code> (<code>sw_emu</code>, <code>hw_emu</code>,
+and <code>hw</code>). More description is available on the introductory video linked
+above.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Invoking <code>make all</code> with <code>TARGET=hw</code> would take a while to finish. It
+produces an <code>xclbin</code> file in the end that can be flashed onto the FPGA.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>faketime '2021-12-31 12:00:00' make all TARGET=hw PLATFORM=xilinx_u280_xdma_201920_3  -j 32
+...
+&lt;snip&gt;
+INFO: [v++ 60-2256] Packaging for hardware
+INFO: [v++ 60-2460] Successfully copied a temporary xclbin to the output xclbin: /opt/Vitis_Accel_Examples/hello_world/./build_dir.hw.xilinx_u280_xdma_201920_3/vadd.xclbin
+INFO: [v++ 60-2343] Use the vitis_analyzer tool to visualize and navigate the relevant reports. Run the following command.
+    vitis_analyzer /opt/Vitis_Accel_Examples/hello_world/build_dir.hw.xilinx_u280_xdma_201920_3/vadd.xclbin.package_summary
+INFO: [v++ 60-791] Total elapsed time: 0h 0m 20s
+INFO: [v++ 60-1653] Closing dispatch client
+</code></pre><ul>
+<li>Example invocation (running <code>make test</code> with <code>TARGET=hw</code>)</li>
+</ul>
+<pre tabindex="0"><code>faketime '2021-12-31 12:00:00' make test TARGET=hw PLATFORM=xilinx_u280_xdma_201920_3  -j 32
+./hello_world ./build_dir.hw.xilinx_u280_xdma_201920_3/vadd.xclbin
+Found Platform
+Platform Name: Xilinx
+INFO: Reading ./build_dir.hw.xilinx_u280_xdma_201920_3/vadd.xclbin
+Loading: './build_dir.hw.xilinx_u280_xdma_201920_3/vadd.xclbin'
+Trying to program device[0]: xilinx_u280_xdma_201920_3
+Device[0]: program successful!
+TEST PASSED
+</code></pre><h3 id="validating-vector-addition-using-pynq">Validating vector addition using PYNQ</h3>
+<ul>
+<li>Let&rsquo;s validate the hello world vector addition example using PYNQ. We can
+use <code>pynq.Overlay</code> class to load the generated <code>xclbin</code> file.</li>
+</ul>
+<pre tabindex="0"><code>In [4]: ol = pynq.Overlay('/opt/Vitis_Accel_Examples/hello_world/build_dir.hw.xilinx_u280_xdma_201920_3/vadd.xclbin')
+</code></pre><ul>
+<li>It is possible to access the kernel from the <code>xclbin</code> file. Our kernel
+(vector addition) is <code>vadd</code>. We can see the signature of the kernel.</li>
+</ul>
+<pre tabindex="0"><code>In [8]: ol.vadd_1.signature
+Out[8]: &lt;Signature (in1:'void*', in2:'void*', out_r:'void*', size:'unsigned int')&gt;
+</code></pre><ul>
+<li>Let&rsquo;s create input/output buffers to test the vadd kernel</li>
+</ul>
+<pre tabindex="0"><code># Allocate buffers
+In [9]: in1 = pynq.allocate(32)
+
+In [10]: in2 = pynq.allocate(32)
+
+In [11]: out = pynq.allocate(32)
+
+In [12]: import random
+
+# Populate input data with random numbers
+In [13]: for x in range(0, in1.size):
+    ...:     in1[x] = random.randint(1, 512)
+    ...:     in2[x] = random.randint(1, 512)
+    ...:
+
+In [14]: in1
+Out[14]:
+PynqBuffer([397, 409, 434,  70, 192, 335, 258, 213, 255, 459, 376, 306,
+            102, 166, 323,  20, 129, 253, 396, 378, 247, 295, 381,   5,
+            446, 217, 481, 140, 115, 285, 477,   5], dtype=uint32)
+
+In [15]: in2
+Out[15]:
+PynqBuffer([243,  88, 497, 143, 347,  34, 319, 102, 197,  17,  45, 212,
+             79, 473, 257, 188, 468, 466, 263, 170,  94, 171, 124,  36,
+            454,  73, 172,  27,  50, 279, 381,  27], dtype=uint32)
+</code></pre><ul>
+<li>The input buffers need to be sync-ed to the device</li>
+</ul>
+<pre tabindex="0"><code>In [16]: in1.sync_to_device()
+
+In [17]: in2.sync_to_device()
+</code></pre><ul>
+<li>We can invoke the kernel on the inputs we created (<code>in1</code> and <code>in2</code>) by
+invoking the <code>call</code> method on the kernel.</li>
+</ul>
+<pre tabindex="0"><code>In [18]: ol.vadd_1.call(in1, in2, out, 32)
+
+</code></pre><ul>
+<li>Finally, we can validate the output by syncing the <code>out</code> buffer back to the host.</li>
+</ul>
+<pre tabindex="0"><code>In [19]: out
+Out[19]:
+PynqBuffer([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=uint32)
+
+In [20]: out.sync_from_device()
+
+In [21]: out
+Out[21]:
+PynqBuffer([640, 497, 931, 213, 539, 369, 577, 315, 452, 476, 421, 518,
+            181, 639, 580, 208, 597, 719, 659, 548, 341, 466, 505,  41,
+            900, 290, 653, 167, 165, 564, 858,  32], dtype=uint32)
+</code></pre><h3 id="revisiting-the-node">Revisiting the node</h3>
+<p>If you happen to swap out the node, just install the dependencies and also the
+kernel modules necessary for accessing the Xilinx devices (<code>xocl.ko</code> and
+<code>xclmgmt.ko</code>). The easiest way is to just re-install the XRT component from the
+deb package which takes care of installing the kernel modules and other
+dependencies.</p>
+<p>In Part 2, we will create a Vivado project for Alveo U280 card directly from
+Verilog sources.</p>
+<h4 id="resources">Resources</h4>
+<ul>
+<li>
+<p>Alveo U280 getting started - <a href="https://www.xilinx.com/products/boards-and-kits/alveo/u280.html#gettingStarted">https://www.xilinx.com/products/boards-and-kits/alveo/u280.html#gettingStarted</a></p>
+</li>
+<li>
+<p>PYNQ docs - <a href="https://pynq.readthedocs.io/en/v2.7.0/index.html">https://pynq.readthedocs.io/en/v2.7.0/index.html</a></p>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>Debugging QEMU/KVM Setup If Something Goes Wrong (e.g., Support for 1GB Pages)</title>
       <link>https://mars-research.github.io/posts/2020/11/qemu-kvm-1gb-pages/</link>
