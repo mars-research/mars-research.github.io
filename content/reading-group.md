@@ -29,7 +29,7 @@ table th:first-of-type {
 
 | Date | Paper |
 | :------------- | :---------- |
-| Jan 21 | [https://www.usenix.org/conference/usenixsecurity19/presentation/vahldiek-oberwagner](https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf) |
+| Jan 21 | [ERIM: Secure, Efficient In-process Isolation with Protection Keys (MPK)](https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf) |
 | Jan 28 | [PKU Pitfalls: Attacks on PKU-based Memory Isolation Systems](https://www.usenix.org/system/files/sec20-connor.pdf) |
 
 ### Fall 2021
