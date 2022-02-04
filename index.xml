@@ -1160,7 +1160,7 @@ table th:first-of-type {
 <tbody>
 <tr>
 <td style="text-align:left">Jan 21</td>
-<td style="text-align:left"><a href="https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf">https://www.usenix.org/conference/usenixsecurity19/presentation/vahldiek-oberwagner</a></td>
+<td style="text-align:left"><a href="https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf">ERIM: Secure, Efficient In-process Isolation with Protection Keys (MPK)</a></td>
 </tr>
 <tr>
 <td style="text-align:left">Jan 28</td>
