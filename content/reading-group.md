@@ -29,8 +29,12 @@ table th:first-of-type {
 
 | Date | Paper |
 | :------------- | :---------- |
-| Jan 21 | [ERIM: Secure, Efficient In-process Isolation with Protection Keys (MPK)](https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf) |
+| Mar 4  | [Cornucopia: Temporal Safety for CHERI Heaps](https://www.cl.cam.ac.uk/research/security/ctsrd/pdfs/2020oakland-cornucopia.pdf) |
+| Feb 18 | [PTAuth: Temporal Memory Safety via Robust Points-to Authentication](https://www.usenix.org/system/files/sec21-farkhani.pdf) |
+| Feb 11 | [PAC it up: Towards Pointer Integrity using ARM Pointer Authentication](https://www.usenix.org/system/files/sec19fall_liljestrand_prepub.pdf) |
+| Feb 4  | [Preventing Kernel Hacks with HAKC](http://nebelwelt.net/files/22NDSS2.pdf) |
 | Jan 28 | [PKU Pitfalls: Attacks on PKU-based Memory Isolation Systems](https://www.usenix.org/system/files/sec20-connor.pdf) |
+| Jan 21 | [ERIM: Secure, Efficient In-process Isolation with Protection Keys (MPK)](https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf) |
 
 ### Fall 2021
 
