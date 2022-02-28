@@ -1159,12 +1159,28 @@ table th:first-of-type {
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">Jan 21</td>
-<td style="text-align:left"><a href="https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf">ERIM: Secure, Efficient In-process Isolation with Protection Keys (MPK)</a></td>
+<td style="text-align:left">Mar 4</td>
+<td style="text-align:left"><a href="https://www.cl.cam.ac.uk/research/security/ctsrd/pdfs/2020oakland-cornucopia.pdf">Cornucopia: Temporal Safety for CHERI Heaps</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Feb 18</td>
+<td style="text-align:left"><a href="https://www.usenix.org/system/files/sec21-farkhani.pdf">PTAuth: Temporal Memory Safety via Robust Points-to Authentication</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Feb 11</td>
+<td style="text-align:left"><a href="https://www.usenix.org/system/files/sec19fall_liljestrand_prepub.pdf">PAC it up: Towards Pointer Integrity using ARM Pointer Authentication</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Feb 4</td>
+<td style="text-align:left"><a href="http://nebelwelt.net/files/22NDSS2.pdf">Preventing Kernel Hacks with HAKC</a></td>
 </tr>
 <tr>
 <td style="text-align:left">Jan 28</td>
 <td style="text-align:left"><a href="https://www.usenix.org/system/files/sec20-connor.pdf">PKU Pitfalls: Attacks on PKU-based Memory Isolation Systems</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Jan 21</td>
+<td style="text-align:left"><a href="https://www.usenix.org/system/files/sec19-vahldiek-oberwagner_0.pdf">https://www.usenix.org/conference/usenixsecurity19/presentation/vahldiek-oberwagner</a></td>
 </tr>
 </tbody>
 </table>
