@@ -10,9 +10,7 @@ Mars Research is a systems research group at the University of California, Irvin
 
 Redleaf Operating System: [redleaf](./redleaf)
 
-Lightweight Virtualized Domains: [lvds](https://mars-research.github.io/lvds/)
-
-Lightweight Execution Domains: [lxds](https://mars-research.github.io/lxds/)
+Kernel Isolation: [kernel-isolation] (./kernel-isolation)
 
 # People
 
@@ -22,10 +20,18 @@ Lightweight Execution Domains: [lxds](https://mars-research.github.io/lxds/)
 
 [Zhaofeng Li](https://github.com/zhaofengli) (PhD)
 
-[Dan Appel]() (BS)
+[Xiangdong Chen](https://github.com/FeizaiYiHao) (PhD) 
 
 [Tianjiao Huang]() (BS)
 
 [David Detweiler]() (BS)
 
+[Connor Zwick]() (BS)
 
+[Vincent Whizin]() (BS) 
+
+[Arthur Lafrance]() (BS)
+
+# Past
+
+[Dan Appel]() (BS)
