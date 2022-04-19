@@ -40,11 +40,11 @@ proper abstractions and automation tools.
 We work on a range of projects aimed at bringing practical low-overhead
 isolation to full-featured commodity kernels. 
 
-Lightweight Virtualized Domains: [lvds](./lvds)
+Lightweight Virtualized Domains: [lvds](../lvds)
 
-Lightweight Execution Domains: [lxds](./lxds)
+Lightweight Execution Domains: [lxds](../lxds)
 
-KSplit: [ksplit](./ksplit) 
+KSplit: [ksplit](../ksplit) 
 
 # Publications
 

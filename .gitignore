@@ -14,3 +14,6 @@ result
 
 # Local Netlify folder
 .netlify
+
+# vim 
+*.swp
