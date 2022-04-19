@@ -10,9 +10,7 @@ Mars Research is a systems research group at University of California, Irvine. P
 
 Redleaf Operating System: [redleaf](./redleaf)
 
-Lightweight Virtualized Domains: [lvds](./lvds)
-
-Lightweight Execution Domains: [lxds](./lxds)
+Kernel Isolation: [kernel-isolation] (./kernel-isolation)
 
 ## People
 
@@ -32,14 +30,15 @@ Lightweight Execution Domains: [lxds](./lxds)
 
 [Vincent Whizin](https://github.com/vwheezy22) (BS)
 
-[Dan Appel](https://github.com/Danappelxx) (BS)
 
 ## Alumni
 
-[Michael Lusher](https://github.com/1aguna) (BS 2021, Now at Splunk)
+[Dan Appel](https://github.com/Danappelxx) (BS 2021, now at Apple)
 
-[Daman M Kumar](https://github.com/damanmkumar) (MS 2020, Now at Amazon)
+[Michael Lusher](https://github.com/1aguna) (BS 2021, now at Splunk)
 
-[Ed Younis](https://github.com/edyounis) (BS 2018, Now at Berkeley Lab)
+[Daman M Kumar](https://github.com/damanmkumar) (MS 2020, now at Amazon)
+
+[Ed Younis](https://github.com/edyounis) (BS 2018, now at Berkeley Lab)
 
 ## Posts
