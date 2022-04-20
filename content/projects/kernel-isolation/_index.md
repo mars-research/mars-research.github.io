@@ -5,7 +5,6 @@ aliases:
 - /kernel-isolation
 
 ShowReadingTime: false
-
 ---
 
 <img src="images/lvds.png" alt="LVDs Architecture" width="550"/>
@@ -40,9 +39,9 @@ proper abstractions and automation tools.
 We work on a range of projects aimed at bringing practical low-overhead
 isolation to full-featured commodity kernels. 
 
-Lightweight Virtualized Domains: [lvds](../lvds)
-
 Lightweight Execution Domains: [lxds](../lxds)
+
+Lightweight Virtualized Domains: [lvds](../lvds)
 
 KSplit: [ksplit](../ksplit) 
 
