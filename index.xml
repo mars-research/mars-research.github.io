@@ -1149,6 +1149,25 @@ table th:first-of-type {
     width: 10%;
 }
 </style>
+<h3 id="spring-2022">Spring 2022</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Date</th>
+<th style="text-align:left">Paper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">May 9</td>
+<td style="text-align:left"><a href="https://www.usenix.org/conference/usenixsecurity22/presentation/yoo">In-Kernel Control-Flow Integrity on Commodity OSes using ARM Pointer Authentication</a></td>
+</tr>
+<tr>
+<td style="text-align:left">May 2</td>
+<td style="text-align:left"><a href="https://dl.acm.org/doi/10.14778/2732219.2732227">Multi-Core, Main-Memory Joins: Sort vs. Hash Revisited</a></td>
+</tr>
+</tbody>
+</table>
 <h3 id="winter-2022">Winter 2022</h3>
 <table>
 <thead>
