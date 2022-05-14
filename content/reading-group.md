@@ -25,6 +25,13 @@ table th:first-of-type {
 }
 </style>
 
+### Spring 2022
+
+| Date | Paper |
+| :------------- | :---------- |
+| May 9 | [In-Kernel Control-Flow Integrity on Commodity OSes using ARM Pointer Authentication](https://www.usenix.org/conference/usenixsecurity22/presentation/yoo) |
+| May 2 | [Multi-Core, Main-Memory Joins: Sort vs. Hash Revisited](https://dl.acm.org/doi/10.14778/2732219.2732227) |
+
 ### Winter 2022
 
 | Date | Paper |
