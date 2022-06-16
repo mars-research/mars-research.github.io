@@ -8,9 +8,9 @@ Mars Research is a systems research group at University of California, Irvine. P
 
 ## Projects
 
-Redleaf Operating System: [redleaf](./redleaf)
+Redleaf operating system: [redleaf](./redleaf)
 
-Kernel Isolation: [kernel-isolation](./kernel-isolation)
+Fine-grained isolation for the Linux kernel: [kernel-isolation](./kernel-isolation)
 
 ## People
 
