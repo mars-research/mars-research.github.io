@@ -25,6 +25,9 @@ allows one to take an existing driver and produce the data synchronization code
 necessary to run the driver in isolation, automatically if possible, and
 identifies remaining tasks that require manual intervention, if needed.
 
+KSplit is built on our previous work on [kernel isolation](../kernel-isolation) and 
+specifically Lightweight Virtualized Domains: [lvds](../lvds). 
+
 
 # Publications
 
@@ -32,7 +35,7 @@ Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
 Trent Jaeger, and Anton Burtsev.  **KSplit: Automating Device Driver
 Isolation**.  In _16th USENIX Symposium on Operating Systems Design and
 Implementation (OSDI '22)_, July 2022.
-[pdf](https://mars-research.github.io/doc/)
+[pdf](https://mars-research.github.io/doc/ksplit-osdi22.pdf)
 
 
 
