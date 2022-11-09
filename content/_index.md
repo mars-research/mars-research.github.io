@@ -24,6 +24,8 @@ Fine-grained isolation for the Linux kernel: [kernel-isolation](./kernel-isolati
 
 [David Detweiler](https://github.com/daviddetweiler) (BS)
 
+[Tirth Jain](https://hedonhermdev.github.io/)(Summer Intern)
+
 ## Alumni
 
 [Dan Appel](https://github.com/Danappelxx) (BS 2021, now at Apple)
