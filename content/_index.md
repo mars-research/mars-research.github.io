@@ -4,7 +4,7 @@ title: Mars Research Group
 
 # Mars Research Group
 
-Mars Research is a systems research group at University of California, Irvine. Primarily we work in the areas of operating systems and security. 
+Mars Research is a systems research group at University of Utah. Primarily we work in the areas of operating systems and security.
 
 ## Projects
 
