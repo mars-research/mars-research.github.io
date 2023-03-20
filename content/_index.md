@@ -24,8 +24,6 @@ Fine-grained isolation for the Linux kernel: [kernel-isolation](./kernel-isolati
 
 [David Detweiler](https://github.com/daviddetweiler) (BS)
 
-[Tirth Jain](https://hedonhermdev.github.io/)(Summer Intern)
-
 ## Alumni
 
 [Dan Appel](https://github.com/Danappelxx) (BS 2021, now at Apple)
@@ -41,4 +39,7 @@ Fine-grained isolation for the Linux kernel: [kernel-isolation](./kernel-isolati
 [Ed Younis](https://github.com/edyounis) (BS 2018, now at Berkeley Lab)
 
 [Connor Zwick](https://github.com/czoop) (BS, 2022)
+
+[Tirth Jain](https://hedonhermdev.github.io/) (Summer Intern, 2022)
+
 ## Posts
