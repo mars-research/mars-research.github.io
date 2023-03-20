@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3.4.0
 
-      - uses: cachix/install-nix-action@v13
+      - uses: cachix/install-nix-action@v20
         with:
-          install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.4pre20210604_8e6ee1b/install
+          install_url: https://releases.nixos.org/nix/nix-2.9.2/install
           extra_nix_config: |
             experimental-features = nix-command flakes
 
@@ -21,7 +21,7 @@ jobs:
         run: nix build .#website
 
       - name: Deploy website
-        uses: JamesIves/github-pages-deploy-action@4.1.6
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages
           folder: result

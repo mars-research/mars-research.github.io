@@ -38,7 +38,9 @@
 
       nativeBuildInputs = with pkgs; [ go hugo git ];
 
-      GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+      GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
+
+      NIX_SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt";
 
       buildPhase = ''
         hugo mod vendor
