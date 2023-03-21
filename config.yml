@@ -1,7 +1,6 @@
 baseURL: 'https://mars-research.github.io/'
 languageCode: 'en-us'
 title: 'Mars Research Group'
-theme: PaperMod
 
 params:
   ShowReadingTime: true
