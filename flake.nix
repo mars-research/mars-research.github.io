@@ -17,7 +17,10 @@
       name = "mars-research-homepage";
       inherit src;
 
-      nativeBuildInputs = with pkgs; [ go hugo ];
+      GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
+
+      NIX_SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt";
+      nativeBuildInputs = with pkgs; [ go hugo openssl_1_1 ];
 
       buildPhase = ''
         ln -sf ${hugoVendor} _vendor
@@ -36,13 +39,15 @@
 
       inherit src;
 
-      nativeBuildInputs = with pkgs; [ go hugo git ];
+      nativeBuildInputs = with pkgs; [ go hugo
+      (git.override {openssl = openssl_1_1;}) ];
 
       GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
 
       NIX_SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt";
 
       buildPhase = ''
+        rm -rf /build/hugo_cache
         hugo mod vendor
       '';
 
