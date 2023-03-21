@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Projects | Mars Research Group</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="Projects - Mars Research Group">
 <meta name="author" content="">
-<link rel="canonical" href="https://mars-research.github.io/projects/" />
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.6f60056d44d3f7eb69a4bc6c332b59960f3a995802bded244750232f33713c49.css" integrity="sha256-b2AFbUTT9&#43;tppLxsMytZlg86mVgCve0kR1AjLzNxPEk=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://mars-research.github.io/projects/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6a98292fb8fa8cf0f3ba4042d4b75515c04267550f3ad49ff6271b5af9562443.css" integrity="sha256-apgpL7j6jPDzukBC1LdVFcBCZ1UPOtSf9icbWvlWJEM=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://mars-research.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://mars-research.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://mars-research.github.io/favicon-32x32.png">
@@ -18,7 +18,6 @@
 <link rel="mask-icon" href="https://mars-research.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.88.1" />
 <link rel="alternate" type="application/rss+xml" href="https://mars-research.github.io/projects/index.xml">
 <noscript>
     <style>
@@ -98,14 +97,14 @@
     <nav class="nav">
         <div class="logo">
             <a href="https://mars-research.github.io/" accesskey="h" title="Mars Research Group (Alt + H)">Mars Research Group</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -119,7 +118,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -157,7 +156,9 @@
 </header>
 <main class="main"> 
 <header class="page-header">
-  <h1>Projects</h1>
+  <h1>
+    Projects
+  </h1>
 </header>
 
 <article class="post-entry"> 
@@ -165,11 +166,23 @@
     <h2>Fine-grained kernel isolation
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Today, the lack of isolation within an operating system kernel is one of the main factors undermining its security. While the core kernel is relatively stable, the number of kernel extensions and device drivers is growing with every hardware generation (a modern Linux kernel contains around 8,867 device drivers, with around 180-130 drivers running on a typical system). Developed by third-party vendors that often have an incomplete understanding of the kernel programming and security idioms, kernel extensions and device drivers are a primary source of vulnerabilities in the kernel....</p>
-  </section>
+  </div>
   <footer class="entry-footer"></footer>
   <a class="entry-link" aria-label="post link to Fine-grained kernel isolation" href="https://mars-research.github.io/projects/kernel-isolation/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>High-performance Hash Table
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Despite decades of innovation, existing hash tables fail to achieve peak performance on modern hardware. Built around a relatively simple computation, i.e., a hash function, which in most cases takes only a handful of CPU cycles, hash tables should only be limited by the throughput of the memory subsystem. Unfortunately, due to the inherently random memory access pattern and the contention across multiple threads, existing hash tables spend most of their time waiting for the memory subsystem to serve cache misses and coherence requests....</p>
+  </div>
+  <footer class="entry-footer"></footer>
+  <a class="entry-link" aria-label="post link to High-performance Hash Table" href="https://mars-research.github.io/projects/dramhit/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -177,9 +190,9 @@
     <h2>KSplit
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>KSplit, a new framework for isolating device drivers in the Linux kernel. KSplit performs a collection of static analyses on the source code of the kernel and the driver to generate the synchronization code that is required to execute the driver in isolation. Specifically, KSplit identifies the shared state that is accessed by both driver and the kernel computing how this state is accessed on both sides of the isolation boundary and how it should be synchronized on each kernel-driver invocation and when a shared synchronization primitive, e....</p>
-  </section>
+  </div>
   <footer class="entry-footer"></footer>
   <a class="entry-link" aria-label="post link to KSplit" href="https://mars-research.github.io/projects/ksplit/"></a>
 </article>
@@ -189,9 +202,9 @@
     <h2>Lightweight Execution Domains
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Modern operating systems are monolithic. Today, however,lack of isolation is one of the main factors undermining security of the kernel. Inherent complexity of the kernel code and rapid development pace combined with the use of unsafe,low-level programming language results in a steady streamof errors. Even after decades of efforts to make commodity kernels more secure, i.e., development of numerous static and dynamic approaches aimed to prevent exploitation of mostcommon errors, several hundreds of serious kernel vulnerabilities are reported every year....</p>
-  </section>
+  </div>
   <footer class="entry-footer"></footer>
   <a class="entry-link" aria-label="post link to Lightweight Execution Domains" href="https://mars-research.github.io/projects/lxds/"></a>
 </article>
@@ -201,10 +214,10 @@
     <h2>Lightweight Virtualized Domains
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Commodity operating systems execute core kernel subsystems in a single address space along with hundreds of dynamically loaded extensions and device drivers. Lack of isolation within the kernel implies that a vulnerability in any of the kernel subsystems or device drivers opens a way to mount a successful attack on the entire kernel.
 Historically, isolation within the kernel remained prohibitive due to the high cost of hardware isolation primitives. Recent CPUs, however, bring a new set of mechanisms....</p>
-  </section>
+  </div>
   <footer class="entry-footer"></footer>
   <a class="entry-link" aria-label="post link to Lightweight Virtualized Domains" href="https://mars-research.github.io/projects/lvds/"></a>
 </article>
@@ -214,20 +227,20 @@ Historically, isolation within the kernel remained prohibitive due to the high c
     <h2>RedLeaf
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>A research operating system developed from scratch in Rust, aimed to explore the impact of language safety on operating system organization.</p>
-  </section>
+  </div>
   <footer class="entry-footer"></footer>
   <a class="entry-link" aria-label="post link to RedLeaf" href="https://mars-research.github.io/projects/redleaf/"></a>
 </article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://mars-research.github.io/">Mars Research Group</a></span>
+    <span>&copy; 2023 <a href="https://mars-research.github.io/">Mars Research Group</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -238,9 +251,11 @@ Historically, isolation within the kernel remained prohibitive due to the high c
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

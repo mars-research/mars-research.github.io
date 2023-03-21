@@ -6,13 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Recent Publications | Mars Research Group</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev (University of California, Irvine). Understanding the Overheads of Hardware and Language-Based IPC Mechanisms. In 11th Workshop on Programming Languages and Operating Systems (PLOS 2021), October, 2021.
 Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li, Vikram Narayanan (University of California, Irvine) and Gerd Zellweger (VMware Research). Isolation in Rust: What is Missing?. In 11th Workshop on Programming Languages and Operating Systems (PLOS 2021), October, 2021.">
 <meta name="author" content="">
-<link rel="canonical" href="https://mars-research.github.io/publications/" />
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.6f60056d44d3f7eb69a4bc6c332b59960f3a995802bded244750232f33713c49.css" integrity="sha256-b2AFbUTT9&#43;tppLxsMytZlg86mVgCve0kR1AjLzNxPEk=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link rel="canonical" href="https://mars-research.github.io/publications/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6a98292fb8fa8cf0f3ba4042d4b75515c04267550f3ad49ff6271b5af9562443.css" integrity="sha256-apgpL7j6jPDzukBC1LdVFcBCZ1UPOtSf9icbWvlWJEM=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://mars-research.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://mars-research.github.io/favicon-16x16.png">
@@ -21,7 +21,6 @@ Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li, Vikram N
 <link rel="mask-icon" href="https://mars-research.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.88.1" />
 <noscript>
     <style>
         #theme-toggle,
@@ -133,14 +132,14 @@ Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li, Vikram N
     <nav class="nav">
         <div class="logo">
             <a href="https://mars-research.github.io/" accesskey="h" title="Mars Research Group (Alt + H)">Mars Research Group</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -154,7 +153,7 @@ Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li, Vikram N
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -237,16 +236,18 @@ in Operating Systems (HotOS), May 2019.</em></p>
   </div>
 
   <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://mars-research.github.io/">Mars Research Group</a></span>
+    <span>&copy; 2023 <a href="https://mars-research.github.io/">Mars Research Group</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -257,9 +258,11 @@ in Operating Systems (HotOS), May 2019.</em></p>
 
 <script>
     let menu = document.getElementById('menu')
-    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-    menu.onscroll = function () {
-        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -313,12 +316,12 @@ in Operating Systems (HotOS), May 2019.</em></p>
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerText = 'copy';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerText = 'copied!';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerText = 'copy';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 
