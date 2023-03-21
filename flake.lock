@@ -99,9 +99,26 @@
         "type": "github"
       }
     },
+    "papermod": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677951738,
+        "narHash": "sha256-9/HQGuT0yUI1+uLOkzjsJ8DShvKCTWRdik8kSe9HmfY=",
+        "owner": "adityatelange",
+        "repo": "hugo-PaperMod",
+        "rev": "d67462d0f3f22cc5687f73f1edd454aa9cfa3800",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adityatelange",
+        "repo": "hugo-PaperMod",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "mars-std": "mars-std"
+        "mars-std": "mars-std",
+        "papermod": "papermod"
       }
     },
     "rust-overlay": {
