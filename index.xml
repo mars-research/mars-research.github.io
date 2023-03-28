@@ -1360,9 +1360,21 @@ table th:first-of-type {
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://mars-research.github.io/publications/</guid>
-      <description>Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev (University of California, Irvine). Understanding the Overheads of Hardware and Language-Based IPC Mechanisms. In 11th Workshop on Programming Languages and Operating Systems (PLOS 2021), October, 2021.
-Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li, Vikram Narayanan (University of California, Irvine) and Gerd Zellweger (VMware Research). Isolation in Rust: What is Missing?. In 11th Workshop on Programming Languages and Operating Systems (PLOS 2021), October, 2021.</description>
-      <content:encoded><![CDATA[<p>Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev
+      <description>2023 Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev. DRAMHiT: A Hash Table architected for the Speed of DRAM. In 18th European Conference on Computer Systems (EuroSys &amp;lsquo;23), May 2023.
+2022 Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan, Trent Jaeger, and Anton Burtsev. KSplit: Automating Device Driver Isolation. In 16th USENIX Symposium on Operating Systems Design and Implementation (OSDI &amp;lsquo;22), July 2022. pdf
+2021 Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev (University of California, Irvine).</description>
+      <content:encoded><![CDATA[<h3 id="2023">2023</h3>
+<p>Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev.
+<strong>DRAMHiT: A Hash Table architected for the Speed of DRAM</strong>.  In <em>18th European
+Conference on Computer Systems (EuroSys &lsquo;23)</em>, May 2023.</p>
+<h3 id="2022">2022</h3>
+<p>Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
+Trent Jaeger, and Anton Burtsev.  <strong>KSplit: Automating Device Driver
+Isolation</strong>.  In <em>16th USENIX Symposium on Operating Systems Design and
+Implementation (OSDI &lsquo;22)</em>, July 2022.
+<a href="https://mars-research.github.io/doc/ksplit-osdi22.pdf">pdf</a></p>
+<h3 id="2021">2021</h3>
+<p>Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev
 (University of California, Irvine). <a href="/doc/plos21/plos21-ipc-overheads.pdf">Understanding the Overheads of Hardware
 and Language-Based IPC Mechanisms</a>. <em>In 11th Workshop on Programming
 Languages and Operating Systems (PLOS 2021), October, 2021.</em></p>
@@ -1370,6 +1382,7 @@ Languages and Operating Systems (PLOS 2021), October, 2021.</em></p>
 Vikram Narayanan (University of California, Irvine) and Gerd Zellweger
 (VMware Research). <a href="/doc/plos21/plos21-rust-isolation.pdf">Isolation in Rust: What is Missing?</a>. <em>In 11th Workshop
 on Programming Languages and Operating Systems (PLOS 2021), October, 2021.</em></p>
+<h3 id="2020">2020</h3>
 <p>Vikram Narayanan, Tianjiao Huang, David Detweiler, Dan Appel, Zhaofeng
 Li, Gerd Zellweger, Anton Burtsev. <a href="https://www.usenix.org/system/files/osdi20-narayanan_vikram.pdf">RedLeaf: Isolation and Communication in a
 Safe Operating
@@ -1381,6 +1394,7 @@ Burtsev. <a href="/doc/lvds-vee20.pdf">Lightweight Kernel Isolation with Virtual
 Functions</a>. <em>In 16th ACM SIGPLAN/SIGOPS
 International Conference on Virtual Execution Environments (VEE 20), March
 2020.</em> [Best Paper Award]</p>
+<h3 id="2019">2019</h3>
 <p>Vikram Narayanan, Abhiram Balasubramanian, Charlie Jacobsen, Sarah Spall,
 Scott Bauer, Michael Quigley, Aftab Hussain, Abdullah Younis, Junjie Shen,
 Moinak Bhattacharyya, and Anton Burtsev. <a href="https://www.usenix.org/system/files/atc19-narayanan.pdf">LXDs: Towards Isolation of Kernel
