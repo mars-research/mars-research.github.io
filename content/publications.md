@@ -8,6 +8,22 @@ ShowReadingTime: false
 ShowBreadCrumbs: false
 ---
 
+### 2023
+
+Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev.
+**DRAMHiT: A Hash Table architected for the Speed of DRAM**.  In _18th European
+Conference on Computer Systems (EuroSys '23)_, May 2023.
+
+### 2022
+
+Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
+Trent Jaeger, and Anton Burtsev.  **KSplit: Automating Device Driver
+Isolation**.  In _16th USENIX Symposium on Operating Systems Design and
+Implementation (OSDI '22)_, July 2022.
+[pdf](https://mars-research.github.io/doc/ksplit-osdi22.pdf)
+
+### 2021
+
 Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev
   (University of California, Irvine). [Understanding the Overheads of Hardware
 and Language-Based IPC Mechanisms](/doc/plos21/plos21-ipc-overheads.pdf). *In 11th Workshop on Programming
@@ -17,6 +33,8 @@ Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li,
   Vikram Narayanan (University of California, Irvine) and Gerd Zellweger
 (VMware Research). [Isolation in Rust: What is Missing?](/doc/plos21/plos21-rust-isolation.pdf). *In 11th Workshop
 on Programming Languages and Operating Systems (PLOS 2021), October, 2021.*
+
+### 2020
 
 Vikram Narayanan, Tianjiao Huang, David Detweiler, Dan Appel, Zhaofeng
   Li, Gerd Zellweger, Anton Burtsev. [RedLeaf: Isolation and Communication in a
@@ -30,6 +48,8 @@ Vikram Narayanan, Yongzhe Huang, Gang Tan, Trent Jaeger, and Anton
 Functions](/doc/lvds-vee20.pdf). *In 16th ACM SIGPLAN/SIGOPS
 International Conference on Virtual Execution Environments (VEE 20), March
 2020.* [Best Paper Award]
+
+### 2019
 
 Vikram Narayanan, Abhiram Balasubramanian, Charlie Jacobsen, Sarah Spall,
   Scott Bauer, Michael Quigley, Aftab Hussain, Abdullah Younis, Junjie Shen,
