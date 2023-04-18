@@ -1360,13 +1360,14 @@ table th:first-of-type {
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://mars-research.github.io/publications/</guid>
-      <description>2023 Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev. DRAMHiT: A Hash Table architected for the Speed of DRAM. In 18th European Conference on Computer Systems (EuroSys &amp;lsquo;23), May 2023.
+      <description>2023 Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev. DRAMHiT: A Hash Table architected for the Speed of DRAM. In 18th European Conference on Computer Systems (EuroSys &amp;lsquo;23), May 2023. pdf
 2022 Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan, Trent Jaeger, and Anton Burtsev. KSplit: Automating Device Driver Isolation. In 16th USENIX Symposium on Operating Systems Design and Implementation (OSDI &amp;lsquo;22), July 2022. pdf
 2021 Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev (University of California, Irvine).</description>
       <content:encoded><![CDATA[<h3 id="2023">2023</h3>
 <p>Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev.
 <strong>DRAMHiT: A Hash Table architected for the Speed of DRAM</strong>.  In <em>18th European
-Conference on Computer Systems (EuroSys &lsquo;23)</em>, May 2023.</p>
+Conference on Computer Systems (EuroSys &lsquo;23)</em>, May 2023.
+<a href="https://mars-research.github.io/doc/dramhit-esys23.pdf">pdf</a></p>
 <h3 id="2022">2022</h3>
 <p>Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
 Trent Jaeger, and Anton Burtsev.  <strong>KSplit: Automating Device Driver
