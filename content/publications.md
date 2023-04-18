@@ -13,6 +13,7 @@ ShowBreadCrumbs: false
 Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev.
 **DRAMHiT: A Hash Table architected for the Speed of DRAM**.  In _18th European
 Conference on Computer Systems (EuroSys '23)_, May 2023.
+[pdf](https://mars-research.github.io/doc/dramhit-esys23.pdf)
 
 ### 2022
 
