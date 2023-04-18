@@ -12,6 +12,8 @@ Redleaf operating system: [redleaf](./redleaf)
 
 Fine-grained isolation for the Linux kernel: [kernel-isolation](./kernel-isolation)
 
+High-performance hash table: [DRAMHiT](./dramhit)
+
 ## People
 
 [Anton Burtsev](https://www.ics.uci.edu/~aburtsev) (Faculty, lead)
