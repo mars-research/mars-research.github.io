@@ -2,7 +2,7 @@
 ---
 title: High-performance Hash Table
 aliases:
-- /DRAMHiT
+- /dramhit
 
 ShowReadingTime: false
 ---
