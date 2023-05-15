@@ -10,6 +10,12 @@ ShowBreadCrumbs: false
 
 ### 2023
 
+Vikram Narayanan and Anton Burtsev.
+**The Opportunities and Limitations of Extended Page Table Switching for Fine-Grained Isolation**.
+In _IEEE Security & Privacy Magazine_ (to appear).
+[pdf](https://mars-research.github.io/doc/2023-ieee-sp-mag.pdf)
+
+
 Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev.
 **DRAMHiT: A Hash Table architected for the Speed of DRAM**.  In _18th European
 Conference on Computer Systems (EuroSys '23)_, May 2023.
