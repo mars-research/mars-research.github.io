@@ -1383,24 +1383,28 @@ table th:first-of-type {
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://mars-research.github.io/publications/</guid>
-      <description>2023 Vikram Narayanan and Anton Burtsev. The Opportunities and Limitations of Extended Page Table Switching for Fine-Grained Isolation. In IEEE Security &amp;amp; Privacy Magazine vol. 21, no. 3, pp. 16-26, May-June 2023. pdf
-Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev. DRAMHiT: A Hash Table architected for the Speed of DRAM. In 18th European Conference on Computer Systems (EuroSys &amp;lsquo;23), May 2023. pdf
-2022 Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan, Trent Jaeger, and Anton Burtsev.</description>
+      <description>2023 Anton Burtsev, Vikram Narayanan, Yongzhe Huang, Kaiming Huang, Gang Tan, and Trent Jaeger. Evolving Operating System Kernels Towards Secure Kernel-Driver Interfaces. In Proceedings of the 19th Workshop on Hot Topics in Operating Systems (HOTOS &amp;lsquo;23). June 2023.
+Vikram Narayanan and Anton Burtsev. The Opportunities and Limitations of Extended Page Table Switching for Fine-Grained Isolation. In IEEE Security &amp;amp; Privacy Magazine vol. 21, no. 3, pp. 16-26, May-June 2023.
+Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev.</description>
       <content:encoded><![CDATA[<h3 id="2023">2023</h3>
-<p>Vikram Narayanan and Anton Burtsev.
-<strong>The Opportunities and Limitations of Extended Page Table Switching for Fine-Grained Isolation</strong>.
-In <em>IEEE Security &amp; Privacy Magazine vol. 21, no. 3, pp. 16-26</em>, May-June 2023.
-<a href="https://mars-research.github.io/doc/2023-ieee-sp-mag.pdf">pdf</a></p>
-<p>Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev.
-<strong>DRAMHiT: A Hash Table architected for the Speed of DRAM</strong>.  In <em>18th European
-Conference on Computer Systems (EuroSys &lsquo;23)</em>, May 2023.
-<a href="https://mars-research.github.io/doc/dramhit-esys23.pdf">pdf</a></p>
+<p>Anton Burtsev, Vikram Narayanan, Yongzhe Huang, Kaiming Huang, Gang Tan, and
+Trent Jaeger. <a href="/doc/2023-hotos-kernel-interfaces.pdf">Evolving Operating System Kernels Towards Secure Kernel-Driver
+Interfaces</a>. In <em>Proceedings of the 19th
+Workshop on Hot Topics in Operating Systems (HOTOS &lsquo;23)</em>. June 2023.</p>
+<p>Vikram Narayanan and Anton Burtsev. <a href="https://mars-research.github.io/doc/2023-ieee-sp-mag.pdf">The Opportunities and Limitations of
+Extended Page Table Switching for Fine-Grained
+Isolation</a>. In <em>IEEE
+Security &amp; Privacy Magazine vol. 21, no. 3, pp. 16-26</em>, May-June 2023.</p>
+<p>Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev. <a href="https://mars-research.github.io/doc/dramhit-esys23.pdf">DRAMHiT:
+A Hash Table architected for the Speed of
+DRAM</a>.  In <em>18th
+European Conference on Computer Systems (EuroSys &lsquo;23)</em>, May 2023. [pdf]</p>
 <h3 id="2022">2022</h3>
 <p>Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
-Trent Jaeger, and Anton Burtsev.  <strong>KSplit: Automating Device Driver
-Isolation</strong>.  In <em>16th USENIX Symposium on Operating Systems Design and
-Implementation (OSDI &lsquo;22)</em>, July 2022.
-<a href="https://mars-research.github.io/doc/ksplit-osdi22.pdf">pdf</a></p>
+Trent Jaeger, and Anton Burtsev.  <a href="https://mars-research.github.io/doc/ksplit-osdi22.pdf">KSplit: Automating Device Driver
+Isolation</a>.  In <em>16th
+USENIX Symposium on Operating Systems Design and Implementation (OSDI &lsquo;22)</em>,
+July 2022.</p>
 <h3 id="2021">2021</h3>
 <p>Zhaofeng Li, Tianjiao Huang, Vikram Narayanan and Anton Burtsev
 (University of California, Irvine). <a href="/doc/plos21/plos21-ipc-overheads.pdf">Understanding the Overheads of Hardware
