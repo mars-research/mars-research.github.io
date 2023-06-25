@@ -1,6 +1,9 @@
 ---
 menu: after
 title: News
+
+ShowReadingTime: false
+ShowBreadCrumbs: false
 ---
 
 ### 2023
