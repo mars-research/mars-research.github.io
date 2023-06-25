@@ -10,23 +10,28 @@ ShowBreadCrumbs: false
 
 ### 2023
 
-Vikram Narayanan and Anton Burtsev.
-**The Opportunities and Limitations of Extended Page Table Switching for Fine-Grained Isolation**.
-In _IEEE Security & Privacy Magazine vol. 21, no. 3, pp. 16-26_, May-June 2023.
-[pdf](https://mars-research.github.io/doc/2023-ieee-sp-mag.pdf)
+Anton Burtsev, Vikram Narayanan, Yongzhe Huang, Kaiming Huang, Gang Tan, and
+Trent Jaeger. [Evolving Operating System Kernels Towards Secure Kernel-Driver
+Interfaces](/doc/2023-hotos-kernel-interfaces.pdf). In _Proceedings of the 19th
+Workshop on Hot Topics in Operating Systems (HOTOS '23)_. June 2023.
 
-Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev.
-**DRAMHiT: A Hash Table architected for the Speed of DRAM**.  In _18th European
-Conference on Computer Systems (EuroSys '23)_, May 2023.
-[pdf](https://mars-research.github.io/doc/dramhit-esys23.pdf)
+Vikram Narayanan and Anton Burtsev. [The Opportunities and Limitations of
+Extended Page Table Switching for Fine-Grained
+Isolation](https://mars-research.github.io/doc/2023-ieee-sp-mag.pdf). In _IEEE
+Security & Privacy Magazine vol. 21, no. 3, pp. 16-26_, May-June 2023.
+
+Vikram Narayanan, David Detweiler, Tianjiao Huang, and Anton Burtsev. [DRAMHiT:
+A Hash Table architected for the Speed of
+DRAM](https://mars-research.github.io/doc/dramhit-esys23.pdf).  In _18th
+European Conference on Computer Systems (EuroSys '23)_, May 2023. [pdf]
 
 ### 2022
 
 Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
-Trent Jaeger, and Anton Burtsev.  **KSplit: Automating Device Driver
-Isolation**.  In _16th USENIX Symposium on Operating Systems Design and
-Implementation (OSDI '22)_, July 2022.
-[pdf](https://mars-research.github.io/doc/ksplit-osdi22.pdf)
+Trent Jaeger, and Anton Burtsev.  [KSplit: Automating Device Driver
+Isolation](https://mars-research.github.io/doc/ksplit-osdi22.pdf).  In _16th
+USENIX Symposium on Operating Systems Design and Implementation (OSDI '22)_,
+July 2022.
 
 ### 2021
 
