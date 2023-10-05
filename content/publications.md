@@ -26,7 +26,7 @@ _Proceedings of the 1st Workshop on Kernel Isolation, Safety and Verification
 Arthur Lafrance (University of California, Irvine), David Detweiler (University
 of California, Irvine), Zhaofeng Li, Xiangdong Chen, Vikram Narayanan and Anton
 Burtsev. [Extending Rust with Support for Zero Copy
-Communication](/doc/plos23/plos23-rust-zerocopy.pdf). In _Proceedings of the
+Communication](/doc/2023-plos-rust-zerocopy.pdf). In _Proceedings of the
 12th Workshop on Programming Languages and Operating Systems (PLOS 2023)_,
 October 2023.
 
