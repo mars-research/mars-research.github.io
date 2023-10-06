@@ -24,8 +24,6 @@ High-performance hash table: [DRAMHiT](./dramhit)
 
 [Xiandong Chen](https://github.com/FeizaiYiHao) (PhD, 2026 expected)
 
-[David Detweiler](https://github.com/daviddetweiler) (BS)
-
 ## Alumni
 
 [Dan Appel](https://github.com/Danappelxx) (BS 2021, now at Apple)
@@ -43,5 +41,7 @@ High-performance hash table: [DRAMHiT](./dramhit)
 [Connor Zwick](https://github.com/czoop) (BS, 2022)
 
 [Tirth Jain](https://hedonhermdev.github.io/) (Summer Intern, 2022)
+
+[David Detweiler](https://github.com/daviddetweiler) (BS 2023, now at Atlassian)
 
 ## Posts
