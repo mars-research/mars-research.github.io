@@ -47,21 +47,26 @@ KSplit: [ksplit](../ksplit)
 
 # Publications
 
-Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
+* Anton Burtsev, Vikram Narayanan, Yongzhe Huang, Kaiming Huang, Gang Tan, and
+Trent Jaeger. [Evolving Operating System Kernels Towards Secure Kernel-Driver
+Interfaces](/doc/2023-hotos-kernel-interfaces.pdf). In _Proceedings of the 19th
+Workshop on Hot Topics in Operating Systems (HOTOS '23)_. June 2023.
+
+* Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
 Trent Jaeger, and Anton Burtsev.  **KSplit: Automating Device Driver
 Isolation**.  In _16th USENIX Symposium on Operating Systems Design and
 Implementation (OSDI '22)_, July 2022.
-[pdf](https://mars-research.github.io/doc/ksplit-osdi22.pdf)
+[pdf](/doc/2022-osdi-ksplit.pdf)
 
 
-\[**Best paper award**\] Vikram Narayanan, Yongzhe Huang, Gang Tan, Trent
+* \[**Best paper award**\] Vikram Narayanan, Yongzhe Huang, Gang Tan, Trent
 Jaeger, and Anton Burtsev. **Lightweight Kernel Isolation with Virtualization
 and VM Functions**. In _16th ACM SIGPLAN/SIGOPS International Conference on
 Virtual Execution Environments (VEE 20)_, March 2020.
-[pdf](https://mars-research.github.io/doc/lvds-vee20.pdf)
+[pdf](/doc/2020-vee-lvds.pdf)
 
-Vikram Narayanan, Abhiram Balasubramanian, Charlie Jacobsen, Sarah Spall, Scott
+* Vikram Narayanan, Abhiram Balasubramanian, Charlie Jacobsen, Sarah Spall, Scott
 Bauer, Michael Quigley, Aftab Hussain, Abdullah Younis, Junjie Shen, Moinak
 Bhattacharyya, and Anton Burtsev. **LXDs: Towards Isolation of Kernel
 Subsystems**.  In _2019 USENIX Annual Technical Conference (USENIX ATC 19)_,
-July 2019. [pdf] (https://mars-research.github.io/doc/lxds-usenix19.pdf) 
+July 2019. [pdf] (/doc/2019-atc-lxds.pdf)
