@@ -17,6 +17,8 @@
     <loc>https://mars-research.github.io/posts/2020/10/hello-world-on-bare-metal/</loc>
     <lastmod>2020-10-28T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://mars-research.github.io/projects/atmo/</loc>
+  </url><url>
     <loc>https://mars-research.github.io/categories/</loc>
   </url><url>
     <loc>https://mars-research.github.io/projects/kernel-isolation/</loc>
@@ -40,6 +42,8 @@
     <loc>https://mars-research.github.io/publications/</loc>
   </url><url>
     <loc>https://mars-research.github.io/projects/redleaf/</loc>
+  </url><url>
+    <loc>https://mars-research.github.io/projects/rustpm/</loc>
   </url><url>
     <loc>https://mars-research.github.io/tags/</loc>
   </url>

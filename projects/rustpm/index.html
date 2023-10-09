@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Projects | Mars Research Group</title>
+<title>RustPM - Safe and Efficient Persistent Memory Systems in Rust | Mars Research Group</title>
 <meta name="keywords" content="">
-<meta name="description" content="Projects - Mars Research Group">
+<meta name="description" content="Persistent memory (PM) hardware such as Intel’s Optane DC memory product promises to transform how programs store and manipulate information. Persistent memory provides a mixture of the performance and flexibility of DRAM and the price and persistence of FLASH storage. There has been much exciting work in the systems community to explore how persistent memory enables new more efficient designs of storage systems ranging from file systems that bypass the kernel to key-value storage systems to concurrent DRAM indices to databases.">
 <meta name="author" content="">
-<link rel="canonical" href="https://mars-research.github.io/projects/">
+<link rel="canonical" href="https://mars-research.github.io/projects/rustpm/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.6a98292fb8fa8cf0f3ba4042d4b75515c04267550f3ad49ff6271b5af9562443.css" integrity="sha256-apgpL7j6jPDzukBC1LdVFcBCZ1UPOtSf9icbWvlWJEM=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://mars-research.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://mars-research.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://mars-research.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://mars-research.github.io/projects/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://mars-research.github.io/projects/rustpm/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,13 +55,13 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Projects" />
+</noscript><meta property="og:title" content="RustPM - Safe and Efficient Persistent Memory Systems in Rust" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://mars-research.github.io/projects/" />
+<meta property="og:url" content="https://mars-research.github.io/projects/rustpm/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Projects"/>
+<meta name="twitter:title" content="RustPM - Safe and Efficient Persistent Memory Systems in Rust"/>
 <meta name="twitter:description" content=""/>
 
 
@@ -75,6 +75,12 @@
       "position":  1 ,
       "name": "Projects",
       "item": "https://mars-research.github.io/projects/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "RustPM - Safe and Efficient Persistent Memory Systems in Rust",
+      "item": "https://mars-research.github.io/projects/rustpm/"
     }
   ]
 }
@@ -133,7 +139,7 @@
             </li>
             <li>
                 <a href="https://mars-research.github.io/projects" title="Projects">
-                    <span class="active">Projects</span>
+                    <span>Projects</span>
                 </a>
             </li>
             <li>
@@ -155,108 +161,41 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header">
+<header class="page-header"><div class="breadcrumbs"><a href="https://mars-research.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://mars-research.github.io/projects/">Projects</a></div>
   <h1>
-    Projects
+    RustPM - Safe and Efficient Persistent Memory Systems in Rust
   </h1>
 </header>
+<div class="post-content"><p>Persistent memory (PM) hardware such as Intel’s Optane DC memory product
+promises to transform how programs store and manipulate information. Persistent
+memory provides a mixture of the performance and flexibility of DRAM and the
+price and persistence of FLASH storage. There has been much exciting work in
+the systems community to explore how persistent memory enables new more
+efficient designs of storage systems ranging from file systems that bypass the
+kernel to key-value storage systems to concurrent DRAM indices to databases.</p>
+<p>Unfortunately, developing correct persistent memory code is extremely
+challenging. Stores to persistent memory do not immediately update the
+underlying PM. Instead, stores to PM are first written to the processor cache
+and are only later written to the underlying PM when the cache line is evicted
+or explicitly flushed.  Thus, machine crashes can leave applications in an
+inconsistent state. The difficulty of using PM is well known and researchers
+have developed many bug finding tools to find missing flush instructions.</p>
+<p>Persistency bugs do not just affect the correctness of application code, they
+can easily subvert the safety guarantees of safe programming languages like
+Rust — for example, a persistency bug could leave a reference in a persistent
+data structure to a previously freed object or create multiple aliases that all
+own the same object. The proposed work will develop a lightweight verification
+approach to ensure the safety of efficient persistent memory code.</p>
+<p>Our work aims to build the RustPM verification system for persistent memory
+systems that guarantees crash consistency. Our basic approach has two
+components: (1) verify that a program correctly uses flush and fence operations
+and (2) verify that the data structure operations are failure atomic. We
+propose to implement the verification system for the Rust programming language.</p>
+<h1 id="nsf-award">NSF Award<a hidden class="anchor" aria-hidden="true" href="#nsf-award">#</a></h1>
+<p><a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2220410">FMitF: Track I: Safe, Efficient Persistent Memory Systems</a></p>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Atmosphere Verified Operating System
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Atmosphere is a full-featured microkernel developed in Rust and verified with Verus. Conceptually Atmosphere is similar to the line of L4 microkernels. Atmosphere pushes most kernel functionality to user-space, e.g., device drivers, network stack, file systems, etc. The microkernel supports a minimal set of mechanisms to implement address spaces, page-tables, coarse-grained memory management, and threads of execution that together with address spaces implement an abstraction of a process. Each process has a page table and a collection of schedulable threads....</p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to Atmosphere Verified Operating System" href="https://mars-research.github.io/projects/atmo/"></a>
-</article>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Fine-grained kernel isolation
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Today, the lack of isolation within an operating system kernel is one of the main factors undermining its security. While the core kernel is relatively stable, the number of kernel extensions and device drivers is growing with every hardware generation (a modern Linux kernel contains around 8,867 device drivers, with around 180-130 drivers running on a typical system). Developed by third-party vendors that often have an incomplete understanding of the kernel programming and security idioms, kernel extensions and device drivers are a primary source of vulnerabilities in the kernel....</p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to Fine-grained kernel isolation" href="https://mars-research.github.io/projects/kernel-isolation/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>High-performance Hash Table
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Despite decades of innovation, existing hash tables fail to achieve peak performance on modern hardware. Built around a relatively simple computation, i.e., a hash function, which in most cases takes only a handful of CPU cycles, hash tables should only be limited by the throughput of the memory subsystem. Unfortunately, due to the inherently random memory access pattern and the contention across multiple threads, existing hash tables spend most of their time waiting for the memory subsystem to serve cache misses and coherence requests....</p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to High-performance Hash Table" href="https://mars-research.github.io/projects/dramhit/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>KSplit
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>KSplit, a new framework for isolating device drivers in the Linux kernel. KSplit performs a collection of static analyses on the source code of the kernel and the driver to generate the synchronization code that is required to execute the driver in isolation. Specifically, KSplit identifies the shared state that is accessed by both driver and the kernel computing how this state is accessed on both sides of the isolation boundary and how it should be synchronized on each kernel-driver invocation and when a shared synchronization primitive, e....</p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to KSplit" href="https://mars-research.github.io/projects/ksplit/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Lightweight Execution Domains
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Modern operating systems are monolithic. Today, however,lack of isolation is one of the main factors undermining security of the kernel. Inherent complexity of the kernel code and rapid development pace combined with the use of unsafe,low-level programming language results in a steady streamof errors. Even after decades of efforts to make commodity kernels more secure, i.e., development of numerous static and dynamic approaches aimed to prevent exploitation of mostcommon errors, several hundreds of serious kernel vulnerabilities are reported every year....</p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to Lightweight Execution Domains" href="https://mars-research.github.io/projects/lxds/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Lightweight Virtualized Domains
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Commodity operating systems execute core kernel subsystems in a single address space along with hundreds of dynamically loaded extensions and device drivers. Lack of isolation within the kernel implies that a vulnerability in any of the kernel subsystems or device drivers opens a way to mount a successful attack on the entire kernel.
-Historically, isolation within the kernel remained prohibitive due to the high cost of hardware isolation primitives. Recent CPUs, however, bring a new set of mechanisms....</p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to Lightweight Virtualized Domains" href="https://mars-research.github.io/projects/lvds/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>RedLeaf
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>A research operating system developed from scratch in Rust, aimed to explore the impact of language safety on operating system organization.</p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to RedLeaf" href="https://mars-research.github.io/projects/redleaf/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>RustPM - Safe and Efficient Persistent Memory Systems in Rust
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Persistent memory (PM) hardware such as Intel’s Optane DC memory product promises to transform how programs store and manipulate information. Persistent memory provides a mixture of the performance and flexibility of DRAM and the price and persistence of FLASH storage. There has been much exciting work in the systems community to explore how persistent memory enables new more efficient designs of storage systems ranging from file systems that bypass the kernel to key-value storage systems to concurrent DRAM indices to databases....</p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to RustPM - Safe and Efficient Persistent Memory Systems in Rust" href="https://mars-research.github.io/projects/rustpm/"></a>
-</article>
+</div>
     </main>
     
 <footer class="footer">
