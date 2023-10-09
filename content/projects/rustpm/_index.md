@@ -1,6 +1,6 @@
 
 ---
-title: RustPM: Safe and Efficient Persistent Memory Systems in Rust
+title: RustPM - Safe and Efficient Persistent Memory Systems in Rust
 aliases:
 - /rustpm
 
