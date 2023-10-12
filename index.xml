@@ -1059,12 +1059,18 @@ on Intel platforms.</p>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://mars-research.github.io/news/</guid>
-      <description>2023 Our paper on developing ephemeral virtual TPMs for enabling remote attestation in confidential computing Remote attestation of confidential VMs using ephemeral vTPMs got accepted to ACSAC&#39;23 (pdf)
+      <description>2023 Our paper on verifying operating systems using Verus Atmosphere: Towards Practical Verified Kernels in Rust got accepted to KISV&#39;23 (pdf)
+Our paper on developing ephemeral virtual TPMs for enabling remote attestation in confidential computing Remote attestation of confidential VMs using ephemeral vTPMs got accepted to ACSAC&#39;23 (pdf)
 Our position paper on strengthening the isolation boundary Evolving Operating System Kernels Towards Secure Kernel-Driver Interface got accepted to HotOS&#39;23 (pdf)
-Amazon Research Award, Atmosphere: leveraging language safety and operating system design for verification Anton Burtsev (PI). April 2023. $50,000
-National Science Foundation, Formal Methods In the Field: Safe, Efficient Persistent Memory Systems Anton Burtsev (co-PI).</description>
+Amazon Research Award, Atmosphere: leveraging language safety and operating system design for verification Anton Burtsev (PI).</description>
       <content:encoded><![CDATA[<h3 id="2023">2023</h3>
 <ul>
+<li>
+<p>Our paper on verifying operating systems using Verus <strong>Atmosphere: Towards
+Practical Verified Kernels in Rust</strong> got accepted to
+<strong><a href="https://kisv-workshop.github.io/program/">KISV'23</a></strong>
+(<a href="/doc/2023-kisv-atmo.pdf">pdf</a>)</p>
+</li>
 <li>
 <p>Our paper on developing ephemeral virtual TPMs for enabling remote
 attestation in confidential computing <strong>Remote attestation of confidential
