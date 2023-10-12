@@ -7,6 +7,11 @@ ShowBreadCrumbs: false
 ---
 
 ### 2023
+* Our paper on verifying operating systems using Verus **Atmosphere: Towards
+  Practical Verified Kernels in Rust** got accepted to
+  **[KISV'23](https://kisv-workshop.github.io/program/)**
+  ([pdf](/doc/2023-kisv-atmo.pdf))
+
 * Our paper on developing ephemeral virtual TPMs for enabling remote
   attestation in confidential computing **Remote attestation of confidential
   VMs using ephemeral vTPMs** got accepted to
