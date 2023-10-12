@@ -19,8 +19,10 @@ ShowBreadCrumbs: false
   **[HotOS'23](https://www.sigops.org/s/conferences/hotos/2023/#program)**
   ([pdf](/doc/2023-hotos-kernel-interfaces.pdf))
 
-* Amazon Research Award, **Atmosphere: leveraging language safety and operating
-  system design for verification** Anton Burtsev (PI). April 2023. $50,000
+* Amazon Research Award, **[Atmosphere: leveraging language safety and
+  operating system design for
+  verification](https://www.cs.utah.edu/amazon-awards-50k-to-prof-anton-burtsev-to-develop-atmosphere-a-secure-and-reliable-operating-system/)**
+  Anton Burtsev (PI). April 2023. $50,000
 
 * National Science Foundation, **Formal Methods In the Field: Safe, Efficient
   Persistent Memory Systems** Anton Burtsev (co-PI). October 2022 - September
