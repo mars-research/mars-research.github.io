@@ -1076,7 +1076,7 @@ Practical Verified Kernels in Rust</strong> got accepted to
 attestation in confidential computing <strong>Remote attestation of confidential
 VMs using ephemeral vTPMs</strong> got accepted to
 <strong><a href="https://www.openconf.org/acsac2023/modules/request.php?module=oc_program&amp;action=program.php&amp;p=program">ACSAC'23</a></strong>
-(<a href="https://arxiv.org/pdf/2303.16463.pdf">pdf</a>)</p>
+(<a href="/doc/2023-acsac-svsm-vtpm.pdf">pdf</a>)</p>
 </li>
 <li>
 <p>Our position paper on strengthening the isolation boundary <strong>Evolving
@@ -1423,7 +1423,7 @@ Xiangdong Chen, Zhaofeng Li, Vikram Narayanan and Anton Burtsev. Atmosphere: Tow
 Gheorghe Almási<sup>*</sup>, James Bottomley<sup>*</sup>, Mengmei
 Ye<sup>*</sup>, Tobin Feldman-Fitzthum<sup>*</sup>, Daniele Buono<sup>*</sup>,
 Hubertus Franke<sup>*</sup>, and Anton Burtsev. (<sup>*</sup>IBM Research)
-<a href="https://arxiv.org/pdf/2303.16463.pdf">Remote attestation of confidential VMs using ephemeral
+<a href="/doc/2023-acsac-svsm-vtpm.pdf">Remote attestation of confidential VMs using ephemeral
 vTPMs</a>. In <em>Proceedings of the 39th Annual
 Computer Security Applications Conference (ACSAC 2023)</em>, December 2023.</p>
 <p>Xiangdong Chen, Zhaofeng Li, Vikram Narayanan and Anton Burtsev. <a href="/doc/2023-kisv-atmo.pdf">Atmosphere:
