@@ -16,7 +16,7 @@ ShowBreadCrumbs: false
   attestation in confidential computing **Remote attestation of confidential
   VMs using ephemeral vTPMs** got accepted to
   **[ACSAC'23](https://www.openconf.org/acsac2023/modules/request.php?module=oc_program&action=program.php&p=program)**
-  ([pdf](https://arxiv.org/pdf/2303.16463.pdf))
+  ([pdf](/doc/2023-acsac-svsm-vtpm.pdf))
 
 * Our position paper on strengthening the isolation boundary **Evolving
   Operating System Kernels Towards Secure Kernel-Driver Interface** got

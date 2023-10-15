@@ -15,7 +15,7 @@ Gheorghe Almási<sup>\*</sup>, James Bottomley<sup>\*</sup>, Mengmei
 Ye<sup>\*</sup>, Tobin Feldman-Fitzthum<sup>\*</sup>, Daniele Buono<sup>\*</sup>,
 Hubertus Franke<sup>\*</sup>, and Anton Burtsev. (<sup>\*</sup>IBM Research)
 [Remote attestation of confidential VMs using ephemeral
-vTPMs](https://arxiv.org/pdf/2303.16463.pdf). In _Proceedings of the 39th Annual
+vTPMs](/doc/2023-acsac-svsm-vtpm.pdf). In _Proceedings of the 39th Annual
 Computer Security Applications Conference (ACSAC 2023)_, December 2023.
 
 Xiangdong Chen, Zhaofeng Li, Vikram Narayanan and Anton Burtsev. [Atmosphere:
