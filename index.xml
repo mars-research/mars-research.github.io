@@ -1166,7 +1166,7 @@ In this work, we study the overheads of hardware and software isolation mechanis
 <p>Zhaofeng Li, Tianjiao Huang, Vikram Narayanan, Anton Burtsev. <strong>Understanding
 the Overheads of Hardware and Language-Based IPC Mechanisms</strong>. In <em>11th
 Workshop on Programming Languages and Operating Systems (PLOS)</em>, October 2021.
-<a href="https://mars-research.github.io/doc/plos21/plos21-ipc-overheads.pdf">pdf</a></p>
+<a href="https://mars-research.github.io/doc/2021-plos-ipc-overheads.pdf">pdf</a></p>
 <h2 id="code">Code</h2>
 <ul>
 <li>Coming soon &hellip;</li>
@@ -1418,7 +1418,7 @@ table th:first-of-type {
       
       <guid>https://mars-research.github.io/publications/</guid>
       <description>2023 Vikram Narayanan, Claudio Carvalho*, Angelo Ruocco*, Gheorghe Almási*, James Bottomley*, Mengmei Ye*, Tobin Feldman-Fitzthum*, Daniele Buono*, Hubertus Franke*, and Anton Burtsev. (*IBM Research) Remote attestation of confidential VMs using ephemeral vTPMs. In Proceedings of the 39th Annual Computer Security Applications Conference (ACSAC 2023), December 2023.
-Xiangdong Chen, Zhaofeng Li, Vikram Narayanan and Anton Burtsev. Atmosphere: Towards Practical Verified Kernels in Rust. In Proceedings of the 1st Workshop on Kernel Isolation, Safety and Verification (KISV 2023), October 2023.</description>
+Xiangdong Chen, Zhaofeng Li, Lukas Mesicek, Vikram Narayanan and Anton Burtsev. Atmosphere: Towards Practical Verified Kernels in Rust. In Proceedings of the 1st Workshop on Kernel Isolation, Safety and Verification (KISV 2023), October 2023.</description>
       <content:encoded><![CDATA[<h3 id="2023">2023</h3>
 <p>Vikram Narayanan, Claudio Carvalho<sup>*</sup>, Angelo Ruocco<sup>*</sup>,
 Gheorghe Almási<sup>*</sup>, James Bottomley<sup>*</sup>, Mengmei
@@ -1427,10 +1427,10 @@ Hubertus Franke<sup>*</sup>, and Anton Burtsev. (<sup>*</sup>IBM Research)
 <a href="/doc/2023-acsac-svsm-vtpm.pdf">Remote attestation of confidential VMs using ephemeral
 vTPMs</a>. In <em>Proceedings of the 39th Annual
 Computer Security Applications Conference (ACSAC 2023)</em>, December 2023.</p>
-<p>Xiangdong Chen, Zhaofeng Li, Vikram Narayanan and Anton Burtsev. <a href="/doc/2023-kisv-atmo.pdf">Atmosphere:
-Towards Practical Verified Kernels in Rust</a>. In
-<em>Proceedings of the 1st Workshop on Kernel Isolation, Safety and Verification
-(KISV 2023)</em>, October 2023.</p>
+<p>Xiangdong Chen, Zhaofeng Li, Lukas Mesicek, Vikram Narayanan and Anton Burtsev.
+<a href="/doc/2023-kisv-atmo.pdf">Atmosphere: Towards Practical Verified Kernels in
+Rust</a>. In <em>Proceedings of the 1st Workshop on Kernel
+Isolation, Safety and Verification (KISV 2023)</em>, October 2023.</p>
 <p>Arthur Lafrance (University of California, Irvine), David Detweiler (University
 of California, Irvine), Zhaofeng Li, Xiangdong Chen, Vikram Narayanan and Anton
 Burtsev. <a href="/doc/2023-plos-rust-zerocopy.pdf">Extending Rust with Support for Zero Copy
