@@ -8,7 +8,7 @@ Mars Research is a systems research group at University of Utah. Primarily we wo
 
 ## Projects
 
-Atmostphere verified operating system: [redleaf](./atmo)
+Atmostphere verified operating system: [atmo](./atmo)
 
 Redleaf operating system: [redleaf](./redleaf)
 

@@ -81,32 +81,31 @@ practical and scalable verification.
 
 ## Publications
 
-Zhaofeng Li, Tianjiao Huang, Vikram Narayanan, Anton Burtsev. **Understanding
+* Zhaofeng Li, Tianjiao Huang, Vikram Narayanan, Anton Burtsev. **Understanding
 the Overheads of Hardware and Language-Based IPC Mechanisms**. In _11th
 Workshop on Programming Languages and Operating Systems (PLOS)_, October 2021.
-[pdf](https://mars-research.github.io/doc/plos21/plos21-ipc-overheads.pdf)
+[pdf](https://mars-research.github.io/doc/2021-plos-ipc-overheads.pdf)
 
-Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li, Vikram
+* Anton Burtsev, Dan Appel, David Detweiler, Tianjiao Huang, Zhaofeng Li, Vikram
 Narayanan, Gerd Zellweger. **Isolation in Rust: What is missing?**. In _11th
 Workshop on Programming Languages and Operating Systems (PLOS)_, October 2021.
-[pdf](https://mars-research.github.io/doc/plos21/plos21-rust-isolation.pdf)
+[pdf](https://mars-research.github.io/doc/2021-plos-rust-isolation.pdf)
 
-Vikram Narayanan, Tianjiao Huang, David Detweiler, Dan Appel, Zhaofeng Li, Gerd
+* Vikram Narayanan, Tianjiao Huang, David Detweiler, Dan Appel, Zhaofeng Li, Gerd
 Zellweger, Anton Burtsev. **RedLeaf: Isolation and Communication in a Safe
 Operating System**. In _14th USENIX Symposium on Operating Systems Design and
 Implementation (OSDI)_, November 2020.
-[pdf](https://mars-research.github.io/doc/redleaf-osdi20.pdf)
+[pdf](https://mars-research.github.io/doc/2020-osdi-redleaf.pdf)
 
-Dan Appel. **Inter-Process Communication in a Safe Kernel**. _BS Thesis_. University 
+* Dan Appel. **Inter-Process Communication in a Safe Kernel**. _BS Thesis_. University 
 of California, Irvine, 2020. [pdf](https://www.ics.uci.edu/~aburtsev/doc/appel-bs-thesis.pdf)
 
-
-Vikram Narayanan (University of California, Irvine), Marek S. Baranowski
+* Vikram Narayanan (University of California, Irvine), Marek S. Baranowski
 (University of Utah), Leonid Ryzhyk (VMware Research), Zvonimir Rakamaric
 (University of Utah), Anton Burtsev (University of California, Irvine).
 **RedLeaf: Towards An Operating System for Safe and Verified Firmware**. In
 _17th Workshop on Hot Topics in Operating Systems (HotOS)_, May 2019.
-[pdf](https://mars-research.github.io/doc/redleaf-hotos19.pdf)
+[pdf](https://mars-research.github.io/doc/2019-hotos-redleaf.pdf)
 
 # Code
 

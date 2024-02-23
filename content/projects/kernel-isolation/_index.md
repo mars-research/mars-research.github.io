@@ -9,7 +9,6 @@ ShowReadingTime: false
 
 <img src="images/lvds.png" alt="LVDs Architecture" width="550"/>
 
-
 Today, the lack of isolation within an operating system kernel is one of the
 main factors undermining its security. While the core kernel is relatively
 stable, the number of kernel extensions and device drivers is growing with
@@ -69,4 +68,4 @@ Virtual Execution Environments (VEE 20)_, March 2020.
 Bauer, Michael Quigley, Aftab Hussain, Abdullah Younis, Junjie Shen, Moinak
 Bhattacharyya, and Anton Burtsev. **LXDs: Towards Isolation of Kernel
 Subsystems**.  In _2019 USENIX Annual Technical Conference (USENIX ATC 19)_,
-July 2019. [pdf] (/doc/2019-atc-lxds.pdf)
+July 2019. [pdf](/doc/2019-atc-lxds.pdf)

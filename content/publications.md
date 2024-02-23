@@ -18,10 +18,10 @@ Hubertus Franke<sup>\*</sup>, and Anton Burtsev. (<sup>\*</sup>IBM Research)
 vTPMs](/doc/2023-acsac-svsm-vtpm.pdf). In _Proceedings of the 39th Annual
 Computer Security Applications Conference (ACSAC 2023)_, December 2023.
 
-Xiangdong Chen, Zhaofeng Li, Vikram Narayanan and Anton Burtsev. [Atmosphere:
-Towards Practical Verified Kernels in Rust](/doc/2023-kisv-atmo.pdf). In
-_Proceedings of the 1st Workshop on Kernel Isolation, Safety and Verification
-(KISV 2023)_, October 2023.
+Xiangdong Chen, Zhaofeng Li, Lukas Mesicek, Vikram Narayanan and Anton Burtsev.
+[Atmosphere: Towards Practical Verified Kernels in
+Rust](/doc/2023-kisv-atmo.pdf). In _Proceedings of the 1st Workshop on Kernel
+Isolation, Safety and Verification (KISV 2023)_, October 2023.
 
 Arthur Lafrance (University of California, Irvine), David Detweiler (University
 of California, Irvine), Zhaofeng Li, Xiangdong Chen, Vikram Narayanan and Anton

@@ -35,4 +35,8 @@ line of classical L4 microkernels.
 
 # Publications
 
+* Xiangdong Chen, Zhaofeng Li, Lukas Mesicek, Vikram Narayanan and Anton Burtsev.
+[Atmosphere: Towards Practical Verified Kernels in
+Rust](/doc/2023-kisv-atmo.pdf). In _Proceedings of the 1st Workshop on Kernel
+Isolation, Safety and Verification (KISV 2023)_, October 2023.
 

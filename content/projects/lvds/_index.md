@@ -42,7 +42,7 @@ isolated domains.
 Jaeger, and Anton Burtsev. **Lightweight Kernel Isolation with Virtualization
 and VM Functions**. In _16th ACM SIGPLAN/SIGOPS International Conference on
 Virtual Execution Environments (VEE 20)_, March 2020.
-[pdf](https://mars-research.github.io/static/doc/lvds-vee20.pdf)
+[pdf](/doc/2020-vee-lvds.pdf)
 
 # Code
 
