@@ -35,4 +35,4 @@ Yongzhe Huang, Vikram Narayanan, David Detweiler, Kaiming Huang, Gang Tan,
 Trent Jaeger, and Anton Burtsev.  **KSplit: Automating Device Driver
 Isolation**.  In _16th USENIX Symposium on Operating Systems Design and
 Implementation (OSDI '22)_, July 2022.
-[pdf](https://mars-research.github.io/doc/ksplit-osdi22.pdf)
+[pdf](/doc/2022-osdi-ksplit.pdf)
