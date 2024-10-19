@@ -8,6 +8,21 @@ ShowReadingTime: false
 ShowBreadCrumbs: false
 ---
 
+### 2024
+
+Zhaofeng Li, Vikram Narayanan, Xiangdong Chen, Jerry Zhang, Anton Burtsev.
+[Rust for Linux: Understanding Security Impact of Rust on the Linux Kernel](./doc/2024-acsac-rfl.pdf). In 
+_Proceedings of the Annual Computer Security Applications Conference (ACSAC'24)_, December 2024.
+
+Xiangdong Chen, Zhaofeng Li, Jerry Zhang, Anton Burtsev.
+[Veld: Verified Linux Drivers](./doc/2024-kisv-veld.pdf). In  _Proceedings of the 
+2nd Workshop on Kernel Isolation, Safety and Verification (KISV 2024)_, November 2024.
+
+Xiangdong Chen, Zhaofeng Li, Tirth Jain, Vikram Narayanan, Anton Burtsev. 
+[Limitations and Opportunities of Modern Hardware
+Isolation Mechanisms](/doc/2024-atc-hw-isolation.pdf). In _Proceedings of the
+2024 USENIX Annual Technical Conference (USENIX ATC)_, July 2024.
+
 ### 2023
 
 Vikram Narayanan, Claudio Carvalho<sup>\*</sup>, Angelo Ruocco<sup>\*</sup>,
