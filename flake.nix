@@ -35,11 +35,18 @@
       dontFixup = true;
     };
   in {
-    devShell = pkgs.mkShell {
+    devShells.default = pkgs.mkShell {
       inputsFrom = [ website ];
+
+      packages = with pkgs; [
+        just
+      ];
+
       HUGO_MODULE_IMPORTS_PATH = papermod;
     };
-    packages.website = website;
-    defaultPackage = website;
-  });
+    packages = {
+      default = website;
+      inherit website;
+    };
+   });
 }

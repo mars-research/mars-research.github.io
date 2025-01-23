@@ -4,24 +4,33 @@ on:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3.4.0
+      - uses: actions/checkout@v4.1.7
 
-      - uses: cachix/install-nix-action@v20
-        with:
-          install_url: https://releases.nixos.org/nix/nix-2.9.2/install
-          extra_nix_config: |
-            experimental-features = nix-command flakes
+      - uses: DeterminateSystems/nix-installer-action@v13
+        continue-on-error: true # Self-hosted runners already have Nix installed
 
       - name: Build website
         run: nix build .#website
 
-      - name: Deploy website
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+      - name: Copy website artifact
+        run: |
+          cp --recursive --dereference --no-preserve=mode,ownership result public
+
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@v3.0.1
         with:
-          branch: gh-pages
-          folder: result
+          path: public
+
+      - name: Deploy website
+        uses: actions/deploy-pages@v4.0.5

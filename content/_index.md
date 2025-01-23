@@ -4,28 +4,47 @@ title: Mars Research Group
 
 # Mars Research Group
 
-Mars Research is a systems research group at University of Utah. Primarily we work in the areas of operating systems and security.
+Mars Research is a systems research group at the [University of
+Utah](https://www.utah.edu). Primarily we work in the areas of operating
+systems and security.
+
+Historically, we are always working on at least one clean slate operating
+system (in the past we did [RedLeaf](./redleaf), a clean slate operating system
+in Rust), right now we work on [Atmostphere](./atmo), a clean-slate
+fully-verified operating system. 
+
+We are a small team (it feels like a small startup), but we push out some
+amazing things (clean slate kernels!)
 
 ## Active Projects 
 
-Atmostphere verified operating system: [atmo](./atmo)
+- Atmostphere verified operating system develooped in Rust and Verus:
+  [atmo](./atmo)
 
-Safe Persistent Memory Systems in Rust: [rustpm](./rustpm)
+- Formally verified drivers for the Linux kernel [VELD](./veld)
 
-Fine-grained isolation for the Linux kernel: [kernel-isolation](./kernel-isolation)
+- Hardware support for low-overhead, fine grained isolation [ipc](./ipc)
 
-High-performance hash table: [DRAMHiT](./dramhit)
+- Retrofitting isolation in the Linux kernel:
+  [kernel-isolation](./kernel-isolation)
+
+- Hash table designed to work at the speed of DRAM: [DRAMHiT](./dramhit)
+
+- Impact of Rust on the Linux kernel: [rfl](./rfl)
 
 ## Past Projects 
 
-Redleaf operating system: [redleaf](./redleaf)
+- Redleaf operating system: [redleaf](./redleaf)
 
-Rust for linux study: [rfl](./rfl)
+- KSplit framework for decomposing the Linux kernel [ksplit](./ksplit)
+
+- Lightweight VMFUNC Domains [LVDs](./lvds)
+
+- Lightweight eXecution Domains [LXDs](./lxds)
 
 ## People
 
-[Anton Burtsev](https://www.ics.uci.edu/~aburtsev) (Faculty, lead)
-
+[Anton Burtsev](https://mars-research.github.io/aburtsev/) (Faculty, lead)
 
 [Xiandong Chen](https://github.com/FeizaiYiHao) (PhD, 2026 expected)
 
