@@ -2,8 +2,6 @@
 title: Mars Research Group
 ---
 
-# Mars Research Group
-
 Mars Research is a systems research group at the [University of
 Utah](https://www.utah.edu). Primarily we work in the areas of operating
 systems and security.
