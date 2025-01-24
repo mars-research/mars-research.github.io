@@ -3,16 +3,29 @@ title: Mars Research Group
 ---
 
 Mars Research is a systems research group at the [University of
-Utah](https://www.utah.edu). Primarily we work in the areas of operating
-systems and security.
+Utah](https://www.utah.edu). Primarily we are interested in a broad range of
+problems at the very core of the systems stack related to the security,
+reliability, and performance of **operating systems**. 
 
-Historically, we are always working on at least one clean slate operating
-system (in the past we did [RedLeaf](./redleaf), a clean slate operating system
-in Rust), right now we work on [Atmostphere](./atmo), a clean-slate
-fully-verified operating system. 
+Our work explores the challenges related to the design and implementation of
+operating systems as well as a range of issues on the intersection of systems
+with architecture, programming languages, security, and formal methods.
 
-We are a small team (it feels like a small startup), but we push out some
-amazing things (clean slate kernels!)
+Historically, we are always working on at least one clean-slate operating
+system. Right now its:
+
+- [Atmostphere](./atmo), a clean-slate fully-verified operating system
+
+Notable past projects are [RedLeaf](./redleaf), a clean slate operating system
+that uses Rust safety for isolation, and [KSplit](./ksplit), a static analysis
+framework and lightweight runtime for automatic isolation of device drivers in
+the Linux kernel. 
+
+We also built [DRAMHiT](./dramhit) -- the fastest ever hash table.  
+
+We're **always looking for motivated students interested in operating systems**
+at all levels from undergraduate to PhD. If you have relevant skills (take a
+look at our repos to see what we normally do) send me an email.
 
 ## Active Projects 
 
