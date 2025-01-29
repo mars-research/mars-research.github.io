@@ -64,6 +64,8 @@ look at our repos to see what we normally do) send me an email.
 
 [Jerry Zhang](https://jerryidk.github.io/) (PhD, 2028 expected)
 
+[Joshua Tlatelpa-Agustin](https://joshagustint.github.io/) (BS, expected 2025)
+
 ## Alumni
 
 
