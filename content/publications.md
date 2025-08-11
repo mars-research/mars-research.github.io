@@ -8,6 +8,12 @@ ShowReadingTime: false
 ShowBreadCrumbs: false
 ---
 
+### 2025
+
+Xiangdong Chen, Zhaofeng Li, Jerry Zhang, Vikram Narayanan, Anton Burtsev.
+[Atmosphere: Practical Verified Kernels with Rust and Verus](/doc/). 
+Accepted to _the 31st ACM Symposium on Operating Systems Principles (SOSP 2025)_, October 2025.
+
 ### 2024
 
 Zhaofeng Li, Vikram Narayanan, Xiangdong Chen, Jerry Zhang, Anton Burtsev.
