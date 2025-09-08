@@ -11,8 +11,18 @@ ShowBreadCrumbs: false
 ### 2025
 
 Xiangdong Chen, Zhaofeng Li, Jerry Zhang, Vikram Narayanan, Anton Burtsev.
-[Atmosphere: Practical Verified Kernels with Rust and Verus](/doc/). 
-Accepted to _the 31st ACM Symposium on Operating Systems Principles (SOSP 2025)_, October 2025.
+[Atmosphere: Practical Verified Kernels with Rust and Verus](/doc/2025-sosp-atmo.pdf). 
+In _Proceedings of the 31st ACM Symposium on Operating Systems Principles (SOSP 2025)_, October 2025.
+
+Yongzhe Huang, Kaiming Huang, Matthew Ennis, Vikram Narayanan, Anton Burtsev,
+Trent Jaeger, Gang Tan.
+[Beyond Driver Isolation - Triaging Threats against Driver Isolation](/doc/). 
+In _Proceedings of the  Annual Computer Security Applications Conference (ACSAC)_, December 2025.
+
+Zhaofeng Li, Jerry Zhang, Joshua Tlatelpa-Agustin, Xiangdong Chen, Anton Burtsev. 
+[Understanding the Security Impact of CHERI on the Operating System Kernel](/doc/). 
+In _Proceedings of the  Annual Computer Security Applications Conference (ACSAC)_, December 2025.
+
 
 ### 2024
 

@@ -35,7 +35,11 @@ line of classical L4 microkernels.
 
 # Publications
 
-* Xiangdong Chen, Zhaofeng Li, Lukas Mesicek, Vikram Narayanan and Anton Burtsev.
+* Xiangdong Chen, Zhaofeng Li, Jerry Zhang, Vikram Narayanan, Anton Burtsev.
+[Atmosphere: Practical Verified Kernels with Rust and Verus](/doc/2025-sosp-atmo.pdf). 
+In _Proceedings of the 1st ACM Symposium on Operating Systems Principles (SOSP 2025)_, October 2025.
+
+* Xiangdong Chen, Zhaofeng Li, Sylvia (Lukas) Mesicek, Vikram Narayanan and Anton Burtsev.
 [Atmosphere: Towards Practical Verified Kernels in
 Rust](/doc/2023-kisv-atmo.pdf). In _Proceedings of the 1st Workshop on Kernel
 Isolation, Safety and Verification (KISV 2023)_, October 2023.

@@ -60,7 +60,7 @@ look at our repos to see what we normally do) send me an email.
 
 [Xiandong Chen](https://github.com/FeizaiYiHao) (PhD, 2026 expected)
 
-[Zhaofeng Li](https://zhaofeng.li) (PhD, 2025 expected)
+[Manvik Nanda]() (PhD, 2030 expected)
 
 [Jerry Zhang](https://jerryidk.github.io/) (PhD, 2028 expected)
 
@@ -68,6 +68,7 @@ look at our repos to see what we normally do) send me an email.
 
 ## Alumni
 
+[Zhaofeng Li](https://zhaofeng.li) (PhD, 2025, now at ...)
 
 [Vikram Narayanan](https://arkivm.github.io) (PhD, 2024, now at Palo Alto Networks)
 
