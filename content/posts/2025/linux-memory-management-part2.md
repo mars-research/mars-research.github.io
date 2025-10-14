@@ -117,3 +117,10 @@ kmem_cache  ──► [ Slab (1..N pages) ] ─┬─ [obj] [obj] [obj] ...
 ```
 ## What's More?
 So far, we’ve looked at the main strategies Linux uses to manage memory. Next, we’ll explore virtual memory and see how the system translates virtual addresses into physical ones. All this and more, coming up in the next part, stay tuned!
+
+## Additional Reading... [`vmalloc()`](https://litux.nl/mirror/kerneldevelopment/0672327201/ch11lev1sec5.html)
+
+Instead of demanding physically adjacent pages, `vmalloc()` creates a contiguous virtual address range by stitching together scattered physical pages. The kernel handles this through the virtual memory system, setting up the proper page table mappings so that, from the program’s perspective, it looks like one smooth, continuous block of memory.
+
+Behind the scenes, `vmalloc()` still relies on the Buddy Allocator to find available physical pages — it just doesn’t require them to sit next to each other.
+This approach greatly reduces fragmentation, improves overall memory utilization, and works especially well for large or infrequently accessed buffers, where strict physical adjacency isn’t necessary.
