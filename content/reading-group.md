@@ -8,9 +8,10 @@ ShowBreadCrumbs: false
 
 ## Details
 
-- **Organizers**: Vikram Narayanan, Anton Burtsev
-- **Email**: narayav1 at uci dot edu, aburtsev at uci dot edu
-- **Meeting time/place**: Friday, 2:00pm-3:00pm (held remotely)
+- **Organizers**: Manvik Nanda, Anton Burtsev
+- **Email**: u1584242@umail.utah.edu, anton.burtsev@utah.edu
+- **Meeting time/place**: Friday, 4:00pm-5:00pm (3375, OS Lab, MEB, University of Utah)
+- **Zoom Link**: https://utah.zoom.us/my/aburtsev
 
 We read and discuss a broad range of papers related to systems research. The
 topics range from novel system designs (generally results from recent systems
@@ -24,6 +25,12 @@ table th:first-of-type {
     width: 10%;
 }
 </style>
+
+### Fall 2035
+
+| Date | Paper |
+| :------------- | :---------- |
+| Oct 31 | [CHERIoT RTOS: An OS for Fine-Grained Memory-Safe Compartments on Low-Cost Embedded Devices](https://dl.acm.org/doi/pdf/10.1145/3731569.3764844) |
 
 ### Spring 2022
 
