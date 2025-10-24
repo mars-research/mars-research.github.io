@@ -9,7 +9,7 @@ ShowBreadCrumbs: false
 ## Details
 
 - **Organizers**: Manvik Nanda, Anton Burtsev
-- **Email**: u1584242 (at) umail (dot) utah (dot) edu, anton (dot) burtsev (at) utah (dot) edu
+- **Email**: manvik (dot) nanda (at) utah (dot) edu, anton (dot) burtsev (at) utah (dot) edu
 - **Meeting time/place**: Friday, 4:00pm-5:00pm (3375, OS Lab, MEB, University of Utah)
 - **Zoom Link**: https://utah.zoom.us/j/86742139165
 
