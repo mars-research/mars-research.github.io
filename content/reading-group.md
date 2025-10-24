@@ -26,7 +26,7 @@ table th:first-of-type {
 }
 </style>
 
-### Fall 2035
+### Fall 2025
 
 | Date | Paper |
 | :------------- | :---------- |
