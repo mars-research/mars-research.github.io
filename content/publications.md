@@ -16,11 +16,11 @@ In _Proceedings of the 31st ACM Symposium on Operating Systems Principles (SOSP 
 
 Yongzhe Huang, Kaiming Huang, Matthew Ennis, Vikram Narayanan, Anton Burtsev,
 Trent Jaeger, Gang Tan.
-[Beyond Driver Isolation - Triaging Threats against Driver Isolation](/doc/). 
+[Beyond Driver Isolation - Triaging Threats against Driver Isolation](/doc/2025-beyond-driver-isolation-acsac25.pdf). 
 In _Proceedings of the  Annual Computer Security Applications Conference (ACSAC)_, December 2025.
 
 Zhaofeng Li, Jerry Zhang, Joshua Tlatelpa-Agustin, Xiangdong Chen, Anton Burtsev. 
-[Understanding the Security Impact of CHERI on the Operating System Kernel](/doc/). 
+[Understanding the Security Impact of CHERI on the Operating System Kernel](/doc/2025-cheri-acsac25.pdf). 
 In _Proceedings of the  Annual Computer Security Applications Conference (ACSAC)_, December 2025.
 
 
