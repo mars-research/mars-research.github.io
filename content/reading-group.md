@@ -30,6 +30,7 @@ table th:first-of-type {
 
 | Date | Paper |
 | :------------- | :---------- |
+| Nov 21 | [AutoVerus: Automated Proof Generation for Rust Code](https://dl.acm.org/doi/pdf/10.1145/3763174) |
 | Nov 14 | [IronFleet: Proving Practical Distributed Systems Correct](https://www.andrew.cmu.edu/user/bparno/papers/ironfleet.pdf) |
 | Oct 31 | [CHERIoT RTOS: An OS for Fine-Grained Memory-Safe Compartments on Low-Cost Embedded Devices](https://dl.acm.org/doi/pdf/10.1145/3731569.3764844) |
 
