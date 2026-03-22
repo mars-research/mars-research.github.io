@@ -34,6 +34,70 @@ verified code on bare metal.
 [RedLeaf operating system](./redleaf) and is supported by the Amazon Faculty
 Research Award and the National Science Foundation (CAREER Award).
 
+## Rust for linux: Understanding Security Impact of Rust on Linux Kernel
+[Project page](./rfl)
+
+Rust-for-Linux (RFL) is a new framework that allows
+development of Linux kernel extensions in Rust. At first
+glance, RFL is a huge step forward in terms of improving
+the security of the kernel: As a safe programming language,
+Rust can eliminate wide classes of low-level vulnerabilities.
+Yet, in practice, low-level driver code – complex driver
+interface, a combination of reference counting and manual
+memory management, arithmetic pointer and index oper-
+ations, unsafe type casts, and numerous logical invariants
+about the data structures exchanged with the kernel might
+significantly limit the security impact of Rust.
+This work takes a careful look at how Rust can impact
+the security of driver code. Specifically, we ask the question:
+What classes (and what fraction) of vulnerabilities typi-
+cally found in device driver code can be eliminated by re-
+implementing device drivers in Rust? We find that Rust can
+eliminate large classes of safety-related vulnerabilities, but
+naturally struggles to address protocol violations and seman-
+tic errors. Moreover, to be fully eliminated, many classes
+of flaws require careful programming discipline to avoid
+memory leaks and runtime panics (e.g., explicit checks for
+integer overflows and option types), careful implementation
+of Drop traits, as well as correct implementation of reference
+counting. Our analysis of 240 driver vulnerabilities that are
+present in device drivers in the last four years, shows that
+82 could be automatically eliminated by Rust, 113 require
+specific programming idioms and developer’s involvement,
+and 45 remain unaffected by Rust. We hope that our work
+can improve the understanding of potential flaws in Rust
+drivers and result in more secure kernel code.
+
+## Security Impact of CHERI on Operating System Kernel
+[Project page](./cheri)
+
+Capability Hardware Enhanced RISC Instructions
+(CHERI) is a set of hardware extensions that allow enforce-
+ment of spatial and temporal safety for unsafe programming
+languages like C. CHERI utilizes an idea of hardware ca-
+pability pointers to enforce bounds checks on all memory
+accesses and a hardware-assisted revocation scheme to en-
+force temporal safety. In theory, CHERI offers a surprising
+mix of practical adoption and strong security guarantees
+for traditionally unsafe environments like operating system
+kernels, i.e., capability extensions block a range of software
+safety-related vulnerabilities common to low-level systems
+code while requiring only a modest engineering effort.
+Our work takes a deep look at the potential impact
+of CHERI on the security of commodity operating system
+kernels. We analyze a total of 439 kernel vulnerabilities in
+Linux and FreeBSD kernels. Our analysis shows that CHERI
+can block 35%-61% vulnerabilities depending on whether
+temporal safety is enabled in the kernel. Enabling CHERI
+requires a modest effort, e.g., porting the FreeBSD kernel to
+support pure-capability mode of execution took 7 months.
+Finally, we estimate that compared to Rust, CHERI blocks
+70% of vulnerabilities (38% if revocation is off), a number
+lower than blocked by Rust, 84%, but at a much lower
+effort. We hope that our work improves the understanding
+of potential effort and benefits of capability protection in
+commodity kernels.
+
 ## VELD: Practical verification of commodity kernel extensions 
 
 [Project page](./veld)
