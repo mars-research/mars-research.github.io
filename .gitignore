@@ -17,3 +17,5 @@ result
 
 # vim 
 *.swp
+
+.hugo_build.lock

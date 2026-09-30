@@ -12,7 +12,7 @@ ShowBreadCrumbs: false
 
 Soham Bagchi, Manvik Nanda, Anton Burtsev. 
 [Beyond Zero-Cost: Understanding Rust Safety Overheads in Systems Code](/doc/2026-plos-rust-v-c.pdf).
-In _Proceedings of the 14th Workshop on Programming Languages and Operating Systems (PLOS 2026)_, September 2026.
+In _Proceedings of the 14th Workshop on Programming Languages and Operating Systems (PLOS 2026)_, September 2026. [Slides](/doc/PLOS26-slides.pdf).
 
 ### 2025
 
