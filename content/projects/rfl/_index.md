@@ -48,6 +48,10 @@ You can remove or apply filter under Data tab on top of google sheet.
 
 # Publications
 
+* Soham Bagchi, Manvik Nanda, Anton Burtsev.
+[Beyond Zero-Cost: Understanding Rust Safety Overheads in Systems Code](/doc/2026-plos-rust-v-c.pdf.pdf). In
+_Workshop on Programming Languages and Operating Systems (PLOS'26)_, September 2026.
+
 * Zhaofeng Li, Vikram Narayanan, Xiangdong Chen, Jerry Zhang, Anton Burtsev.
 [Rust for Linux: Understanding Security Impact of Rust on the Linux Kernel](./doc/2024-acsac-rfl.pdf). In 
 _Proceedings of the Annual Computer Security Applications Conference (ACSAC'24)_, December 2024.

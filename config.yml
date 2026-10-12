@@ -39,6 +39,10 @@ menu:
       name: Reading Group
       url: /reading-group
       weight: 60
+    - identifier: teaching
+      name: Teaching
+      url: /teaching
+      weight: 70
 
 # Allow raw HTML in content
 markup:

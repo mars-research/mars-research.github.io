@@ -58,17 +58,21 @@ look at our repos to see what we normally do) send me an email.
 
 [Anton Burtsev](https://mars-research.github.io/aburtsev/) (Faculty, lead)
 
-[Xiandong Chen](https://github.com/FeizaiYiHao) (PhD, 2026 expected)
-
-[Manvik Nanda]() (PhD, 2030 expected)
-
 [Jerry Zhang](https://jerryidk.github.io/) (PhD, 2028 expected)
 
-[Joshua Tlatelpa-Agustin](https://joshagustint.github.io/) (BS, expected 2025)
+[Soham Bagchi]() (PhD, 2031 expected)
+
+[Brian Le]() (PhD, 2031 expected)
+
+[Moritz Pechstein](http://www.linkedin.com/in/moritz-pechstein-939a90379) (Research Scholar)
 
 ## Alumni
 
-[Zhaofeng Li](https://zhaofeng.li) (PhD, 2025, now at ...)
+[Xiangdong Chen](https://github.com/FeizaiYiHao) (PhD, 2026, now at Amazon Web Services)
+
+[Joshua Tlatelpa-Agustin](https://joshagustint.github.io/) (MS, 2026, now PhD student at University of British Columbia)
+
+[Zhaofeng Li](https://zhaofeng.li) (PhD, 2025, now at PDT Partners)
 
 [Vikram Narayanan](https://arkivm.github.io) (PhD, 2024, now at Palo Alto Networks)
 
