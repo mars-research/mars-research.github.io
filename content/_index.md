@@ -15,7 +15,7 @@ with architecture, programming languages, security, and formal methods.
 Historically, we are always working on at least one clean-slate operating
 system. Right now its:
 
-- [Atmostphere](./atmo), a clean-slate fully-verified operating system
+- [Atmosphere](./atmo), a clean-slate fully-verified operating system
 
 Notable past projects are [RedLeaf](./redleaf), a clean slate operating system
 that uses Rust safety for isolation, and [KSplit](./ksplit), a static analysis
@@ -30,7 +30,7 @@ look at our repos to see what we normally do) send me an email.
 
 ## Active Projects 
 
-- Atmostphere verified operating system develooped in Rust and Verus:
+- Atmosphere verified operating system developed in Rust and Verus:
   [atmo](./atmo)
 
 - Formally verified drivers for the Linux kernel [VELD](./veld)

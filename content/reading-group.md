@@ -83,8 +83,8 @@ table th:first-of-type {
 | Mar 22 | [PACStack: an Authenticated Call Stack](https://www.usenix.org/system/files/sec21summer_liljestrand.pdf) |
 | Mar 15 | [Lord of the Ring(s): Side Channel Attacks on the CPU On-Chip Ring Interconnect Are Practical](https://arxiv.org/pdf/2103.03443.pdf) |
 | Mar 9 | [Hyperkernel: Push-Button Verification of an OS Kernel](https://unsat.cs.washington.edu/papers/nelson-hyperkernel.pdf) |
-| Feb 26 | [Scaling symbolic evaluation for automatedverification of systems code with Serval](https://unsat.cs.washington.edu/papers/nelson-serval.pdf) |
-| Feb 12, 19  | [Understanding Memory and Thread Safety Practicesand Issues in Real-World Rust Programs](https://cseweb.ucsd.edu/~yiying/RustStudy-PLDI20.pdf) |
+| Feb 26 | [Scaling symbolic evaluation for automated verification of systems code with Serval](https://unsat.cs.washington.edu/papers/nelson-serval.pdf) |
+| Feb 12, 19  | [Understanding Memory and Thread Safety Practices and Issues in Real-World Rust Programs](https://cseweb.ucsd.edu/~yiying/RustStudy-PLDI20.pdf) |
 | Feb 5  | [Safe Systems Programming in Rust : The Promise and the Challenge](https://people.mpi-sws.org/~dreyer/papers/safe-sysprog-rust/paper.pdf) |
 | Jan 22  | [Safe Kernel Extensions Without Run-Time Checking](https://people.eecs.berkeley.edu/~necula/Papers/pcc_osdi96.ps) |
 | Jan 15  | [NixOS: A Purely Functional Linux Distribution](https://edolstra.github.io/pubs/nixos-icfp2008-final.pdf) |

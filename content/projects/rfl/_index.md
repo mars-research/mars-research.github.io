@@ -14,18 +14,14 @@ the security of the kernel: As a safe programming language,
 Rust can eliminate wide classes of low-level vulnerabilities.
 Yet, in practice, low-level driver code – complex driver
 interface, a combination of reference counting and manual
-memory management, arithmetic pointer and index oper-
-ations, unsafe type casts, and numerous logical invariants
+memory management, arithmetic pointer and index operations, unsafe type casts, and numerous logical invariants
 about the data structures exchanged with the kernel might
 significantly limit the security impact of Rust.
 This work takes a careful look at how Rust can impact
 the security of driver code. Specifically, we ask the question:
-What classes (and what fraction) of vulnerabilities typi-
-cally found in device driver code can be eliminated by re-
-implementing device drivers in Rust? We find that Rust can
+What classes (and what fraction) of vulnerabilities typically found in device driver code can be eliminated by re-implementing device drivers in Rust? We find that Rust can
 eliminate large classes of safety-related vulnerabilities, but
-naturally struggles to address protocol violations and seman-
-tic errors. Moreover, to be fully eliminated, many classes
+naturally struggles to address protocol violations and semantic errors. Moreover, to be fully eliminated, many classes
 of flaws require careful programming discipline to avoid
 memory leaks and runtime panics (e.g., explicit checks for
 integer overflows and option types), careful implementation

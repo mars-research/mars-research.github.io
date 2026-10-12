@@ -40,7 +40,7 @@ ShowBreadCrumbs: false
 * Our high-performance hashtable paper **[DRAMHiT: A Hash Table architected for
   the Speed of DRAM](https://mars-research.github.io/doc/dramhit-esys23.pdf)**
   got accepted to
-  **[Eurosys'23](https://2023.eurosys.org/program.html#program)**
+  **[EuroSys'23](https://2023.eurosys.org/program.html#program)**
   ([pdf](/doc/2023-eurosys-dramhit.pdf))
 
 ### 2022

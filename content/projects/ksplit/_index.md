@@ -14,7 +14,7 @@ execute the driver in isolation. Specifically, KSplit identifies the shared
 state that is accessed by both driver and the kernel computing how this state
 is accessed on both sides of the isolation boundary and how it should be
 synchronized on each kernel-driver invocation and when a shared synchronization
-primitive, e.g., a spinlockor or an RCU, is invoked. The result of the analysis
+primitive, e.g., a spinlock or or an RCU, is invoked. The result of the analysis
 is a collection of procedure call specifications in the KSplit interface
 definition language (IDL). The KSplit IDL compiler then generates glue code
 that ensures synchronization of data structures between isolated subsystems.

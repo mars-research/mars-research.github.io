@@ -9,12 +9,9 @@ ShowReadingTime: false
 ---
 
 Capability Hardware Enhanced RISC Instructions
-(CHERI) is a set of hardware extensions that allow enforce-
-ment of spatial and temporal safety for unsafe programming
-languages like C. CHERI utilizes an idea of hardware ca-
-pability pointers to enforce bounds checks on all memory
-accesses and a hardware-assisted revocation scheme to en-
-force temporal safety. In theory, CHERI offers a surprising
+(CHERI) is a set of hardware extensions that allow enforcement of spatial and temporal safety for unsafe programming
+languages like C. CHERI utilizes an idea of hardware capability pointers to enforce bounds checks on all memory
+accesses and a hardware-assisted revocation scheme to enforce temporal safety. In theory, CHERI offers a surprising
 mix of practical adoption and strong security guarantees
 for traditionally unsafe environments like operating system
 kernels, i.e., capability extensions block a range of software
