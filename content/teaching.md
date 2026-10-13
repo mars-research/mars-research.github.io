@@ -6,10 +6,10 @@ ShowReadingTime: false
 ShowBreadCrumbs: false
 ---
 
-We teach two operating systems classes. The first is an introductory class built
+Two operating systems classes are most relevant to our work, and we teach both of them. The first, CS 5460/6460, is an introductory class built
 around [xv6](https://github.com/mit-pdos/xv6-public), a small re-implementation
 of an early UNIX kernel that is simple enough to read and understand in full.
-The second is an advanced class centered around virtualization: students learn
+The second, CS 5465/6465, is an advanced class centered around virtualization: students learn
 how modern kernels and hypervisors (Linux, Xen, KVM) work, and build their own
 hypervisor for xv6 using hardware virtualization support (Intel VT-x).
 Along the way they also work on fast device interfaces, container isolation,

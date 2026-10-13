@@ -68,30 +68,30 @@ look at our repos to see what we normally do) send me an email.
 
 ## Alumni
 
-[Xiangdong Chen](https://github.com/FeizaiYiHao) (PhD, 2026, now at Amazon Web Services)
+[Xiangdong Chen](https://github.com/FeizaiYiHao) (PhD, 2026, first position: Amazon Web Services)
 
-[Joshua Tlatelpa-Agustin](https://joshagustint.github.io/) (MS, 2026, now PhD student at University of British Columbia)
+[Joshua Tlatelpa-Agustin](https://joshagustint.github.io/) (MS, 2026, first position: PhD student at University of British Columbia)
 
-[Zhaofeng Li](https://zhaofeng.li) (PhD, 2025, now at PDT Partners)
+[Zhaofeng Li](https://zhaofeng.li) (PhD, 2025, first position: PDT Partners)
 
-[Vikram Narayanan](https://arkivm.github.io) (PhD, 2024, now at Palo Alto Networks)
+[Vikram Narayanan](https://arkivm.github.io) (PhD, 2024, first position: Palo Alto Networks)
 
-[Dan Appel](https://github.com/Danappelxx) (BS 2021, now at Apple)
+[Dan Appel](https://github.com/Danappelxx) (BS 2021, first position: Apple)
 
-[Tianjiao Huang](https://github.com/tjhu) (MS 2022, now PhD student at UC Irvine)
+[Tianjiao Huang](https://github.com/tjhu) (MS 2022, first position: PhD student at UC Irvine)
 
-[Michael Lusher](https://github.com/1aguna) (BS 2021, now at Splunk)
+[Michael Lusher](https://github.com/1aguna) (BS 2021, first position: Splunk)
 
-[Daman M Kumar](https://github.com/damanmkumar) (MS 2020, now at Amazon)
+[Daman M Kumar](https://github.com/damanmkumar) (MS 2020, first position: Amazon)
 
 [Vincent Whizin](https://github.com/vwheezy22) (BS, 2022)
 
-[Ed Younis](https://github.com/edyounis) (BS 2018, now at Berkeley Lab)
+[Ed Younis](https://github.com/edyounis) (BS 2018, first position: PhD student at UC Berkeley)
 
 [Connor Zwick](https://github.com/czoop) (BS, 2022)
 
 [Tirth Jain](https://hedonhermdev.github.io/) (Summer Intern, 2022)
 
-[David Detweiler](https://github.com/daviddetweiler) (BS 2023, now at Atlassian)
+[David Detweiler](https://github.com/daviddetweiler) (BS 2023, first position: Atlassian)
 
 ## Posts
